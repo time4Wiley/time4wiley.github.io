@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中国历史学习资料 - Chinese History Study Materials</title>
+    <title>学习资料库 - Study Materials Library</title>
     <style>
         * {
             margin: 0;
@@ -15,41 +15,139 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
             padding: 30px;
         }
         
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        h2 {
-            color: #34495e;
-            margin: 25px 0 15px 0;
-            padding: 10px;
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .subject-section {
+            margin-bottom: 50px;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .subject-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-radius: 5px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
-        h3 {
-            color: #2980b9;
-            margin: 20px 0 10px 0;
-            padding-left: 10px;
-            border-left: 4px solid #3498db;
+        .subject-icon {
+            font-size: 2em;
+        }
+        
+        .subject-title {
+            font-size: 1.8em;
+            font-weight: 500;
+        }
+        
+        .publishers-grid {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .publisher-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .publisher-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+        
+        .grades-container {
+            padding: 25px;
+        }
+        
+        .grade-section {
+            margin-bottom: 25px;
+        }
+        
+        .grade-title {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .main-files {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
         }
         
         .file-list {
@@ -59,9 +157,9 @@
         
         .file-list li {
             margin: 8px 0;
-            padding: 12px;
+            padding: 15px;
             background: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 8px;
             border-left: 4px solid #3498db;
             transition: all 0.3s ease;
         }
@@ -69,6 +167,7 @@
         .file-list li:hover {
             background: #e9ecef;
             transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .file-list a {
@@ -77,6 +176,7 @@
             font-weight: 500;
             display: flex;
             align-items: center;
+            gap: 12px;
         }
         
         .file-list a:hover {
@@ -84,257 +184,194 @@
         }
         
         .pdf-icon {
-            margin-right: 10px;
+            font-size: 20px;
             color: #e74c3c;
-            font-size: 18px;
-        }
-        
-        .main-files {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
         }
         
         .main-files .pdf-icon {
             color: #dc3545;
         }
         
-        .description {
+        .unit-title {
+            font-size: 1.1em;
+            color: #2980b9;
+            margin: 15px 0 10px 0;
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .coming-soon {
             text-align: center;
-            margin-bottom: 30px;
+            padding: 40px;
             color: #6c757d;
             font-style: italic;
-        }
-        
-        .stats {
-            display: flex;
-            justify-content: space-around;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 10px;
             margin: 20px 0;
-            padding: 20px;
-            background: #e9ecef;
-            border-radius: 5px;
         }
         
-        .stat-item {
-            text-align: center;
+        .coming-soon-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
         }
         
-        .stat-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: #3498db;
-        }
-        
-        .stat-label {
-            color: #6c757d;
-            font-size: 14px;
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .subject-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>中国历史学习资料</h1>
-        <p class="description">Chinese History Study Materials - 7th Grade Second Semester</p>
+        <div class="header">
+            <h1>📚 学习资料库</h1>
+            <p>Study Materials Library - Multi-Publisher Educational Resources</p>
+        </div>
         
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">25</div>
-                <div class="stat-label">PDF Files</div>
+        <div class="content">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">学科 Subjects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">出版社 Publishers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">年级 Grades</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">PDF 文件 Files</div>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Units</div>
+
+            <!-- 中国历史 Subject -->
+            <div class="subject-section">
+                <div class="subject-header">
+                    <span class="subject-icon">🏛️</span>
+                    <div>
+                        <div class="subject-title">中国历史 Chinese History</div>
+                        <div>Historical studies and cultural heritage materials</div>
+                    </div>
+                </div>
+                
+                <div class="publishers-grid">
+                    <!-- 人教版 Publisher -->
+                    <div class="publisher-section">
+                        <div class="publisher-header">
+                            📖 人教版 (People's Education Press)
+                        </div>
+                        
+                        <div class="grades-container">
+                            <!-- 七年级下册 Grade -->
+                            <div class="grade-section">
+                                <div class="grade-title">
+                                    <span>🎓</span>
+                                    <span>七年级下册 (7th Grade - Second Semester)</span>
+                                </div>
+                                
+                                <div class="main-files">
+                                    <div class="unit-title">📖 主要文件 (Main Files)</div>
+                                    <ul class="file-list">
+                                        <li>
+                                            <a href="中国历史/人教版/七年级下册/中国历史_七年级下册_完整版.pdf">
+                                                <span class="pdf-icon">📄</span>
+                                                <span>中国历史_七年级下册_完整版.pdf (22MB)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="中国历史/人教版/七年级下册/00_封面目录.pdf">
+                                                <span class="pdf-icon">📄</span>
+                                                <span>00_封面目录.pdf (3.0MB)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="中国历史/人教版/七年级下册/99_学史方法与附录.pdf">
+                                                <span class="pdf-icon">📄</span>
+                                                <span>99_学史方法与附录.pdf (833KB)</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="unit-title">🏛️ 第一单元：隋唐时期 (Unit 1: Sui and Tang Dynasties)</div>
+                                <ul class="file-list">
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/00_第一单元导入_1.pdf"><span class="pdf-icon">📄</span><span>第一单元导入 (Unit Introduction)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/01_隋朝统一与灭亡_1.pdf"><span class="pdf-icon">📄</span><span>01_隋朝统一与灭亡 (Sui Dynasty Unification and Fall)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/02_唐朝建立与贞观之治_1.pdf"><span class="pdf-icon">📄</span><span>02_唐朝建立与贞观之治 (Tang Dynasty Establishment and Zhenguan Rule)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/03_开元盛世_1.pdf"><span class="pdf-icon">📄</span><span>03_开元盛世 (Kaiyuan Prosperity)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/04_安史之乱与唐朝衰亡_1.pdf"><span class="pdf-icon">📄</span><span>04_安史之乱与唐朝衰亡 (An Lushan Rebellion and Tang Decline)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/05_隋唐时期的民族交往与交融_1.pdf"><span class="pdf-icon">📄</span><span>05_隋唐时期的民族交往与交融 (Ethnic Relations in Sui-Tang Period)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/06_隋唐时期的中外文化交流_1.pdf"><span class="pdf-icon">📄</span><span>06_隋唐时期的中外文化交流 (Cultural Exchange in Sui-Tang Period)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/07_隋唐时期的科技与文化_1.pdf"><span class="pdf-icon">📄</span><span>07_隋唐时期的科技与文化 (Technology and Culture in Sui-Tang Period)</span></a></li>
+                                </ul>
+
+                                <div class="unit-title">🏰 第二单元：辽宋夏金元时期 (Unit 2: Liao, Song, Xia, Jin, Yuan Period)</div>
+                                <ul class="file-list">
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/00_第二单元导入_2.pdf"><span class="pdf-icon">📄</span><span>第二单元导入 (Unit Introduction)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/08_北宋的政治_2.pdf"><span class="pdf-icon">📄</span><span>08_北宋的政治 (Northern Song Politics)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/09_辽西夏与北宋并立_2.pdf"><span class="pdf-icon">📄</span><span>09_辽西夏与北宋并立 (Liao, Western Xia and Northern Song Coexistence)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/10_金与南宋对峙_2.pdf"><span class="pdf-icon">📄</span><span>10_金与南宋对峙 (Jin and Southern Song Confrontation)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/11_元朝的建立与统一_2.pdf"><span class="pdf-icon">📄</span><span>11_元朝的建立与统一 (Yuan Dynasty Establishment and Unification)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/12_辽宋夏金元时期经济的繁荣_2.pdf"><span class="pdf-icon">📄</span><span>12_辽宋夏金元时期经济的繁荣 (Economic Prosperity)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/13_辽宋夏金元时期的对外交流_2.pdf"><span class="pdf-icon">📄</span><span>13_辽宋夏金元时期的对外交流 (Foreign Exchange)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/14_辽宋夏金元时期的科技与文化_2.pdf"><span class="pdf-icon">📄</span><span>14_辽宋夏金元时期的科技与文化 (Technology and Culture)</span></a></li>
+                                </ul>
+
+                                <div class="unit-title">🎭 第三单元：明清时期 (Unit 3: Ming and Qing Dynasties)</div>
+                                <ul class="file-list">
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/00_第三单元导入_3.pdf"><span class="pdf-icon">📄</span><span>第三单元导入 (Unit Introduction)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/15_明朝的统治_3.pdf"><span class="pdf-icon">📄</span><span>15_明朝的统治 (Ming Dynasty Rule)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/16_明朝的对外关系_3.pdf"><span class="pdf-icon">📄</span><span>16_明朝的对外关系 (Ming Foreign Relations)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/17_明朝的灭亡和清朝的建立_3.pdf"><span class="pdf-icon">📄</span><span>17_明朝的灭亡和清朝的建立 (Fall of Ming and Rise of Qing)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/18_清朝的边疆治理_3.pdf"><span class="pdf-icon">📄</span><span>18_清朝的边疆治理 (Qing Frontier Administration)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/19_清朝君主专制的强化_3.pdf"><span class="pdf-icon">📄</span><span>19_清朝君主专制的强化 (Strengthening of Qing Autocracy)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/20_明清时期社会经济的发展_3.pdf"><span class="pdf-icon">📄</span><span>20_明清时期社会经济的发展 (Social and Economic Development)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/21_明清时期的科技与文化_3.pdf"><span class="pdf-icon">📄</span><span>21_明清时期的科技与文化 (Technology and Culture)</span></a></li>
+                                    <li><a href="中国历史/人教版/七年级下册/第三单元_明清时期/22_我国传统节日的起源与传承_3.pdf"><span class="pdf-icon">📄</span><span>22_我国传统节日的起源与传承 (Origin and Heritage of Traditional Festivals)</span></a></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Placeholder for more grades -->
+                            <div class="coming-soon">
+                                <div class="coming-soon-icon">🚧</div>
+                                <div><strong>更多年级即将上线</strong></div>
+                                <div>More grades coming soon...</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Placeholder for more publishers -->
+                    <div class="coming-soon">
+                        <div class="coming-soon-icon">📚</div>
+                        <div><strong>更多出版社即将上线</strong></div>
+                        <div>More publishers (北师大版, 岳麓版, etc.) coming soon...</div>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">1</div>
-                <div class="stat-label">Grade Level</div>
+            
+            <!-- Placeholder for more subjects -->
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🎯</div>
+                <div><strong>更多学科即将上线</strong></div>
+                <div>More subjects (数学, 语文, 英语, 物理, 化学, etc.) coming soon...</div>
             </div>
         </div>
-
-        <h2>📚 七年级下册 (7th Grade Second Semester)</h2>
-        
-        <h3>📖 主要文件 (Main Files)</h3>
-        <ul class="file-list">
-            <li class="main-files">
-                <a href="中国历史/人教版/七年级下册/中国历史_七年级下册_完整版.pdf">
-                    <span class="pdf-icon">📄</span>
-                    中国历史_七年级下册_完整版.pdf (22MB)
-                </a>
-            </li>
-            <li class="main-files">
-                <a href="中国历史/人教版/七年级下册/00_封面目录.pdf">
-                    <span class="pdf-icon">📄</span>
-                    00_封面目录.pdf (3.0MB)
-                </a>
-            </li>
-            <li class="main-files">
-                <a href="中国历史/人教版/七年级下册/99_学史方法与附录.pdf">
-                    <span class="pdf-icon">📄</span>
-                    99_学史方法与附录.pdf (833KB)
-                </a>
-            </li>
-        </ul>
-
-        <h3>🏛️ 第一单元：隋唐时期 (Unit 1: Sui and Tang Dynasties)</h3>
-        <ul class="file-list">
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/00_第一单元导入_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    第一单元导入 (Unit Introduction)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/01_隋朝统一与灭亡_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    01_隋朝统一与灭亡 (Sui Dynasty Unification and Fall)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/02_唐朝建立与贞观之治_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    02_唐朝建立与贞观之治 (Tang Dynasty Establishment and Zhenguan Rule)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/03_开元盛世_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    03_开元盛世 (Kaiyuan Prosperity)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/04_安史之乱与唐朝衰亡_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    04_安史之乱与唐朝衰亡 (An Lushan Rebellion and Tang Decline)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/05_隋唐时期的民族交往与交融_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    05_隋唐时期的民族交往与交融 (Ethnic Relations in Sui-Tang Period)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/06_隋唐时期的中外文化交流_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    06_隋唐时期的中外文化交流 (Cultural Exchange in Sui-Tang Period)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第一单元_隋唐时期/07_隋唐时期的科技与文化_1.pdf">
-                    <span class="pdf-icon">📄</span>
-                    07_隋唐时期的科技与文化 (Technology and Culture in Sui-Tang Period)
-                </a>
-            </li>
-        </ul>
-
-        <h3>🏰 第二单元：辽宋夏金元时期 (Unit 2: Liao, Song, Xia, Jin, Yuan Period)</h3>
-        <ul class="file-list">
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/00_第二单元导入_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    第二单元导入 (Unit Introduction)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/08_北宋的政治_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    08_北宋的政治 (Northern Song Politics)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/09_辽西夏与北宋并立_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    09_辽西夏与北宋并立 (Liao, Western Xia and Northern Song Coexistence)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/10_金与南宋对峙_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    10_金与南宋对峙 (Jin and Southern Song Confrontation)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/11_元朝的建立与统一_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    11_元朝的建立与统一 (Yuan Dynasty Establishment and Unification)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/12_辽宋夏金元时期经济的繁荣_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    12_辽宋夏金元时期经济的繁荣 (Economic Prosperity)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/13_辽宋夏金元时期的对外交流_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    13_辽宋夏金元时期的对外交流 (Foreign Exchange)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第二单元_辽宋夏金元时期/14_辽宋夏金元时期的科技与文化_2.pdf">
-                    <span class="pdf-icon">📄</span>
-                    14_辽宋夏金元时期的科技与文化 (Technology and Culture)
-                </a>
-            </li>
-        </ul>
-
-        <h3>🎭 第三单元：明清时期 (Unit 3: Ming and Qing Dynasties)</h3>
-        <ul class="file-list">
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/00_第三单元导入_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    第三单元导入 (Unit Introduction)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/15_明朝的统治_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    15_明朝的统治 (Ming Dynasty Rule)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/16_明朝的对外关系_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    16_明朝的对外关系 (Ming Foreign Relations)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/17_明朝的灭亡和清朝的建立_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    17_明朝的灭亡和清朝的建立 (Fall of Ming and Rise of Qing)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/18_清朝的边疆治理_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    18_清朝的边疆治理 (Qing Frontier Administration)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/19_清朝君主专制的强化_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    19_清朝君主专制的强化 (Strengthening of Qing Autocracy)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/20_明清时期社会经济的发展_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    20_明清时期社会经济的发展 (Social and Economic Development)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/21_明清时期的科技与文化_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    21_明清时期的科技与文化 (Technology and Culture)
-                </a>
-            </li>
-            <li>
-                <a href="中国历史/人教版/七年级下册/第三单元_明清时期/22_我国传统节日的起源与传承_3.pdf">
-                    <span class="pdf-icon">📄</span>
-                    22_我国传统节日的起源与传承 (Origin and Heritage of Traditional Festivals)
-                </a>
-            </li>
-        </ul>
     </div>
 </body>
 </html> 
