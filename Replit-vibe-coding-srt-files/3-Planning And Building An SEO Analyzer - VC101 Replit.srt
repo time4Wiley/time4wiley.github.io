@@ -1,0 +1,1196 @@
+
+1
+00:00:01,220 --> 00:00:04,060
+Speaker 1: In this lesson, we'll build a website performance analyzer. 
+
+2
+00:00:04,100 --> 00:00:07,420
+Speaker 1: You'll learn how to examine HTML content and understand website structure. 
+
+3
+00:00:07,830 --> 00:00:10,350
+Speaker 1: That is understanding the concepts that we'll be automating. 
+
+4
+00:00:10,960 --> 00:00:17,160
+Speaker 1: We'll create a product requirements document or PRD and wireframe before leveraging replets agent to build our first prototype.
+
+5
+00:00:17,690 --> 00:00:23,970
+Speaker 1: So as we just covered, we're going to build an SEO analyzer where you can enter any website URL and view the site's load times and tax. 
+
+6
+00:00:23,970 --> 00:00:28,820
+Speaker 1: We'll also cover exactly what these things are and exactly why they're important. 
+
+7
+00:00:29,510 --> 00:00:33,910
+Speaker 1: That allows us to check if the websites properly implemented and get insights on SEO best practices.
+
+8
+00:00:34,310 --> 00:00:40,230
+Speaker 1: So when we talk about building a PRD or building a wireframe, this is what we're talking about. 
+
+9
+00:00:40,390 --> 00:00:42,910
+Speaker 1: And so we're gonna walk through exactly what I have in front of me. 
+
+10
+00:00:42,950 --> 00:00:44,670
+Speaker 1: This is using an online whiteboarding tool. 
+
+11
+00:00:44,890 --> 00:01:01,500
+Speaker 1: And why I think it's important, it's an interactive tool that allows you to enter a website URL, view a visual representation of the site's load times and tags to make sure what we're building is properly configured and check if the site is properly implemented as a stretch goal, we might store recently analyze sites in a database. 
+
+12
+00:01:01,700 --> 00:01:08,650
+Speaker 1: And the skills involved here are prompting, processing and analyzing HTML content and creating intuitive data visualizations. 
+
+13
+00:01:08,730 --> 00:01:13,160
+Speaker 1: It also involves handling errors and edge cases, as well as storage.
+
+14
+00:01:13,480 --> 00:01:24,400
+Speaker 1: So on the left, I took some time to sketch up a mock of what we're gonna build, the main entry point that users will engage with is a simple text box where you can enter a URL. 
+
+15
+00:01:24,870 --> 00:01:30,030
+Speaker 1: From entering that URL, we want our app to return recommendations on the website that we enter. 
+
+16
+00:01:30,070 --> 00:01:34,070
+Speaker 1: For example, hey, you didn't give a title to your website or you didn't give a description to your website. 
+
+17
+00:01:34,160 --> 00:01:38,910
+Speaker 1: And that's gonna make it hard for Google to find your website or hard for people to know what your website's about. 
+
+18
+00:01:39,270 --> 00:01:41,830
+Speaker 1: And these meta tags are embedded on every website. 
+
+19
+00:01:42,040 --> 00:01:46,560
+Speaker 1: And so when you're building websites or when you're deploying apps, it's actually important to consider these things. 
+
+20
+00:01:46,560 --> 00:01:53,240
+Speaker 1: It's important to consider the preview of how your website shows up when people search for it, and that's what our app is going to allow us to do.
+
+21
+00:01:53,320 --> 00:01:57,120
+Speaker 1: It's going to allow us to analyze any website and access this information. 
+
+22
+00:01:57,980 --> 00:02:05,860
+Speaker 1: So when we talk about vibe coding or just going with the flow, it can often be more helpful to go through this exercise and break down exactly what we want. 
+
+23
+00:02:06,310 --> 00:02:16,240
+Speaker 1: Conceptualize it, visualize it, so that we're not going into a tool without really any concept of what we're doing, where we understand at least a little bit better what we're trying to get to.
+
+24
+00:02:16,800 --> 00:02:20,310
+Speaker 1: So let's talk about how this flows into an initial prompt for replied agent. 
+
+25
+00:02:20,770 --> 00:02:30,860
+Speaker 1: So my prompt here is help me create an interactive app that displays the SEO or meta tags for any website in an interactive and visual way to check that they're properly implemented. 
+
+26
+00:02:31,100 --> 00:02:33,900
+Speaker 1: Note in this first sentence that this is domain specific knowledge. 
+
+27
+00:02:34,350 --> 00:02:35,910
+Speaker 1: You might not know what SEO tags are. 
+
+28
+00:02:35,950 --> 00:02:37,390
+Speaker 1: You might not know what meta tags are. 
+
+29
+00:02:37,800 --> 00:02:44,840
+Speaker 1: AI does and by using those terms, by kind of understanding the framework or understanding what we might not know about this domain. 
+
+30
+00:02:45,180 --> 00:02:49,140
+Speaker 1: We're able to target and direct the agent into what it's building.
+
+31
+00:02:49,920 --> 00:02:55,640
+Speaker 1: The next part of our prompt, the app should fetch the HTML first site, then provide feedback on SEO tags. 
+
+32
+00:02:55,640 --> 00:03:00,970
+Speaker 1: In accordance with best practices for SEO optimization, the app should give Google and social media previous.
+
+33
+00:03:01,590 --> 00:03:10,030
+Speaker 1: Now that last point I think is just important because I've done some work with SEO optimization and that's something I wanted to visualize specifically because it can be very visual. 
+
+34
+00:03:10,460 --> 00:03:13,940
+Speaker 1: But note that we're asking the app to fetch the HTML for the site. 
+
+35
+00:03:13,940 --> 00:03:16,420
+Speaker 1: That's essentially scraping websites. 
+
+36
+00:03:16,510 --> 00:03:21,390
+Speaker 1: So what we're doing is for any website, we're gonna scrape it and then we're gonna get the contents of this thing. 
+
+37
+00:03:21,870 --> 00:03:23,670
+Speaker 1: And we want our app to return feedback, right? 
+
+38
+00:03:23,670 --> 00:03:26,110
+Speaker 1: We want actionable insights on the thing that we're doing. 
+
+39
+00:03:26,530 --> 00:03:31,850
+Speaker 1: And so we're thinking through the language and the phrasing that we can provide to agent to get those results.
+
+40
+00:03:32,300 --> 00:03:36,180
+Speaker 1: It's important to note, right, that I know SEO tags are embedded in the HTML of a site. 
+
+41
+00:03:36,680 --> 00:03:37,760
+Speaker 1: Anyone can access them. 
+
+42
+00:03:37,800 --> 00:03:41,520
+Speaker 1: And that's how I know that this app has a high likelihood of working and succeeding. 
+
+43
+00:03:42,000 --> 00:03:54,490
+Speaker 1: And just as a very clear visual representation of what we're building, when we search deep learning on Google, the result that we're returning is actually the SEO title of the website and the description is listed below.
+
+44
+00:03:54,890 --> 00:04:00,090
+Speaker 1: And so we can see this in the console or the actual underlying HTML of the page. 
+
+45
+00:04:00,890 --> 00:04:06,960
+Speaker 1: And so if I click into the page and then I right click and click inspect, we're gonna get what's known as a browser console. 
+
+46
+00:04:07,460 --> 00:04:10,740
+Speaker 1: This actually lets us do some pretty cool stuff, or rather dev tools. 
+
+47
+00:04:10,940 --> 00:04:16,290
+Speaker 1: So if I click into the page, right, click there and inspect, I'm gonna access our dev tools.
+
+48
+00:04:16,640 --> 00:04:17,760
+Speaker 1: And this might look a little scary. 
+
+49
+00:04:17,760 --> 00:04:20,120
+Speaker 1: This is just the underlying HTML for the website. 
+
+50
+00:04:20,910 --> 00:04:25,390
+Speaker 1: Now, if you go into the HTML head section, you're gonna see a whole bunch of stuff. 
+
+51
+00:04:26,010 --> 00:04:28,090
+Speaker 1: You can see actually things called meta tags. 
+
+52
+00:04:28,390 --> 00:04:38,320
+Speaker 1: And one of those is the title deep on AI, start or advance your career in AI, as well as the description, join over 7 million people learning how to use and build AI through our online courses. 
+
+53
+00:04:38,400 --> 00:04:43,960
+Speaker 1: These are the tags that we're going to extract to understand if our websites properly implemented. 
+
+54
+00:04:44,570 --> 00:04:45,610
+Speaker 1: So we've talked about our prompt. 
+
+55
+00:04:45,610 --> 00:04:47,410
+Speaker 1: We've gone over our wireframe and our PID. 
+
+56
+00:04:47,530 --> 00:04:50,890
+Speaker 1: We're gonna type in our prompt and just click start building on replied. 
+
+57
+00:04:53,020 --> 00:04:54,740
+Speaker 1: Now we're gonna see some things start happening. 
+
+58
+00:04:54,740 --> 00:04:59,830
+Speaker 1: I'm gonna walk through this because it's our first course and discuss how agent builds these applica.
+
+59
+00:05:00,000 --> 00:05:00,550
+Speaker 1: Patients. 
+
+60
+00:05:01,000 --> 00:05:05,320
+Speaker 1: Fundamentally agents different from other types of vibe coding apps because agent produces a plan. 
+
+61
+00:05:06,630 --> 00:05:14,910
+Speaker 1: The plan is going to help us understand what we're building and confirm that we're taking the right actions or we're moving kind of closer to what we actually want. 
+
+62
+00:05:15,340 --> 00:05:24,730
+Speaker 1: So agent is going to analyze that prompt and present a plan to us, says it's gonna build the initial prototype and ask if it wants, if we want any follow up features in the initial prototype. 
+
+63
+00:05:24,730 --> 00:05:28,410
+Speaker 1: It'll also mention if it's using any frameworks or integrations. 
+
+64
+00:05:29,340 --> 00:05:32,180
+Speaker 1: I'm gonna approve this plan and start and then talk a little bit more about that. 
+
+65
+00:05:32,850 --> 00:05:36,090
+Speaker 1: So it's important to mention that agent does come with a ton of integration. 
+
+66
+00:05:36,090 --> 00:05:43,240
+Speaker 1: Sophie said, for example, build me an app that uses the Anthropic API or build me an app that has straight payments. 
+
+67
+00:05:43,240 --> 00:05:46,920
+Speaker 1: We support those integrations natively and agent should mention that in the app.
+
+68
+00:05:48,020 --> 00:05:53,260
+Speaker 1: Now what's happening on the right is that in real time, agent is designing a visual preview of our app. 
+
+69
+00:05:53,870 --> 00:06:01,410
+Speaker 1: And the goal there is to get you something that you can use as fast as possible or something that you can visualize rather as fast as possible. 
+
+70
+00:06:02,110 --> 00:06:04,950
+Speaker 1: But it's important to note this is not the actual application. 
+
+71
+00:06:04,990 --> 00:06:08,470
+Speaker 1: And so we can see, you know, kind of closer to our wireframe. 
+
+72
+00:06:08,470 --> 00:06:11,190
+Speaker 1: Okay, the main entry point is just this website URL. 
+
+73
+00:06:11,470 --> 00:06:13,310
+Speaker 1: And from there, we're gonna be able to analyze it.
+
+74
+00:06:13,770 --> 00:06:21,890
+Speaker 1: Now, once the agent is done with that visual preview that actually is mentioning to us up here, it's creating a fully interactive version of our app. 
+
+75
+00:06:22,470 --> 00:06:29,470
+Speaker 1: And so underneath the hood, agent is scaffolding this project, installing packages, configuring your environment. 
+
+76
+00:06:29,570 --> 00:06:30,920
+Speaker 1: And this is what we talked about at the beginning, right? 
+
+77
+00:06:30,920 --> 00:06:33,480
+Speaker 1: Replied is more than just agent and assistant. 
+
+78
+00:06:33,480 --> 00:06:36,080
+Speaker 1: It's actually an entire environment and an entire workspace. 
+
+79
+00:06:36,450 --> 00:06:39,080
+Speaker 1: So while we're getting this set up, I'm gonna walk through the workspace. 
+
+80
+00:06:39,240 --> 00:06:43,680
+Speaker 1: If you go over here, up in the top left, you can take a look at the files that exist in the workspace. 
+
+81
+00:06:44,080 --> 00:06:52,480
+Speaker 1: And as agent continues building, these are gonna be populated with the folders and the directories that the project contains, right? 
+
+82
+00:06:52,840 --> 00:06:58,540
+Speaker 1: And so it's important really, again to drive home that this is an entire interactive workspace in the cloud at any time. 
+
+83
+00:06:58,540 --> 00:07:04,730
+Speaker 1: If you're familiar with programming concepts, if you wanna open something like a shell or a console, you can do that. 
+
+84
+00:07:04,810 --> 00:07:06,450
+Speaker 1: And we have access to that now. 
+
+85
+00:07:06,450 --> 00:07:09,410
+Speaker 1: You also don't have to do these things if you're not familiar with programming. 
+
+86
+00:07:09,690 --> 00:07:12,100
+Speaker 1: We're gonna build entirely using natural language. 
+
+87
+00:07:12,340 --> 00:07:30,840
+Speaker 1: But it is important to mention that through this new tab interface up top, or the All tools section on the left hand side, you can access all of the services and tools available in the workspace, which include things like integrating Git, installing dependencies, viewing our output, will go over exactly what that is. 
+
+88
+00:07:30,880 --> 00:07:39,440
+Speaker 1: Storing secrets are basically a very secure way to store environment variables that require no configuration and many more things.
+
+89
+00:07:39,680 --> 00:07:46,690
+Speaker 1: But going back to our app, agent is still working on the fully functional version, which might take five to 10 minutes. 
+
+90
+00:07:46,690 --> 00:07:49,730
+Speaker 1: And so that's another important thing to call out as we're building this application. 
+
+91
+00:07:50,130 --> 00:07:55,050
+Speaker 1: The way agent is designed is to build these apps from sort of start to MVP. 
+
+92
+00:07:55,290 --> 00:07:58,130
+Speaker 1: And that's why we stayed high level and we're keeping the prompt simple. 
+
+93
+00:07:58,420 --> 00:08:02,040
+Speaker 1: These runs could take two minutes, it could take five or 10 minutes. 
+
+94
+00:08:02,730 --> 00:08:05,970
+Speaker 1: But for the first implementation, you can expect a fully featured app. 
+
+95
+00:08:06,800 --> 00:08:13,600
+Speaker 1: As you can see on the left there, agent just created a client, a server, and a whole host of other configuration files. 
+
+96
+00:08:14,510 --> 00:08:19,390
+Speaker 1: Now we see the agent is actually writing and creating files in this interactive ping here. 
+
+97
+00:08:19,950 --> 00:08:27,550
+Speaker 1: And part of the reason that we do this is because we want to get you to an MVP as fast as possible, and so there's less back and forth required with replied agent. 
+
+98
+00:08:27,930 --> 00:08:31,890
+Speaker 1: But along the way, agent is gonna show you exactly what it's doing. 
+
+99
+00:08:32,370 --> 00:08:35,410
+Speaker 1: So we can see that it's writing this file server routes. 
+
+100
+00:08:35,750 --> 00:08:39,070
+Speaker 1: It already wrote our client index and some other things.
+
+101
+00:08:39,710 --> 00:08:53,310
+Speaker 1: Now it's not important to dig into how all of these things work, but what might be useful is to start to pay attention to how agent creates these apps and start to reverse engineer how the applications work because it can teach you a lot about programming. 
+
+102
+00:08:53,550 --> 00:08:55,030
+Speaker 1: It can teach you a lot about building. 
+
+103
+00:08:55,540 --> 00:08:59,840
+Speaker 1: For example, I see that there are folders here, client, server, and shared. 
+
+104
+00:09:00,390 --> 00:09:03,950
+Speaker 1: If you're unfamiliar, a client is typically a front end and a server is typically a backend. 
+
+105
+00:09:04,460 --> 00:09:08,620
+Speaker 1: So it makes sense that clicking to the server exposes things like routes. 
+
+106
+00:09:08,660 --> 00:09:14,300
+Speaker 1: If you're not familiar with APIs, this is a way, a programmatic way for applications to communicate. 
+
+107
+00:09:14,400 --> 00:09:15,590
+Speaker 1: And that happens in our backend. 
+
+108
+00:09:16,100 --> 00:09:20,100
+Speaker 1: But in the client, we might see the source file and notice there's like an index. 
+
+109
+00:09:20,140 --> 00:09:29,440
+Speaker 1: HTML file, things like app dot TSX, that might be a main sort of entry point for our app or index dot CSS defines how the app is style. 
+
+110
+00:09:29,840 --> 00:09:33,880
+Speaker 1: And so what I'm trying to drive home here is that you really don't need to look at any of this. 
+
+111
+00:09:33,880 --> 00:09:36,640
+Speaker 1: You know, like if this is intimidating for you, just close that and don't look at it. 
+
+112
+00:09:36,640 --> 00:09:38,320
+Speaker 1: And, you know, like we'll just keep vibe coding. 
+
+113
+00:09:38,760 --> 00:09:46,300
+Speaker 1: But if you're trying to learn and follow along as you're building these things, you can start to poke around, start to pay attention.
+
+114
+00:09:46,300 --> 00:09:50,660
+Speaker 1: Oh, hey, agent is defining this thing, this component called Social Media Preview. 
+
+115
+00:09:50,700 --> 00:09:59,660
+Speaker 1: I bet if we go into our components folder and we look at the stuff that's in here, the Google preview probably defines something. 
+
+116
+00:10:00,110 --> 00:10:02,990
+Speaker 1: That would show us a preview of what it might look like on Google. 
+
+117
+00:10:03,560 --> 00:10:11,660
+Speaker 1: So again, agent is going to, on the first run, create this app from scratch, is going to implement the front end and the backend.
+
+118
+00:10:11,950 --> 00:10:18,550
+Speaker 1: This is a lot of talking, yes, but what we're going to have when agent is done running is an MVP that we can start iterating on. 
+
+119
+00:10:18,900 --> 00:10:28,100
+Speaker 1: It does that in order to deliver you something that just works and that we can kind of keep punching through or we can keep iterating on once our application is stood up. 
+
+120
+00:10:30,380 --> 00:10:32,020
+Speaker 1: And so that's been our workspace overview. 
+
+121
+00:10:32,220 --> 00:10:33,820
+Speaker 1: We're gonna let the agent keep building. 
+
+122
+00:10:33,940 --> 00:10:36,180
+Speaker 1: You'll be able to see all of the things that it does. 
+
+123
+00:10:36,550 --> 00:10:40,230
+Speaker 1: And then we'll come back once we have our MVP and start iterating. 
+
+124
+00:10:40,350 --> 00:10:44,150
+Speaker 1: This is often how I develop my first prototypes when I'm building with Rebel Agent.
+
+125
+00:10:50,520 --> 00:10:50,960
+Speaker 1: Cool. 
+
+126
+00:10:51,000 --> 00:10:54,760
+Speaker 1: So what she'll notice on the right is that we have a implemented version of our app. 
+
+127
+00:10:54,880 --> 00:11:00,770
+Speaker 1: And I wanna dig in for a second to the agent sort of history, chat history here to see what was happening. 
+
+128
+00:11:01,380 --> 00:11:06,170
+Speaker 1: So as you saw, when we were writing the application, there are a bunch of file edits that happened. 
+
+129
+00:11:06,210 --> 00:11:12,200
+Speaker 1: And anytime you can dig into these and you can even click the drop down to see exactly what was created or exactly what changed.
+
+130
+00:11:12,750 --> 00:11:21,620
+Speaker 1: Then agent went along and actually installed the dependencies that we needed for our application as well as some ancillary dependencies that I might have missed on the first class pass. 
+
+131
+00:11:22,390 --> 00:11:29,510
+Speaker 1: Then it configured the run button up top here to execute our app and cycle through and actually recognize, hey, we missed a package. 
+
+132
+00:11:29,510 --> 00:11:31,830
+Speaker 1: Like this thing is not gonna work unless we install it. 
+
+133
+00:11:32,280 --> 00:11:40,110
+Speaker 1: Then I did some final checks, made an edit to our storage implementation, noticed an issue, restarted the application and fix that issue. 
+
+134
+00:11:40,580 --> 00:11:46,820
+Speaker 1: And so one of the great things about building with rep, with reply, building with agent is that you don't have to worry about like some of these like hassles and getting started. 
+
+135
+00:11:46,820 --> 00:11:52,210
+Speaker 1: You can let agent take the reins and kind of implement some of this functionality from there. 
+
+136
+00:11:52,780 --> 00:11:56,010
+Speaker 1: It confirmed exactly what it did and exactly what it created.
+
+137
+00:11:56,050 --> 00:11:58,730
+Speaker 1: Now, this is another good way to learn about what we're building. 
+
+138
+00:11:58,730 --> 00:12:02,410
+Speaker 1: Hey, we created a complete data model for storing and analyzing these tags. 
+
+139
+00:12:02,410 --> 00:12:04,010
+Speaker 1: We built backend API endpoints. 
+
+140
+00:12:04,010 --> 00:12:07,890
+Speaker 1: We implement our front end with a URL input, results overview, and visualization. 
+
+141
+00:12:08,380 --> 00:12:09,420
+Speaker 1: And we did a bunch other stuff. 
+
+142
+00:12:09,700 --> 00:12:11,540
+Speaker 1: So now we can see if it works. 
+
+143
+00:12:11,540 --> 00:12:12,420
+Speaker 1: We can start debugging. 
+
+144
+00:12:12,420 --> 00:12:13,540
+Speaker 1: We can start testing our app. 
+
+145
+00:12:14,780 --> 00:12:17,660
+Speaker 1: We have our web view on the right, which is gonna show us a preview of our app.
+
+146
+00:12:17,740 --> 00:12:27,220
+Speaker 1: Now, what's important to note, if you've ever written code, if you've ever built with another tool, you've probably did that on local host, which is basically running something on your local machine.
+
+147
+00:12:27,930 --> 00:12:34,170
+Speaker 1: This web view is gonna look similar, but fundamentally this app, this replied app is running at a URL. 
+
+148
+00:12:34,280 --> 00:12:36,150
+Speaker 1: So you can actually access this from anywhere. 
+
+149
+00:12:36,150 --> 00:12:38,030
+Speaker 1: You can access it in your browser. 
+
+150
+00:12:38,030 --> 00:12:41,310
+Speaker 1: If I click this and 0, it would open this web view up in a new tab. 
+
+151
+00:12:41,310 --> 00:12:47,300
+Speaker 1: You could scan it and access it on your phone in real time as you're developing, your friends could access it while you're building. 
+
+152
+00:12:47,660 --> 00:12:52,420
+Speaker 1: It's important to mention that once you leave this app, once you close this page, this URL will go to sleep. 
+
+153
+00:12:52,930 --> 00:12:57,930
+Speaker 1: This is not a deployment, but it is a development environment that is live on the internet technically. 
+
+154
+00:12:58,370 --> 00:13:00,770
+Speaker 1: So fundamentally, we're working with like a real web page. 
+
+155
+00:13:01,250 --> 00:13:02,050
+Speaker 1: So let's test this out. 
+
+156
+00:13:02,050 --> 00:13:02,850
+Speaker 1: Let's see how it works. 
+
+157
+00:13:02,850 --> 00:13:07,610
+Speaker 1: I'm gonna type in my blog and see what's going on. 
+
+158
+00:13:08,150 --> 00:13:12,680
+Speaker 1: So if I click analyze, we get an SEO summary, 86 out of 100. 
+
+159
+00:13:12,680 --> 00:13:13,480
+Speaker 1: I guess that's not bad. 
+
+160
+00:13:13,480 --> 00:13:15,280
+Speaker 1: It might be like a B+. 
+
+161
+00:13:15,930 --> 00:13:16,690
+Speaker 1: I'm not complaining. 
+
+162
+00:13:17,010 --> 00:13:19,930
+Speaker 1: It seems like we have some scores. 
+
+163
+00:13:19,930 --> 00:13:21,090
+Speaker 1: Let's see what's going on here. 
+
+164
+00:13:21,370 --> 00:13:22,330
+Speaker 1: So Matt Palmer. 
+
+165
+00:13:22,330 --> 00:13:22,810
+Speaker 1: That's right. 
+
+166
+00:13:23,050 --> 00:13:24,290
+Speaker 1: Developer marketing simplified. 
+
+167
+00:13:24,290 --> 00:13:24,770
+Speaker 1: That's right. 
+
+168
+00:13:24,870 --> 00:13:26,060
+Speaker 1: It looks like a warning. 
+
+169
+00:13:26,100 --> 00:13:28,660
+Speaker 1: Our title tag is too short a description. 
+
+170
+00:13:28,660 --> 00:13:30,140
+Speaker 1: The description is a bit too short. 
+
+171
+00:13:30,740 --> 00:13:31,740
+Speaker 1: The details there. 
+
+172
+00:13:32,320 --> 00:13:33,840
+Speaker 1: Looks like we're getting some best practices. 
+
+173
+00:13:33,840 --> 00:13:35,560
+Speaker 1: So this is pretty similar to what we wanted. 
+
+174
+00:13:36,040 --> 00:13:38,080
+Speaker 1: And we also have some keywords, recommendations. 
+
+175
+00:13:38,080 --> 00:13:43,010
+Speaker 1: We're getting a kind of a pass there and some other recommendations. 
+
+176
+00:13:43,010 --> 00:13:53,790
+Speaker 1: So what our analyzer is telling us is, hey, if we want our website to show up on search on Google, maybe even an indexing for LLMs, I don't know, we could optimize our title. 
+
+177
+00:13:53,950 --> 00:13:57,110
+Speaker 1: We could improve the description and make it maybe a little bit longer. 
+
+178
+00:13:57,590 --> 00:13:58,590
+Speaker 1: So this is really great. 
+
+179
+00:13:59,220 --> 00:14:01,140
+Speaker 1: I'd say it's close to what we want. 
+
+180
+00:14:01,180 --> 00:14:02,940
+Speaker 1: It looks like we also have some social media previews. 
+
+181
+00:14:02,940 --> 00:14:04,220
+Speaker 1: So let's go see what's going on there. 
+
+182
+00:14:04,700 --> 00:14:09,730
+Speaker 1: So we have a Facebook preview and it is loading the image properly. 
+
+183
+00:14:10,240 --> 00:14:13,840
+Speaker 1: And we have a Twitter preview and it's also loading image properly there. 
+
+184
+00:14:14,160 --> 00:14:26,030
+Speaker 1: So what we've done here is implemented this tool that they can then check to make sure that our website is displayed properly on social media and that it's being indexed properly by SEO. 
+
+185
+00:14:26,070 --> 00:14:27,030
+Speaker 1: And this was one shot, right? 
+
+186
+00:14:27,030 --> 00:14:29,070
+Speaker 1: We all we did was type in that initial prompt.
+
+187
+00:14:29,430 --> 00:14:30,630
+Speaker 1: Let's try with another website. 
+
+188
+00:14:30,630 --> 00:14:36,490
+Speaker 1: Let's say deep learning dot AI, see what we can. 
+
+189
+00:14:37,200 --> 00:14:40,640
+Speaker 1: Okay, so I just wanna point out my website had a higher score. 
+
+190
+00:14:41,040 --> 00:14:44,000
+Speaker 1: I'm sure after I record this, Andrew's website will have a higher score. 
+
+191
+00:14:44,370 --> 00:14:45,890
+Speaker 1: I have no doubt he's gonna be on top of that. 
+
+192
+00:14:47,690 --> 00:14:54,280
+Speaker 1: But just to see that everything's coming through, we do get our social media previews and we do get our Twitter card previews and everything else. 
+
+193
+00:14:54,280 --> 00:14:56,320
+Speaker 1: So this is kind of the part we're talking about, right? 
+
+194
+00:14:56,320 --> 00:14:57,480
+Speaker 1: Like now I'm just testing the app. 
+
+195
+00:14:57,600 --> 00:14:59,640
+Speaker 1: I'm seeing if it does what I expect it to do.
+
+196
+00:15:00,270 --> 00:15:06,950
+Speaker 1: Part of vibe coding, a large part of vibe coding is having an attention to detail and having a really like dialed in product sense. 
+
+197
+00:15:06,950 --> 00:15:09,780
+Speaker 1: For example, I'm not crazy about the spacing here.
+
+198
+00:15:10,260 --> 00:15:11,860
+Speaker 1: 83 looks like it's on top of 100. 
+
+199
+00:15:11,860 --> 00:15:12,740
+Speaker 1: That's like not good enough. 
+
+200
+00:15:12,740 --> 00:15:13,460
+Speaker 1: We're gonna fix that. 
+
+201
+00:15:13,460 --> 00:15:14,300
+Speaker 1: We're gonna make that better. 
+
+202
+00:15:14,620 --> 00:15:17,950
+Speaker 1: Some of the other elements down here, this looks nice, but these are mislined. 
+
+203
+00:15:18,030 --> 00:15:19,950
+Speaker 1: Past isn't in the middle of this pill. 
+
+204
+00:15:22,120 --> 00:15:35,950
+Speaker 1: I think a lot of the other sort of visual representations of this site are really good, but part of building with AI is being very descriptive about what works, about what doesn't work, and about what you want to change, right? 
+
+205
+00:15:35,950 --> 00:15:42,370
+Speaker 1: And so another example, this, the padding could, there could probably be more padding on this website for it to look nice.
+
+206
+00:15:43,580 --> 00:15:46,980
+Speaker 1: One of the interesting things about web development is that you want your apps to be responsive. 
+
+207
+00:15:47,020 --> 00:15:50,460
+Speaker 1: So you can see there, if we make this wider, the padding actually looks a little bit better. 
+
+208
+00:15:50,730 --> 00:15:54,640
+Speaker 1: So what's going on here is probably that this isn't optimized for small screens. 
+
+209
+00:15:54,760 --> 00:16:00,900
+Speaker 1: We can see that by resizing the web view or by going to this handy little screen size toggle here and seeing what it looks like on an iPhone. 
+
+210
+00:16:01,520 --> 00:16:02,840
+Speaker 1: Maybe we wanna build this for an iPhone. 
+
+211
+00:16:02,840 --> 00:16:04,680
+Speaker 1: So it's important to check that out, right? 
+
+212
+00:16:04,680 --> 00:16:09,080
+Speaker 1: Like, hey, these pills, they're not really expanding the way I want them to. 
+
+213
+00:16:09,670 --> 00:16:11,390
+Speaker 1: These tabs, they might look a little compress. 
+
+214
+00:16:11,390 --> 00:16:13,870
+Speaker 1: So the icons might not be align properly. 
+
+215
+00:16:13,870 --> 00:16:17,230
+Speaker 1: And then we don't get the same aspect ratio for these images. 
+
+216
+00:16:17,920 --> 00:16:21,520
+Speaker 1: Again, this might seem trivial, but it's really important to dig into the details, right? 
+
+217
+00:16:21,800 --> 00:16:23,080
+Speaker 1: The text is overlapping here. 
+
+218
+00:16:23,870 --> 00:16:30,770
+Speaker 1: So all that considered, we have an MVP, we have something that works, and I think it's pretty impressive that agent did in one shot. 
+
+219
+00:16:30,770 --> 00:16:34,790
+Speaker 1: So now we're gonna follow up and we're gonna fix some of these characteristics. 
+
+220
+00:16:34,830 --> 00:16:38,930
+Speaker 1: So I'm gonna say make my app fully responsive. 
+
+221
+00:16:39,850 --> 00:16:40,810
+Speaker 1: This prompt is important. 
+
+222
+00:16:40,970 --> 00:16:42,210
+Speaker 1: What is responsive mean? 
+
+223
+00:16:42,250 --> 00:16:48,730
+Speaker 1: Well, what it actually means in web development is that your app responds to resizing the screen, right? 
+
+224
+00:16:48,810 --> 00:16:50,610
+Speaker 1: And so that will make it mobile friendly. 
+
+225
+00:16:51,010 --> 00:17:02,450
+Speaker 1: And so saying, Mike, my app fully responsive and mobile friendly, we're using key terms that are synonymous with web development techniques that AI is gonna understand and implement pretty well. 
+
+226
+00:17:02,730 --> 00:17:16,250
+Speaker 1: So I'm gonna say make my app fully responsive and mobile friendly and fix some of the alignment and padding issues with the buttons and elements. 
+
+227
+00:17:17,210 --> 00:17:32,730
+Speaker 1: Specifically fix the centering of the overall SEO score and remove the slash 100 being very descriptive about what I want edited here.
+
+228
+00:17:33,300 --> 00:17:35,580
+Speaker 1: You might notice I'm asking for a couple things. 
+
+229
+00:17:35,620 --> 00:17:46,490
+Speaker 1: As we talked about, we want these edits to be concise, but in my experience building with AI, we can do something like, hey, I wanna make the app responsive and mobile friendly and I wanna fix some of this other stuff. 
+
+230
+00:17:46,530 --> 00:17:48,730
+Speaker 1: And then we can hit enter and run that with agent. 
+
+231
+00:17:50,380 --> 00:17:51,820
+Speaker 1: Again, we're gonna kick off an agent run. 
+
+232
+00:17:51,860 --> 00:17:56,720
+Speaker 1: I think you can expect this one to go a little bit faster, given that their smaller edits. 
+
+233
+00:17:56,970 --> 00:18:02,690
+Speaker 1: I'm gonna talk a little bit about what we're doing here and then we'll let this finish up and jump back once it's done.
+
+234
+00:18:04,040 --> 00:18:14,030
+Speaker 1: Again, building with AI vibe coding, it's like asking a junior developer or someone who's never seen your project before to make changes. 
+
+235
+00:18:14,310 --> 00:18:18,750
+Speaker 1: You have to be really descriptive about what you want, make this fully responsive and mobile friendly. 
+
+236
+00:18:18,750 --> 00:18:22,790
+Speaker 1: Fix some of the alignment and padding issues, specifically this one that I'm seeing. 
+
+237
+00:18:23,550 --> 00:18:31,890
+Speaker 1: And if you can do that, agent has all the tools to access the files and the context of your workspace to understand what the issues are and fix them. 
+
+238
+00:18:32,170 --> 00:18:36,700
+Speaker 1: So you can see, hey, I'm looking at the home component. 
+
+239
+00:18:36,780 --> 00:18:46,670
+Speaker 1: I'm editing the URL form in the client, and I'm gonna start updating the results overview to fix the SEO display and make it more responsive. 
+
+240
+00:18:46,710 --> 00:18:53,450
+Speaker 1: So just like that, we're targeting some of these edits and we can kind of hope, right, that this is gonna carry through and do what we want it to do. 
+
+241
+00:18:54,110 --> 00:19:00,920
+Speaker 1: Another important thing to mention is like when we ask agent to do these things, it has all the context of these files in these directories. 
+
+242
+00:19:00,920 --> 00:19:03,040
+Speaker 1: And so it's gonna be able to search for files. 
+
+243
+00:19:03,040 --> 00:19:05,880
+Speaker 1: It's gonna be able to understand exactly what's going on. 
+
+244
+00:19:06,680 --> 00:19:12,000
+Speaker 1: A final point, these, and you can actually see in real time some of this stuff being updated, which is cool.
+
+245
+00:19:13,390 --> 00:19:16,110
+Speaker 1: What we're doing right now is we're in a chat with agent. 
+
+246
+00:19:16,150 --> 00:19:28,630
+Speaker 1: And so when I talked about context, when I talked about talking to AI and telling it all of these different things, everything in this chat, in the agent's context window, it has the history of all these things that I've done. 
+
+247
+00:19:29,440 --> 00:19:34,360
+Speaker 1: As this starts to get longer, you might imagine AI being slower or being less responsive. 
+
+248
+00:19:34,400 --> 00:19:43,800
+Speaker 1: And so it's important when we're working on different things to create new chats, which will essentially clear the context or target the responses of agent. 
+
+249
+00:19:44,780 --> 00:19:47,700
+Speaker 1: And that's the same thing is true of assistant works in a very similar way.
+
+250
+00:19:47,780 --> 00:19:50,980
+Speaker 1: So what we're doing is we're creating this initial chat. 
+
+251
+00:19:51,020 --> 00:19:54,060
+Speaker 1: We got to a prototype, and then we're iterating it on a little bit from there. 
+
+252
+00:19:54,060 --> 00:19:57,340
+Speaker 1: We're gonna switch to maybe a new chat for our next feature. 
+
+253
+00:19:57,380 --> 00:19:59,900
+Speaker 1: But that's all I wanted to talk about. We're gonna let this run. 
+
+254
+00:20:00,150 --> 00:20:09,260
+Speaker 1: And we'll jump back in once we have our results, so it looks like we're done with that run.
+
+255
+00:20:09,340 --> 00:20:21,170
+Speaker 1: Before we dig in, I just want to call out that you might see this V 2 early access, a little pill if you're taking this course relatively soon, we're working on our new revision of agent. 
+
+256
+00:20:21,170 --> 00:20:23,690
+Speaker 1: By the time you're taking it, hopefully this is already out to everyone. 
+
+257
+00:20:23,690 --> 00:20:24,850
+Speaker 1: You might not see this. 
+
+258
+00:20:25,150 --> 00:20:30,510
+Speaker 1: And you can just assume that you have the latest and greatest version of agent and that everything is gonna function the same way.
+
+259
+00:20:30,960 --> 00:20:34,320
+Speaker 1: Now, what we're seeing here is a very similar interface to what we just did. 
+
+260
+00:20:34,680 --> 00:20:41,630
+Speaker 1: And that's that agent made improvements to our app, kind of returned with a report of what it did, made some checkpoints along the way. 
+
+261
+00:20:41,630 --> 00:20:43,960
+Speaker 1: So notice how these checkpoints are free. 
+
+262
+00:20:43,960 --> 00:20:45,840
+Speaker 1: You should be seeing the same thing on your side. 
+
+263
+00:20:46,200 --> 00:20:54,060
+Speaker 1: And fix the SEO score display, improve the mobile view with responsive layouts, added shadow effects, and rounding quarters to enhance the visual hierarchy. 
+
+264
+00:20:54,100 --> 00:20:57,940
+Speaker 1: They don't really even ask for that, but you can know that actually looks pretty nice. 
+
+265
+00:20:57,940 --> 00:20:58,700
+Speaker 1: I like that a lot. 
+
+266
+00:20:59,180 --> 00:21:05,400
+Speaker 1: So, you know, as we think through frameworks and we think through ways of designing beautiful, engaging, fun applications. 
+
+267
+00:21:05,400 --> 00:21:13,500
+Speaker 1: We can take that as a note of, hey, like this looks really cool and made all UI components adapt to different screen sizes.
+
+268
+00:21:13,500 --> 00:21:15,140
+Speaker 1: So what do we do now? 
+
+269
+00:21:15,180 --> 00:21:16,060
+Speaker 1: Well, we're gonna test it out. 
+
+270
+00:21:16,160 --> 00:21:18,830
+Speaker 1: So let's do the same thing and enter our website. 
+
+271
+00:21:18,870 --> 00:21:20,840
+Speaker 1: Okay, first thing, this is good. 
+
+272
+00:21:21,930 --> 00:21:24,330
+Speaker 1: It didn't add https to the beginning of this. 
+
+273
+00:21:24,330 --> 00:21:25,010
+Speaker 1: And I want to website. 
+
+274
+00:21:25,010 --> 00:21:33,990
+Speaker 1: So follow up right away, make it so I don't have to type https every time. 
+
+275
+00:21:34,390 --> 00:21:35,430
+Speaker 1: That's a really great follow up. 
+
+276
+00:21:35,710 --> 00:21:39,190
+Speaker 1: We'll send that in a second as a part of our next prompt for the minute. 
+
+277
+00:21:39,770 --> 00:21:42,850
+Speaker 1: For now, I'm gonna just type in my URL, see what comes through. 
+
+278
+00:21:42,890 --> 00:21:44,210
+Speaker 1: This is better aligned. 
+
+279
+00:21:44,250 --> 00:21:45,530
+Speaker 1: I think it could still be centered. 
+
+280
+00:21:46,270 --> 00:21:49,390
+Speaker 1: Also, I got a nice little toast there that popped up in the bottom right. 
+
+281
+00:21:50,720 --> 00:21:52,760
+Speaker 1: These pills are actually now aligned and centered. 
+
+282
+00:21:52,760 --> 00:21:54,640
+Speaker 1: So it's cool that we fix that.
+
+283
+00:21:55,410 --> 00:21:58,050
+Speaker 1: I like really the way most of this looks. 
+
+284
+00:21:58,560 --> 00:22:02,580
+Speaker 1: Hence, it looks like everything's coming through. 
+
+285
+00:22:02,580 --> 00:22:04,060
+Speaker 1: So I check the social media previews. 
+
+286
+00:22:04,880 --> 00:22:06,840
+Speaker 1: These, let's see, these look better. 
+
+287
+00:22:06,920 --> 00:22:08,680
+Speaker 1: What happens if I resize the screen here? 
+
+288
+00:22:09,480 --> 00:22:15,170
+Speaker 1: So ferry says, looks like these are the, the respond, the widths are coming through a bit better. 
+
+289
+00:22:15,170 --> 00:22:19,010
+Speaker 1: If you recall, these icons were a bit kind of crunched. 
+
+290
+00:22:19,130 --> 00:22:24,980
+Speaker 1: If we go back wide here, we'll just do like iPhone 14 Max, like we'll go old school around the 16 now. 
+
+291
+00:22:25,300 --> 00:22:26,300
+Speaker 1: But this looks better, right? 
+
+292
+00:22:26,300 --> 00:22:28,180
+Speaker 1: Like we have a more responsive layout. 
+
+293
+00:22:28,420 --> 00:22:30,300
+Speaker 1: This is a bit more friendly. 
+
+294
+00:22:30,300 --> 00:22:38,430
+Speaker 1: If I'm doing this on my iPhone and I'm starting to get an application that looks better designed and mobile friendly. 
+
+295
+00:22:38,630 --> 00:22:39,310
+Speaker 1: So this is really cool. 
+
+296
+00:22:39,990 --> 00:22:45,960
+Speaker 1: We're building tools that anyone can use, that we can use to analyze our own websites and at work, which is really fun. 
+
+297
+00:22:47,460 --> 00:22:49,820
+Speaker 1: So we're gonna call this V1 of our application. 
+
+298
+00:22:49,860 --> 00:22:53,180
+Speaker 1: And what we're gonna do in the next lesson is add some polish to this. 
+
+299
+00:22:53,180 --> 00:23:03,940
+Speaker 1: We're gonna go through, we're gonna make some edits in assistant and we're gonna really take our apps to the next level, maybe add some advanced functionality and then deploy. So I'll catch you in the next lesson.

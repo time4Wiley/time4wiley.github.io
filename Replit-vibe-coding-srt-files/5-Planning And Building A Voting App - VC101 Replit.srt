@@ -1,0 +1,1408 @@
+
+1
+00:00:01,400 --> 00:00:14,020
+Speaker 1: In this lesson, we'll build a national parks ranking app with voting capabilities, just like in the last lesson, we'll develop a PRD in a wireframe to outline our requirements, craft an effective prompt, and use agent to create our initial application with our sample part data. 
+
+2
+00:00:14,610 --> 00:00:17,160
+Speaker 1: So now let's get started on our next project. 
+
+3
+00:00:17,160 --> 00:00:23,480
+Speaker 1: And it's gonna be a bit more of a complex project using persistent storage and some more complete interactive functionality. 
+
+4
+00:00:24,850 --> 00:00:31,810
+Speaker 1: So what we're gonna build is a head ranking app that uses a custom dataset to store votes and rankings in a database. 
+
+5
+00:00:31,890 --> 00:00:42,170
+Speaker 1: So the idea is we're going to pull in some national parks data the United States, and you'll be able to go to our app and vote between two parts that are presented to you, the user. 
+
+6
+00:00:42,880 --> 00:00:52,800
+Speaker 1: Once you create a vote, we will in real time sort of tally up a ranking for that park and return the relevant ranked parse. 
+
+7
+00:00:53,320 --> 00:00:55,030
+Speaker 1: So we're gonna go through a similar process. 
+
+8
+00:00:55,030 --> 00:01:01,130
+Speaker 1: We'll start with a PRD, we'll start with a whiteboard, and then we're gonna discuss some more advanced building techniques once we get into replied for our app. 
+
+9
+00:01:01,610 --> 00:01:05,490
+Speaker 1: So again, starting with our whiteboard here, we're building our head to head voting app. 
+
+10
+00:01:05,570 --> 00:01:07,610
+Speaker 1: And I went ahead and sketch this one out as well. 
+
+11
+00:01:08,230 --> 00:01:11,070
+Speaker 1: Again, I'm thinking we have two parts that we're comparing head to head. 
+
+12
+00:01:11,310 --> 00:01:14,510
+Speaker 1: Once we vote on this park, we're gonna calculate a dynamic ranking.
+
+13
+00:01:14,550 --> 00:01:18,150
+Speaker 1: Now, the parks are ranked according to what's known as an Elo system. 
+
+14
+00:01:18,540 --> 00:01:30,530
+Speaker 1: So the goal here is to have our rankings displayed in real time, to store both our parks and our rankings in a database, to use a persistent storage method like a database and display overall rankings in recent floats. 
+
+15
+00:01:31,350 --> 00:01:42,200
+Speaker 1: This brings me to an important point, which is that by default, if you're creating apps on another platform, on or on replied, that data has to be stored somewhere so that we can reaccess it and we can have it available to us at any time. 
+
+16
+00:01:42,790 --> 00:01:52,730
+Speaker 1: And so what we're gonna do is initialize this application and then move that data to persistent storage, to a database such that we can access it, we can update those values and have it stored in our application. 
+
+17
+00:01:52,770 --> 00:01:54,090
+Speaker 1: And that's a really cool feature about reply. 
+
+18
+00:01:54,130 --> 00:01:55,370
+Speaker 1: We have databases built in. 
+
+19
+00:01:55,540 --> 00:01:56,420
+Speaker 1: We'll walk through that. 
+
+20
+00:01:56,460 --> 00:02:02,980
+Speaker 1: So key skills for this one, prompting persistent data deployments, debugging and handling errors and edge cases.
+
+21
+00:02:04,100 --> 00:02:05,770
+Speaker 1: So let's look at our prompt. 
+
+22
+00:02:06,010 --> 00:02:09,330
+Speaker 1: Help me build an interactive app for voting and ranking the best national parks. 
+
+23
+00:02:09,330 --> 00:02:15,450
+Speaker 1: The app should allow users to vote on parks head to head, then calculate a ranking for or the parks based on the chess Elo system. 
+
+24
+00:02:15,970 --> 00:02:19,730
+Speaker 1: The actual prominently display the matchup along with overall rankings and recent votes.
+
+25
+00:02:20,330 --> 00:02:21,650
+Speaker 1: Again, this is really straightforward. 
+
+26
+00:02:21,650 --> 00:02:24,370
+Speaker 1: We're emphasizing the use of our framework and Elo system. 
+
+27
+00:02:24,810 --> 00:02:26,330
+Speaker 1: And you might be saying, hey, what about the data? 
+
+28
+00:02:27,080 --> 00:02:29,440
+Speaker 1: Is the LLM just gonna know about all these national parks? 
+
+29
+00:02:29,520 --> 00:02:31,080
+Speaker 1: Well, probably not. 
+
+30
+00:02:31,120 --> 00:02:33,720
+Speaker 1: And even if it does, it's not gonna have images for those parts. 
+
+31
+00:02:33,720 --> 00:02:35,920
+Speaker 1: It's gonna be hard to find the information. 
+
+32
+00:02:36,230 --> 00:02:40,260
+Speaker 1: So what we're gonna do from this app is we're actually gonna pull data in from an external source.
+
+33
+00:02:40,420 --> 00:02:41,580
+Speaker 1: Let me show you how to do this in reply. 
+
+34
+00:02:41,700 --> 00:02:42,900
+Speaker 1: It'll be really straightforward. 
+
+35
+00:02:43,460 --> 00:02:46,700
+Speaker 1: But first, let's just take our prompt to the replet homepage. 
+
+36
+00:02:47,390 --> 00:02:51,150
+Speaker 1: So just like the last lesson, we're getting started here with our prompt. 
+
+37
+00:02:51,230 --> 00:02:58,700
+Speaker 1: We've entered everything in and now what we're gonna do is enhance this prompt with some additional context like we talked about in the introduction to this course. 
+
+38
+00:02:58,860 --> 00:03:01,930
+Speaker 1: So looks like the US has 63 national parks. 
+
+39
+00:03:02,170 --> 00:03:05,130
+Speaker 1: And this is the Wikipedia page for national parks. 
+
+40
+00:03:05,130 --> 00:03:09,130
+Speaker 1: And it actually, we actually just list all of the national parks here. 
+
+41
+00:03:09,170 --> 00:03:10,130
+Speaker 1: So this is really cool. 
+
+42
+00:03:10,930 --> 00:03:14,490
+Speaker 1: Something we haven't talked about is that agent can actually just scrape this web page for us. 
+
+43
+00:03:14,970 --> 00:03:31,110
+Speaker 1: And if we're thinking about the context that we provide to LMS, well, if we say build this ranker with all these national parks, and then we just give AI a list of all the national parks and potentially the image URLs for those parks, we can be pretty comfortable that it'll be able to use that data to integrate it into our application. 
+
+44
+00:03:31,150 --> 00:03:33,910
+Speaker 1: So what we're just gonna do is copy the URL and bring that over to agent. 
+
+45
+00:03:36,290 --> 00:03:41,610
+Speaker 1: And so what we're gonna do, we're gonna hit shift enter to create a new line and we're gonna paste in our Wikipedia link. 
+
+46
+00:03:41,730 --> 00:03:43,770
+Speaker 1: What you're gonna see up top is this little model here. 
+
+47
+00:03:44,070 --> 00:03:47,910
+Speaker 1: It's gonna prompt us if we want to take a screenshot of that page or get the text content. 
+
+48
+00:03:48,760 --> 00:03:51,760
+Speaker 1: Obviously, a screenshot of a Wikipedia page probably not what we want. 
+
+49
+00:03:52,080 --> 00:03:53,520
+Speaker 1: So we can fetch the text content. 
+
+50
+00:03:53,880 --> 00:03:58,950
+Speaker 1: Our tools are just going to scrape that web page and return us the text content. 
+
+51
+00:03:58,950 --> 00:04:00,190
+Speaker 1: You can actually see it in real time. 
+
+52
+00:04:00,190 --> 00:04:02,150
+Speaker 1: So you'll know exactly what it completes. 
+
+53
+00:04:02,150 --> 00:04:03,950
+Speaker 1: It typically takes one or two seconds here. 
+
+54
+00:04:07,070 --> 00:04:10,150
+Speaker 1: And once you see something populated, you can see the content.
+
+55
+00:04:10,150 --> 00:04:14,310
+Speaker 1: So now we know, hey, we're asking AI to build this interactive voting app. 
+
+56
+00:04:14,870 --> 00:04:21,810
+Speaker 1: Theoretically, it should have all of the content that needs all of the data, which is the list of parks, the 6arks. 
+
+57
+00:04:22,290 --> 00:04:24,500
+Speaker 1: It'll also have access to the URL. 
+
+58
+00:04:24,500 --> 00:04:26,620
+Speaker 1: So we'll see if agent can implement those properly. 
+
+59
+00:04:26,740 --> 00:04:28,140
+Speaker 1: That might take some additional prompting. 
+
+60
+00:04:28,700 --> 00:04:33,520
+Speaker 1: And the next piece, we can actually use that PRD a little bit more directly. 
+
+61
+00:04:33,520 --> 00:04:38,080
+Speaker 1: We can use that wireframe that we drew a little bit more directly in this app than we did in the last one. 
+
+62
+00:04:38,240 --> 00:04:40,240
+Speaker 1: So we're gonna head back over to all our wireframe.
+
+63
+00:04:46,440 --> 00:04:52,400
+Speaker 1: And so now what we're gonna do for this one is we're gonna actually just take a screenshot of this wireframe because I like the design here. 
+
+64
+00:04:52,440 --> 00:04:57,580
+Speaker 1: I want AI to also have some context into what we're doing. And we're gonna paste this into Agent. 
+
+65
+00:05:02,890 --> 00:05:06,880
+Speaker 1: So now I've pasted the wireframe, and our prompt is just a little bit more complete. 
+
+66
+00:05:07,080 --> 00:05:24,450
+Speaker 1: We not only have a really descriptive but concise prompt that tells agent exactly what we want, but we also have the text content of the Wikipedia page that explains what national parks are, what parks exist in the United States and has a complete list of the parks along with really relevant data. 
+
+67
+00:05:25,190 --> 00:05:27,780
+Speaker 1: And we've attached our screenshot. 
+
+68
+00:05:27,820 --> 00:05:30,180
+Speaker 1: So let's see what agent does with this information. 
+
+69
+00:05:31,640 --> 00:05:37,880
+Speaker 1: Just like the last time, Agent's gonna come up with a plan and present us info for what it's gonna build before we jump in. 
+
+70
+00:05:38,510 --> 00:05:43,230
+Speaker 1: Since we've been through this process since, you know, really the first lesson was getting comfortable with what we're building. 
+
+71
+00:05:43,730 --> 00:05:50,280
+Speaker 1: We're gonna confirm the plan here and then I'll catch back up with you once agent is done with the initial MVP built. 
+
+72
+00:05:51,310 --> 00:05:55,870
+Speaker 1: One thing, important thing to note, these additional features here are just that, additional features. 
+
+73
+00:05:55,870 --> 00:06:05,670
+Speaker 1: So regardless, Agent's gonna work towards the initial prototype, we're actually gonna work towards implementing things like a Postgres database or maybe some of these other functionalities. 
+
+74
+00:06:05,670 --> 00:06:06,790
+Speaker 1: So you don't have to worry about that. 
+
+75
+00:06:06,830 --> 00:06:08,270
+Speaker 1: You can just improve the plan and start. 
+
+76
+00:06:08,770 --> 00:06:10,890
+Speaker 1: Also note that right results may vary. 
+
+77
+00:06:10,930 --> 00:06:15,050
+Speaker 1: So if you're following this tutorial, AI does different things. 
+
+78
+00:06:15,050 --> 00:06:20,160
+Speaker 1: Sometimes your preview might look different, the final result might look different, but we're gonna work through it together. 
+
+79
+00:06:20,200 --> 00:06:22,600
+Speaker 1: So I'll catch you once this preview is done.
+
+80
+00:06:48,600 --> 00:06:49,560
+Speaker 1: Okay, so we're back. 
+
+81
+00:06:49,600 --> 00:06:52,960
+Speaker 1: And if you're falling along, once the app was being built, you might have seen some errors come up. 
+
+82
+00:06:52,960 --> 00:06:53,880
+Speaker 1: And we still have some errors. 
+
+83
+00:06:53,880 --> 00:06:54,520
+Speaker 1: So that's okay. 
+
+84
+00:06:55,020 --> 00:06:57,180
+Speaker 1: And we're gonna work through these one at a time. 
+
+85
+00:06:57,220 --> 00:07:00,420
+Speaker 1: And you probably saw actually that agent fix some errors. 
+
+86
+00:07:00,420 --> 00:07:07,270
+Speaker 1: And that was because agent has the ability to both read the output of what's coming from the application, so what's being written to the console. 
+
+87
+00:07:07,790 --> 00:07:15,140
+Speaker 1: If we open up a new tab and type in console, you can actually see what's happening as the application is working. 
+
+88
+00:07:16,140 --> 00:07:19,700
+Speaker 1: And it also has the ability to take screenshots and fix things dynamically. 
+
+89
+00:07:19,700 --> 00:07:20,900
+Speaker 1: So we have our interface. 
+
+90
+00:07:21,490 --> 00:07:22,730
+Speaker 1: There's a lot of stuff going on here. 
+
+91
+00:07:22,770 --> 00:07:24,890
+Speaker 1: There's not a lot of things that are working, but that's okay.
+
+92
+00:07:25,990 --> 00:07:27,350
+Speaker 1: We expected to get errors. 
+
+93
+00:07:27,430 --> 00:07:28,710
+Speaker 1: On the whole, this looks nice. 
+
+94
+00:07:28,750 --> 00:07:29,950
+Speaker 1: The images aren't coming through. 
+
+95
+00:07:30,430 --> 00:07:32,230
+Speaker 1: I don't think we have all of the parks here. 
+
+96
+00:07:32,230 --> 00:07:34,070
+Speaker 1: I don't think it scraped the data like we asked it to. 
+
+97
+00:07:34,740 --> 00:07:38,300
+Speaker 1: And we have some like non functional account buttons up top, which is fine. 
+
+98
+00:07:39,110 --> 00:07:42,390
+Speaker 1: But this looks like our wireframe. 
+
+99
+00:07:42,430 --> 00:07:43,470
+Speaker 1: So I think that's good. 
+
+100
+00:07:43,590 --> 00:07:44,950
+Speaker 1: And we're gonna try and fix this. 
+
+101
+00:07:45,850 --> 00:07:50,250
+Speaker 1: And we're not gonna worry too much about the broken images or the ever, you know, some of the other stuff that's going on here. 
+
+102
+00:07:50,680 --> 00:07:53,120
+Speaker 1: We're just gonna focus on seeing if we can make this work.
+
+103
+00:07:53,160 --> 00:07:55,120
+Speaker 1: But let's check actually if the voting works. 
+
+104
+00:07:55,600 --> 00:07:59,390
+Speaker 1: So I click vote and actually in these ones, the images do works. 
+
+105
+00:08:00,070 --> 00:08:02,350
+Speaker 1: So the Everglades gotta vote. 
+
+106
+00:08:02,890 --> 00:08:05,370
+Speaker 1: It's it is tallied in my recent votes, which is cool. 
+
+107
+00:08:06,450 --> 00:08:09,890
+Speaker 1: It doesn't look like it flowed through to my rankings. 
+
+108
+00:08:10,180 --> 00:08:11,250
+Speaker 1: So that's something to note. 
+
+109
+00:08:11,250 --> 00:08:17,910
+Speaker 1: The rankings don't appear to be working, but the recent votes and the images in some instances do seem to work. 
+
+110
+00:08:17,990 --> 00:08:22,390
+Speaker 1: This is where it might be helpful to dig into the code and kind of see what's going on. 
+
+111
+00:08:22,780 --> 00:08:28,000
+Speaker 1: So I'm gonna poke around in the components, Susan Hooks Lib. 
+
+112
+00:08:28,440 --> 00:08:34,350
+Speaker 1: Okay, so park data, it looks like you know, it just hard coded a bunch of parks in here. 
+
+113
+00:08:34,430 --> 00:08:37,330
+Speaker 1: These do not appear to be all of the parks. 
+
+114
+00:08:37,870 --> 00:08:41,870
+Speaker 1: And it assigned an icon type for these parts, which is probably what's flowing through the front end.
+
+115
+00:08:41,910 --> 00:08:44,590
+Speaker 1: And then replied has access to Unsplash. 
+
+116
+00:08:44,590 --> 00:08:47,850
+Speaker 1: So it looks like it just pulled these images from Unsplash. 
+
+117
+00:08:47,890 --> 00:08:50,610
+Speaker 1: And then my guess would be for some parts, it didn't have images. 
+
+118
+00:08:51,260 --> 00:08:57,770
+Speaker 1: So I think what our goal here is going to be to see if we can get it to use Wikipedia like we originally ask for. 
+
+119
+00:08:57,960 --> 00:08:59,950
+Speaker 1: Possibly just gave it a little bit too much information. 
+
+120
+00:09:00,030 --> 00:09:01,590
+Speaker 1: This is building with AI, right? 
+
+121
+00:09:01,590 --> 00:09:03,310
+Speaker 1: We're gonna take a look at this.
+
+122
+00:09:04,100 --> 00:09:12,300
+Speaker 1: As we talked about, what we're doing now is we're testing the application, seeing what works, seeing what doesn't work is that our rankings aren't pulling from our persistent data storage. 
+
+123
+00:09:12,470 --> 00:09:17,270
+Speaker 1: We are recording recent votes, which is cool, but we also didn't really pull in parts the way we wanted to.
+
+124
+00:09:17,990 --> 00:09:20,620
+Speaker 1: So what I'm gonna tell agent, we're gonna try something different. 
+
+125
+00:09:20,620 --> 00:09:32,170
+Speaker 1: We're gonna say the parks data are listed on the Wikipedia page inside a table in the HTML. 
+
+126
+00:09:34,340 --> 00:09:43,250
+Speaker 1: Please fetch the page, download it, and extract all the parks from the source. 
+
+127
+00:09:44,320 --> 00:09:48,400
+Speaker 1: There should be 63, if I remember correctly. 
+
+128
+00:09:49,380 --> 00:09:59,510
+Speaker 1: Each park has an image in the table. You should use the externally hosted image. 
+
+129
+00:10:00,070 --> 00:10:05,030
+Speaker 1: As the park image in our app. 
+
+130
+00:10:06,660 --> 00:10:08,020
+Speaker 1: And then I'm gonna paste in the Wikipedia page. 
+
+131
+00:10:08,060 --> 00:10:10,620
+Speaker 1: This time we're actually not gonna get the text content. 
+
+132
+00:10:10,660 --> 00:10:15,870
+Speaker 1: The goal here is to see if maybe through an alternative prompting method, we can get agent to just integrate this directly. 
+
+133
+00:10:15,910 --> 00:10:16,630
+Speaker 1: And I'm gonna run that.
+
+134
+00:10:17,300 --> 00:10:20,380
+Speaker 1: So the goal here is I'm thinking about the biggest problems with our app. 
+
+135
+00:10:20,620 --> 00:10:22,940
+Speaker 1: The first one is that like, we just don't have accurate data. 
+
+136
+00:10:23,020 --> 00:10:24,500
+Speaker 1: So there are other ways to go about this, right? 
+
+137
+00:10:24,500 --> 00:10:27,440
+Speaker 1: We could process the data ourselves, we could upload it. 
+
+138
+00:10:27,880 --> 00:10:29,320
+Speaker 1: But I just prompted agent. 
+
+139
+00:10:29,320 --> 00:10:33,170
+Speaker 1: You can see what it did was it ran a curl command on that Wikipedia page. 
+
+140
+00:10:33,210 --> 00:10:35,650
+Speaker 1: And curl is just a fancy way of getting HTML. 
+
+141
+00:10:36,410 --> 00:10:46,330
+Speaker 1: And now it's using a couple libraries, beautiful soup and requests and writing a Python script to extract the part data from the Wikipedia page. 
+
+142
+00:10:46,330 --> 00:10:55,510
+Speaker 1: So this is pretty complicated, but I think it's important to walk through because we're kind of, there are these tools that the AI can do for us, that agent can do for us. 
+
+143
+00:10:55,510 --> 00:10:57,430
+Speaker 1: And sometimes it works, sometimes it doesn't. 
+
+144
+00:10:57,430 --> 00:11:02,610
+Speaker 1: But this would save us time and it would let us build something really cool, given that we have all the resources that we need. 
+
+145
+00:11:03,180 --> 00:11:07,100
+Speaker 1: It's kind of like what we built previously in the SEO analyzer. 
+
+146
+00:11:07,220 --> 00:11:10,020
+Speaker 1: We were able to scrape and access that data. 
+
+147
+00:11:10,770 --> 00:11:15,650
+Speaker 1: So it looks like it just ran the script to extract the parks, but now it's trying out a different approach. 
+
+148
+00:11:16,170 --> 00:11:22,820
+Speaker 1: So it actually looks like agent is writing some scripts here to analyze the structure of that HTML that it just downloaded. 
+
+149
+00:11:23,180 --> 00:11:32,480
+Speaker 1: And hopefully if this is running, we can kind of see the scripts that it's reading and writing in the file structure here. 
+
+150
+00:11:32,480 --> 00:11:41,990
+Speaker 1: So we have analyze parks updating these scripts to actually kind of introspect that's website that it downloaded. 
+
+151
+00:11:42,910 --> 00:11:51,110
+Speaker 1: And I guess our goal or our my expectation would be that we'd come out with something that has all of our park data implemented pretty complete. 
+
+152
+00:11:51,110 --> 00:11:53,910
+Speaker 1: I'm actually pretty impressed the agent was able to do this. 
+
+153
+00:11:54,310 --> 00:11:57,750
+Speaker 1: So theoretically, it understands the structure of what we just extracted. 
+
+154
+00:11:58,130 --> 00:12:02,440
+Speaker 1: And now it's executing that Python script and then going to get contents there.
+
+155
+00:12:14,790 --> 00:12:18,830
+Speaker 1: Okay, so now I want to talk what just happened because there was a lot of stuff going on in that run. 
+
+156
+00:12:19,150 --> 00:12:25,690
+Speaker 1: What agent did was it wrote Python scripts both to fetch and analyze the parks. 
+
+157
+00:12:25,690 --> 00:12:35,730
+Speaker 1: And if you've been paying attention here, if you've been writing programming or if you've been, you know, doing more technical work, you might have noticed this is a Javascript project, this is a typescript project, but we also now have Python files. 
+
+158
+00:12:35,730 --> 00:12:37,210
+Speaker 1: And you might be saying, well, how do we set that up? 
+
+159
+00:12:37,210 --> 00:12:42,680
+Speaker 1: And that is because replied as a platform allows you to install languages in just seconds. 
+
+160
+00:12:43,200 --> 00:12:54,530
+Speaker 1: And so agent actually configured this entire environment to run Python, ran these files to analyze the Wikipedia entry, pulled down the Wikipedia page, wrote the data to Parks Data. 
+
+161
+00:12:54,570 --> 00:13:00,670
+Speaker 1: Jason verified there were 63 entries in the list and we can look through this list and be sure that this is the same. 
+
+162
+00:13:01,030 --> 00:13:02,590
+Speaker 1: It's actually using the same images. 
+
+163
+00:13:03,490 --> 00:13:05,810
+Speaker 1: These images are much better than the ones we had before. 
+
+164
+00:13:06,050 --> 00:13:08,690
+Speaker 1: And if we want to double check, we can flip on over Wikipedia. 
+
+165
+00:13:12,090 --> 00:13:16,210
+Speaker 1: So now I'm in Wikipedia and I'm gonna search for Virgin Islands. 
+
+166
+00:13:17,780 --> 00:13:22,500
+Speaker 1: And we can verify that this is in fact the same image that we had previously.
+
+167
+00:13:25,790 --> 00:13:26,630
+Speaker 1: So what do we just do? 
+
+168
+00:13:26,630 --> 00:13:31,510
+Speaker 1: We were able to extract this data without actually providing or cleaning any data ourselves. 
+
+169
+00:13:31,590 --> 00:13:33,150
+Speaker 1: Agent just did all of that for us. 
+
+170
+00:13:33,730 --> 00:13:36,250
+Speaker 1: This is really cool and we're making some good progress. 
+
+171
+00:13:36,250 --> 00:13:39,930
+Speaker 1: Because my guess would be voting probably still works exactly the same. 
+
+172
+00:13:40,420 --> 00:13:42,460
+Speaker 1: We get new matchups, we can skip the matchup. 
+
+173
+00:13:43,070 --> 00:13:44,830
+Speaker 1: We get our recent votes. 
+
+174
+00:13:45,150 --> 00:13:47,270
+Speaker 1: The rankings probably don't work. 
+
+175
+00:13:48,900 --> 00:13:49,740
+Speaker 1: They definitely don't work.
+
+176
+00:13:50,500 --> 00:13:52,860
+Speaker 1: But again, this is what we talked about before. 
+
+177
+00:13:52,900 --> 00:13:56,660
+Speaker 1: We're adding context, we're fetching data, we're doing things one step at a time. 
+
+178
+00:13:56,660 --> 00:14:01,890
+Speaker 1: And so now we have a description of our park, we have some data we pulled in and we can provide those votes. 
+
+179
+00:14:02,090 --> 00:14:02,810
+Speaker 1: Sign in, sign up. 
+
+180
+00:14:02,810 --> 00:14:03,530
+Speaker 1: Not functional. 
+
+181
+00:14:03,890 --> 00:14:04,970
+Speaker 1: Votes are not functional. 
+
+182
+00:14:04,970 --> 00:14:06,690
+Speaker 1: We're gonna work through this one step at a time. 
+
+183
+00:14:07,300 --> 00:14:14,440
+Speaker 1: Let's say the rankings currently aren't working. 
+
+184
+00:14:14,900 --> 00:14:25,150
+Speaker 1: The recent votes flow through, but I don't see any updates for these scores. 
+
+185
+00:14:28,600 --> 00:14:35,880
+Speaker 1: And again, we're gonna trust that agent is going to be able to analyze this and make the fix. 
+
+186
+00:14:35,920 --> 00:14:38,000
+Speaker 1: So we have a storage implementation. 
+
+187
+00:14:38,080 --> 00:14:39,760
+Speaker 1: Agents can open that up and take a look at it.
+
+188
+00:14:40,130 --> 00:14:42,690
+Speaker 1: Now you might be saying, Matt, why didn't we just start with a database? 
+
+189
+00:14:42,690 --> 00:14:44,410
+Speaker 1: You talked about implementing a database. 
+
+190
+00:14:44,410 --> 00:14:45,890
+Speaker 1: We know we want a database eventually. 
+
+191
+00:14:46,300 --> 00:14:55,190
+Speaker 1: In my experience, it actually works better to make sure that the data is being fetched properly and then make sure that the app actually works with in memory storage. 
+
+192
+00:14:55,230 --> 00:14:59,920
+Speaker 1: So storing in memory works for this application, but it means that like every time it's re. 
+
+193
+00:15:00,000 --> 00:15:02,590
+Speaker 1: Started, we probably lose our rankings. 
+
+194
+00:15:02,590 --> 00:15:08,020
+Speaker 1: So making sure that the app works first and then asking agent to migrate that data over to a database. 
+
+195
+00:15:08,220 --> 00:15:08,980
+Speaker 1: And that's what we're doing.
+
+196
+00:15:11,990 --> 00:15:16,760
+Speaker 1: Other things to note, we can also kind of rely on agent to kind of solve these problems. 
+
+197
+00:15:16,760 --> 00:15:18,280
+Speaker 1: So what do we do before? 
+
+198
+00:15:18,280 --> 00:15:20,280
+Speaker 1: Well, we just specified where the image lived. 
+
+199
+00:15:20,280 --> 00:15:21,160
+Speaker 1: We gave it a URL. 
+
+200
+00:15:21,450 --> 00:15:23,930
+Speaker 1: We specified how we wanted the problem to be approached. 
+
+201
+00:15:23,930 --> 00:15:25,170
+Speaker 1: I want you to go to this URL. 
+
+202
+00:15:25,210 --> 00:15:25,890
+Speaker 1: There's a table. 
+
+203
+00:15:25,890 --> 00:15:28,870
+Speaker 1: You have to analyze the table, extract the data. 
+
+204
+00:15:29,230 --> 00:15:32,590
+Speaker 1: Agent was able to do that and actually take care of that entire thing for us. 
+
+205
+00:15:33,110 --> 00:15:38,620
+Speaker 1: So again, as these models get better, we can think about the smallest sort of building blocks that AI is able to solve. 
+
+206
+00:15:38,620 --> 00:15:45,860
+Speaker 1: Maybe like a year ago, you know, six months ago, it was writing a function or tab auto complete or like doing something that wasn't even that impressive. 
+
+207
+00:15:45,860 --> 00:15:48,310
+Speaker 1: Now it can solve much more higher level problems.
+
+208
+00:15:48,710 --> 00:15:50,110
+Speaker 1: Hey, we don't have a data source. 
+
+209
+00:15:50,350 --> 00:15:52,070
+Speaker 1: Hey, we need to fix a ranking system. 
+
+210
+00:15:52,390 --> 00:15:55,860
+Speaker 1: Hey, we need to update how these things are flowing through. 
+
+211
+00:15:56,100 --> 00:16:00,550
+Speaker 1: And so now, if you recall, we just revoted for the Virgin Islands, right? 
+
+212
+00:16:00,900 --> 00:16:09,660
+Speaker 1: So Virgin Islands beat Hawaii Volcanoes, and our ranking now reflects a 1516 score. 
+
+213
+00:16:10,150 --> 00:16:16,110
+Speaker 1: We can also check, let's make sure all of our parks are being pulled through here, that we do, in fact, have 63 national parks. 
+
+214
+00:16:16,110 --> 00:16:17,270
+Speaker 1: So we have all of those. 
+
+215
+00:16:18,440 --> 00:16:22,760
+Speaker 1: And again, so we have Death Valley up against Virgin Islands. 
+
+216
+00:16:22,760 --> 00:16:32,490
+Speaker 1: The way that an Elo system works is that if the score is higher for the competitor and a lower rank competitor beats that competitor, it should be higher in the ranking. 
+
+217
+00:16:32,530 --> 00:16:39,760
+Speaker 1: So if we vote for Death Valley, you can now see Death Valley is No. 1, and it has a 1517 score rather than a 1516, it looks like. 
+
+218
+00:16:39,760 --> 00:16:40,280
+Speaker 1: Let's check. 
+
+219
+00:16:40,530 --> 00:16:41,010
+Speaker 1: Rank 30. 
+
+220
+00:16:41,010 --> 00:16:44,730
+Speaker 1: I have no idea how to pronounce this, so please don't hold me to that. 
+
+221
+00:16:45,420 --> 00:16:48,100
+Speaker 1: We're gonna check and make sure that this actually is rank 30. 
+
+222
+00:16:48,660 --> 00:16:49,660
+Speaker 1: Go in the page. 
+
+223
+00:16:49,700 --> 00:16:50,140
+Speaker 1: It is. 
+
+224
+00:16:50,140 --> 00:16:51,740
+Speaker 1: We can confirm that works again. 
+
+225
+00:16:51,740 --> 00:16:52,300
+Speaker 1: What are we doing? 
+
+226
+00:16:52,340 --> 00:16:53,820
+Speaker 1: We're just testing our application. 
+
+227
+00:16:54,180 --> 00:16:56,860
+Speaker 1: And that's that loop I was talking about in the very first lesson.
+
+228
+00:16:57,230 --> 00:16:59,020
+Speaker 1: So what can we do now? 
+
+229
+00:16:59,100 --> 00:17:00,780
+Speaker 1: Well, we have our voting system. 
+
+230
+00:17:00,780 --> 00:17:01,860
+Speaker 1: We have our rankings. 
+
+231
+00:17:01,900 --> 00:17:03,220
+Speaker 1: They're updating in real time. 
+
+232
+00:17:03,890 --> 00:17:05,010
+Speaker 1: And we have our recent votes. 
+
+233
+00:17:05,370 --> 00:17:06,450
+Speaker 1: This is all in memory though. 
+
+234
+00:17:06,610 --> 00:17:09,210
+Speaker 1: So what we want to do is add this to a database. 
+
+235
+00:17:09,330 --> 00:17:13,180
+Speaker 1: Now, if you've built with other tools, you know that adding databases are pretty complicated. 
+
+236
+00:17:14,260 --> 00:17:40,060
+Speaker 1: One of the really great features about agent, about vibe coding with Replete Agent is that we can say, okay, let's now make our storage persistent, store all data in a database so it persists across sessions and users. 
+
+237
+00:17:41,610 --> 00:17:42,290
+Speaker 1: Really, that's it. 
+
+238
+00:17:42,450 --> 00:17:50,610
+Speaker 1: We can kind of just trust that if we send this prompt, that agent is going to be able to, No. 1, understand what we would like and have the access to tools. 
+
+239
+00:17:50,650 --> 00:17:52,530
+Speaker 1: You can see there we just created a database. 
+
+240
+00:17:53,090 --> 00:18:00,780
+Speaker 1: We created a server database file, and now it's gonna take that in memory storage and it's gonna migrate it over to our database.
+
+241
+00:18:01,060 --> 00:18:09,370
+Speaker 1: Now, while agent is moving through our sort of database steps, we're gonna open up a new tab just because I wanna show you what's going on. 
+
+242
+00:18:09,770 --> 00:18:11,050
+Speaker 1: And we have a Postgres database. 
+
+243
+00:18:11,670 --> 00:18:15,430
+Speaker 1: If you haven't used the database before, or you don't even really know what a database is. 
+
+244
+00:18:16,100 --> 00:18:23,050
+Speaker 1: It's kind of just like a CSV that relates to other sort of tables. 
+
+245
+00:18:23,050 --> 00:18:29,520
+Speaker 1: So we're gonna have a table structure and what we're gonna see is that agent is going to start populating this database with data. 
+
+246
+00:18:30,190 --> 00:18:32,510
+Speaker 1: You can actually see on the left exactly what it's doing. 
+
+247
+00:18:32,510 --> 00:18:33,910
+Speaker 1: It's gonna start running some scripts. 
+
+248
+00:18:35,300 --> 00:18:40,900
+Speaker 1: We have included a database viewer where you can kind of interact with all of the tables. 
+
+249
+00:18:40,900 --> 00:18:42,500
+Speaker 1: We'll come back to this ones that are tables.
+
+250
+00:18:43,040 --> 00:18:54,320
+Speaker 1: But what I want to point out fundamentally what's going on here, it's important to understand how our databases work, is that if we go to our tools and we go to secrets, we have some really great partners we work with neon for databases. 
+
+251
+00:18:54,360 --> 00:19:01,660
+Speaker 1: And so what you can think about is we're spinning up this like Postgres database on the back end through our partners at neon. 
+
+252
+00:19:02,060 --> 00:19:06,500
+Speaker 1: And all we're doing is dropping in these connection secrets into our secrets ping. 
+
+253
+00:19:07,460 --> 00:19:11,220
+Speaker 1: So our secrets pain, if you've ever built an application before, this is like an environment. 
+
+254
+00:19:11,260 --> 00:19:17,110
+Speaker 1: These are environment variables we can pull in secrets from our account or just have these secrets that live in our app. 
+
+255
+00:19:17,680 --> 00:19:19,160
+Speaker 1: Let's see what's going on over here.
+
+256
+00:19:19,480 --> 00:19:23,290
+Speaker 1: Looks like agent is still working through the database connection. 
+
+257
+00:19:23,510 --> 00:19:31,490
+Speaker 1: It's debugging and fixing some type errors and then executing some database migration scripts. 
+
+258
+00:19:31,530 --> 00:19:39,130
+Speaker 1: Again, don't worry about this too much, but if you're interested in this and you're trying to learn a bit more about how databases work with full stack web applications. 
+
+259
+00:19:39,740 --> 00:19:47,650
+Speaker 1: Hey, you know, like understanding that it's using Postgres, understand what Postgres is, understanding how the connection works and the packages work. 
+
+260
+00:19:47,890 --> 00:19:54,640
+Speaker 1: And these are all really great ways to learn more about databases, what database migrations are, and how applications work. 
+
+261
+00:19:54,680 --> 00:19:55,640
+Speaker 1: And this is how I've Learned. 
+
+262
+00:19:56,200 --> 00:19:59,910
+Speaker 1: So that's why I'm going through this again. Agents gonna take. 
+
+263
+00:20:00,450 --> 00:20:01,090
+Speaker 1: A minute here. 
+
+264
+00:20:01,210 --> 00:20:05,050
+Speaker 1: We're just gonna let it work and then we'll come back once we have some data in our database.
+
+265
+00:20:27,850 --> 00:20:31,810
+Speaker 1: Okay, we're back and we tried the database implementation. 
+
+266
+00:20:31,810 --> 00:20:32,930
+Speaker 1: We're gonna walk through what happened. 
+
+267
+00:20:33,010 --> 00:20:38,500
+Speaker 1: Cuz agent went completely off the rails for about 15 minutes, but it's okay. 
+
+268
+00:20:39,020 --> 00:20:39,980
+Speaker 1: So what happened? 
+
+269
+00:20:40,180 --> 00:20:45,900
+Speaker 1: It did a lot of stuff and it set up our Postgres database, created a schema, used consistent naming. 
+
+270
+00:20:45,900 --> 00:20:50,570
+Speaker 1: It says it loaded parks into the database, but like I'm here, I'm refreshing. 
+
+271
+00:20:50,570 --> 00:21:03,460
+Speaker 1: Okay, we, well, we have matchups, we have parks, users and votes, but it then kind of started working on an API server integration with database stores. 
+
+272
+00:21:03,460 --> 00:21:05,780
+Speaker 1: That's separate from our actual integration. 
+
+273
+00:21:05,780 --> 00:21:07,660
+Speaker 1: So let's see what's going on in the web view. 
+
+274
+00:21:09,350 --> 00:21:13,250
+Speaker 1: If we run, the application fails to run. 
+
+275
+00:21:13,250 --> 00:21:14,250
+Speaker 1: So we're getting errors. 
+
+276
+00:21:14,290 --> 00:21:16,210
+Speaker 1: So it looks like I did most of this. 
+
+277
+00:21:16,210 --> 00:21:17,210
+Speaker 1: Something went wrong.
+
+278
+00:21:17,610 --> 00:21:20,530
+Speaker 1: This is where we're gonna use what we talked about before, which are rollbacks. 
+
+279
+00:21:21,620 --> 00:21:29,120
+Speaker 1: And, you know, the last change we made was up here, you can see we had a checkpoint about 15 minutes ago and this is backed by get. 
+
+280
+00:21:29,200 --> 00:21:36,780
+Speaker 1: So if you really want to see what was going on here with our checkpoints, if you go to the get pane, we'll actually get a summary of everything agent has ever done. 
+
+281
+00:21:36,860 --> 00:21:43,330
+Speaker 1: This is really useful and you can actually create a Github repository from here or push it to your Github account if that's what you're into. 
+
+282
+00:21:43,690 --> 00:21:47,370
+Speaker 1: But the cool thing about checkpoints, we hit a really, like, we just hit a roadblock. 
+
+283
+00:21:47,510 --> 00:21:48,470
+Speaker 1: I'm gonna roll this back. 
+
+284
+00:21:48,880 --> 00:21:51,800
+Speaker 1: So what you're gonna see is that agent is rolling back. 
+
+285
+00:21:52,040 --> 00:21:53,280
+Speaker 1: It completed that rollback.
+
+286
+00:21:53,640 --> 00:22:00,660
+Speaker 1: Now if I run our application, we're back precisely to where we were before. 
+
+287
+00:22:01,420 --> 00:22:03,620
+Speaker 1: Agents can ask us, hey, like, what should I do differently? 
+
+288
+00:22:03,620 --> 00:22:05,340
+Speaker 1: I'll tell you what you should do differently in a second. 
+
+289
+00:22:05,340 --> 00:22:07,300
+Speaker 1: I'm gonna refresh this and see what's going on. 
+
+290
+00:22:08,320 --> 00:22:09,400
+Speaker 1: It initialize our app. 
+
+291
+00:22:09,520 --> 00:22:12,880
+Speaker 1: So now we're back to that state stuff breaks. 
+
+292
+00:22:12,920 --> 00:22:14,360
+Speaker 1: This is kind of what I was talking about before, right? 
+
+293
+00:22:14,360 --> 00:22:15,520
+Speaker 1: It's okay that stuff breaks. 
+
+294
+00:22:15,920 --> 00:22:18,360
+Speaker 1: The cool thing is that we're rolling it back and we're gonna try again. 
+
+295
+00:22:18,400 --> 00:22:21,560
+Speaker 1: So we're gonna think through what we did and we're gonna try something differently. 
+
+296
+00:22:21,770 --> 00:22:24,040
+Speaker 1: So I think I was pretty basic. 
+
+297
+00:22:24,040 --> 00:22:26,760
+Speaker 1: I'm gonna create a new chat and we're gonna be really descriptive this time. 
+
+298
+00:22:26,760 --> 00:22:45,630
+Speaker 1: We're gonna say our app currently uses parks data hard coded in parks data dot Jason, we'd like to move this to a post correct database. 
+
+299
+00:22:46,070 --> 00:22:49,760
+Speaker 1: Again, agents gonna know how have the tools to access that. 
+
+300
+00:22:49,760 --> 00:22:55,330
+Speaker 1: But I think what we need to do is just be very explicit about the type of data we're using and how we want that data inserted.
+
+301
+00:22:56,220 --> 00:23:09,070
+Speaker 1: You should analyze the structure of the data and create a schema for rapid import. 
+
+302
+00:23:10,160 --> 00:23:19,530
+Speaker 1: Be sure to check the data types and perform all necessary migrations. 
+
+303
+00:23:21,580 --> 00:23:23,720
+Speaker 1: So what are we doing here? 
+
+304
+00:23:24,250 --> 00:23:24,890
+Speaker 1: We're trying again. 
+
+305
+00:23:25,210 --> 00:23:27,010
+Speaker 1: We may, we hit, we ran into a roadblock. 
+
+306
+00:23:27,330 --> 00:23:28,250
+Speaker 1: We reset the app. 
+
+307
+00:23:28,410 --> 00:23:30,770
+Speaker 1: We're trying one more time with new data. 
+
+308
+00:23:30,850 --> 00:23:34,490
+Speaker 1: What you probably notice in the app is that we lost all our scores and votes. 
+
+309
+00:23:34,970 --> 00:23:37,690
+Speaker 1: That's expected cuz we don't have persistent data just yet. 
+
+310
+00:23:37,730 --> 00:23:42,250
+Speaker 1: So we kind of took another approach. 
+
+311
+00:23:42,290 --> 00:23:44,250
+Speaker 1: We added a little bit more description to our prompts. 
+
+312
+00:23:44,250 --> 00:23:47,850
+Speaker 1: We started a new chat session just to make sure that the context was clear. 
+
+313
+00:23:47,850 --> 00:23:54,490
+Speaker 1: Since, you know, we've been doing a lot in this application and now we're running the app to rerun that transformation. 
+
+314
+00:23:54,490 --> 00:23:57,970
+Speaker 1: So we're gonna let agent roll here for hopefully sure amount of time. 
+
+315
+00:23:58,010 --> 00:24:00,930
+Speaker 1: We'll come back, we'll see what happened and we'll keep building.
+
+316
+00:24:20,930 --> 00:24:21,290
+Speaker 1: All right. 
+
+317
+00:24:21,330 --> 00:24:21,810
+Speaker 1: Amazing. 
+
+318
+00:24:21,810 --> 00:24:26,150
+Speaker 1: So it looks like our updated prompt got us the result we wanted. 
+
+319
+00:24:26,150 --> 00:24:36,870
+Speaker 1: So agent went through, pulled that data, created our database, and then performed to migration, importing the data from the JSON file that we had into the database.
+
+320
+00:24:36,910 --> 00:24:39,270
+Speaker 1: So now we're getting the parks and we go to our database tab. 
+
+321
+00:24:39,820 --> 00:24:40,980
+Speaker 1: Should be able to refresh this. 
+
+322
+00:24:40,980 --> 00:24:42,420
+Speaker 1: We see votes, which is empty. 
+
+323
+00:24:42,420 --> 00:24:48,620
+Speaker 1: We see parks, which has all of the parks that we wanted now in a form of persistent store storage. 
+
+324
+00:24:49,490 --> 00:24:53,490
+Speaker 1: We have a user's table as well, which could be useful in the future.
+
+325
+00:24:53,810 --> 00:24:59,900
+Speaker 1: We have matchups, so it's recording every matchup part, a ID part, vid, which I would assume corresponds to. 
+
+326
+00:25:00,000 --> 00:25:06,060
+Speaker 1: To Carlsbag Caverns and Bryce Canyon, both in Utah, if I'm not mistaken. 
+
+327
+00:25:06,500 --> 00:25:10,800
+Speaker 1: But if we check those out, 11 crawls back caverns might not actually be in Utah. 
+
+328
+00:25:11,840 --> 00:25:15,160
+Speaker 1: And Bryce Canyon is 8. 
+
+329
+00:25:15,160 --> 00:25:16,780
+Speaker 1: So looks like we have that. 
+
+330
+00:25:16,780 --> 00:25:24,920
+Speaker 1: We have this really cool database explorer here where you can kind of poke around and look at the data, see what we're working with. 
+
+331
+00:25:24,960 --> 00:25:26,600
+Speaker 1: So very cool stuff.
+
+332
+00:25:27,220 --> 00:25:34,630
+Speaker 1: We have some other interesting rose, but this is kind of what we're going for. 
+
+333
+00:25:34,630 --> 00:25:35,350
+Speaker 1: So let's see if it works. 
+
+334
+00:25:35,350 --> 00:25:40,270
+Speaker 1: We're gonna vote for Bryce recording vote vorpville recorded. 
+
+335
+00:25:40,430 --> 00:25:45,600
+Speaker 1: We get the match up to change and Bryce Canyon gets a better ranking. 
+
+336
+00:25:45,640 --> 00:25:49,650
+Speaker 1: What we would expect to see in our database, right, is a vote in the votes table. 
+
+337
+00:25:49,930 --> 00:25:51,530
+Speaker 1: So we have 8 versus 11. 
+
+338
+00:25:51,530 --> 00:25:55,480
+Speaker 1: We have the winner, loser, and the updates populating through. 
+
+339
+00:25:56,230 --> 00:26:00,310
+Speaker 1: And then we also have a new matchup in the matchup table. 
+
+340
+00:26:00,750 --> 00:26:02,110
+Speaker 1: So that was just a couple prompts. 
+
+341
+00:26:02,110 --> 00:26:04,510
+Speaker 1: We migrated the data over into persistent storage.
+
+342
+00:26:04,510 --> 00:26:07,920
+Speaker 1: So now, right, we have our ranking from Bryce Canyon. 
+
+343
+00:26:08,160 --> 00:26:14,870
+Speaker 1: If I stop this app, well, we won't stop it, but if I refresh it or if I restart it, there scores will all persist.
+
+344
+00:26:15,310 --> 00:26:16,550
+Speaker 1: We have persistent data. 
+
+345
+00:26:16,630 --> 00:26:17,910
+Speaker 1: We've done a really good job. 
+
+346
+00:26:17,910 --> 00:26:25,200
+Speaker 1: This is, you know, something that's, has been historically really hard to do, integrate a database and really agent did most of the heavy lifting. 
+
+347
+00:26:25,240 --> 00:26:27,440
+Speaker 1: So we're gonna spin it down for this lesson here. 
+
+348
+00:26:27,440 --> 00:26:28,440
+Speaker 1: We're gonna pick it up. 
+
+349
+00:26:28,910 --> 00:26:38,470
+Speaker 1: We're going to learn a bit more about our app, maybe implement one more feature, deploy it, and have a real functioning as an NPS rank application. 
+
+350
+00:26:39,570 --> 00:26:40,930
+Speaker 1: Deploy in just a couple minutes. 
+
+351
+00:26:40,970 --> 00:26:41,770
+Speaker 1: So stick around. 
+
+352
+00:26:41,770 --> 00:26:46,210
+Speaker 1: We'll wrap this one up and you guys are gonna be expert vibe coders by the end of next lesson.

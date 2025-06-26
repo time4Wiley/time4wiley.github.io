@@ -1,0 +1,192 @@
+
+1
+00:00:01,560 --> 00:00:02,240
+Speaker 1: And that's it. 
+
+2
+00:00:02,280 --> 00:00:04,200
+Speaker 1: Congratulations on completing the course. 
+
+3
+00:00:04,360 --> 00:00:11,050
+Speaker 1: In this lesson, we'll recap what we've built, discuss best practices, and explore next steps for continuing your journey in vibe coding. 
+
+4
+00:00:11,290 --> 00:00:15,810
+Speaker 1: So we've just built some pretty amazing applications without writing any code at all. 
+
+5
+00:00:15,890 --> 00:00:28,650
+Speaker 1: And the amazing thing and what we did was that we built two production ready apps, not just toy demos, that were full stack with persistent storage and deploy 5 to their own URL for anyone to access.
+
+6
+00:00:28,690 --> 00:00:32,320
+Speaker 1: Again, we wrote little or really no code and it was all logic. 
+
+7
+00:00:32,320 --> 00:00:36,400
+Speaker 1: It was all the concepts that we discussed at the beginning of this course. 
+
+8
+00:00:36,720 --> 00:00:38,860
+Speaker 1: So what were those concepts as well? 
+
+9
+00:00:39,250 --> 00:00:44,970
+Speaker 1: And how to do with thinking and how to do with frameworks and debugging and checkpoints and context. 
+
+10
+00:00:45,280 --> 00:00:51,990
+Speaker 1: So let's do a quick review of everything we Learned before we move on to some next steps in your vibe coding journey.
+
+11
+00:00:52,880 --> 00:00:55,720
+Speaker 1: So in our very first lesson, we talked about five skills. 
+
+12
+00:00:55,760 --> 00:00:58,800
+Speaker 1: Those were thinking, framework checkpoints, debugging, and context. 
+
+13
+00:00:59,510 --> 00:01:03,390
+Speaker 1: In thinking, we discussed a logical hierarchy for thought. 
+
+14
+00:01:03,470 --> 00:01:08,010
+Speaker 1: And that goes from everything from logical thought, maybe asking, what is the game that I'm playing? 
+
+15
+00:01:08,010 --> 00:01:16,170
+Speaker 1: If you're playing a game of chess to procedural thought, how do I excel at that game and how do I implement the functionality or instruct a computer to excel at that? 
+
+16
+00:01:16,720 --> 00:01:18,440
+Speaker 1: And that's kind of what we did with our apps, right? 
+
+17
+00:01:18,720 --> 00:01:20,680
+Speaker 1: We ask ourselves, what is SEO? 
+
+18
+00:01:20,680 --> 00:01:22,680
+Speaker 1: What is the the features? 
+
+19
+00:01:22,680 --> 00:01:32,130
+Speaker 1: What are the features we're trying to implement, understand what is our natural parks system kind of ranker trying to do, what are we trying to implement.
+
+20
+00:01:32,650 --> 00:01:33,690
+Speaker 1: And that started with frameworks. 
+
+21
+00:01:33,690 --> 00:01:42,040
+Speaker 1: It started with understanding what we didn't know and trying to figure out more about the things we wanted to, understanding what frameworks allowed us to do that thing and work best with Loms. 
+
+22
+00:01:42,200 --> 00:01:46,520
+Speaker 1: In some cases, that meant asking questions to our tools, to agent assistant to learn.
+
+23
+00:01:47,210 --> 00:01:56,770
+Speaker 1: So even when we were building, stuff broke and we kind of knew that going in, but we use checkpoints, we used versioning to minimize the impact of what we're building. 
+
+24
+00:01:56,930 --> 00:02:02,230
+Speaker 1: And the really great thing is that agent and assistant came with those checkpoints, came with that version intro out of the box. 
+
+25
+00:02:02,630 --> 00:02:09,460
+Speaker 1: And so what that meant is that we could chunk up our builds into MVPs, minimum viable products and features, and move really quickly.
+
+26
+00:02:10,250 --> 00:02:12,410
+Speaker 1: Now, debugging, there is a good bit of debugging. 
+
+27
+00:02:12,490 --> 00:02:22,370
+Speaker 1: I think we had fun, but we were methodical, we were thorough, we understood how our apps worked, sometimes asking assistant, and we got to the root of the issues and fix our problems.
+
+28
+00:02:23,790 --> 00:02:24,990
+Speaker 1: Finally, context. 
+
+29
+00:02:25,430 --> 00:02:27,030
+Speaker 1: Obviously, context is important. 
+
+30
+00:02:27,070 --> 00:02:29,110
+Speaker 1: It's been something I've emphasized throughout the course. 
+
+31
+00:02:29,270 --> 00:02:46,960
+Speaker 1: But we got at context by providing images, providing links to what we were building, and in one case, providing actual data to a web page because we provided context, because we gave a thorough explanation to agent of what we were trying to do, it's actually able to extract that data and implement it into our application. 
+
+32
+00:02:47,290 --> 00:02:54,420
+Speaker 1: When agent made a mistake with implementing our database, we provided additional context, that is additional details about our app in order to get around it. 
+
+33
+00:02:54,820 --> 00:03:00,190
+Speaker 1: So remember, always think about the context that you're supplying or not supplying to your LA.
+
+34
+00:03:01,060 --> 00:03:06,500
+Speaker 1: And finally, we used our framework for iterative building, iterative vibe coding. 
+
+35
+00:03:06,660 --> 00:03:18,470
+Speaker 1: If you want to call it that, for creating features with AI, testing those features, getting at an error or maybe not an error at all, debugging that error to get to a checkpoint and then moving on to the next feature. 
+
+36
+00:03:19,090 --> 00:03:21,250
+Speaker 1: And along the way, we built two applications that worked. 
+
+37
+00:03:21,290 --> 00:03:27,190
+Speaker 1: But if you follow this pattern, you'll be able to build much more advanced applications and much cooler things. 
+
+38
+00:03:27,630 --> 00:03:31,230
+Speaker 1: So what are some next steps if you're new to vibe coding or this is the start of your journey?
+
+39
+00:03:31,310 --> 00:03:33,830
+Speaker 1: I think the biggest step is to just keep building. 
+
+40
+00:03:34,270 --> 00:03:40,870
+Speaker 1: I found that I Learned best by doing, and I would encourage you to keep doing the same and most importantly, keep having fun. 
+
+41
+00:03:41,770 --> 00:03:50,930
+Speaker 1: I do this by finding common problems in my life or finding things that I want to try to automate or recreate or improve and then implementing the skills that we just did together.
+
+42
+00:03:51,800 --> 00:03:53,680
+Speaker 1: Second, you can follow along on social. 
+
+43
+00:03:53,720 --> 00:03:55,680
+Speaker 1: You can connect with replied, you can connect with me. 
+
+44
+00:03:55,680 --> 00:04:00,880
+Speaker 1: I would love to see the things that you build and showcase them on our reply accounts. 
+
+45
+00:04:01,620 --> 00:04:04,860
+Speaker 1: And finally, if you're a Reply Core member, we do have a reply community. 
+
+46
+00:04:04,940 --> 00:04:11,730
+Speaker 1: So once you join core, you'll be eligible to join our community where you can post and interact with other members. 
+
+47
+00:04:12,430 --> 00:04:15,550
+Speaker 1: But again, I'm Matt in Developer relations with replied. 
+
+48
+00:04:15,750 --> 00:04:19,740
+Speaker 1: This has been 5 coding 1:01 on replied. Thanks for joining.

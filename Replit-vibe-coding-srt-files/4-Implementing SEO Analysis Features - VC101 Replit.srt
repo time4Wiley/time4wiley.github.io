@@ -1,0 +1,636 @@
+
+1
+00:00:01,320 --> 00:00:05,400
+Speaker 1: Now we'll enhance our search engine optimization or SEO analyzer prototype. 
+
+2
+00:00:05,640 --> 00:00:10,710
+Speaker 1: We'll use agent to add core functionality, then switch to assistant for customization and feature expansion. 
+
+3
+00:00:11,300 --> 00:00:14,860
+Speaker 1: Finally, we'll deploy our application so others can access it online.
+
+4
+00:00:15,260 --> 00:00:16,300
+Speaker 1: Now let's get back to it. 
+
+5
+00:00:17,170 --> 00:00:23,330
+Speaker 1: So in this lesson, we're going to enhance the functionality of our application and start adding a lot of polish to exactly what we've built. 
+
+6
+00:00:23,330 --> 00:00:34,490
+Speaker 1: So I'm gonna go ahead to the top and create a new chat with agent to clear out the context like we discuss and start off by saying that we want to make a more visually appealing and visually representative app.
+
+7
+00:00:34,570 --> 00:00:42,520
+Speaker 1: We have all this data about our website, about the tags that we've built, but the only real visual summary that we're getting is an overall SEO score. 
+
+8
+00:00:42,640 --> 00:00:57,690
+Speaker 1: So I'm wondering if we could get something that more better captures the entirety of this, these tags, maybe something that tells us if our images, a summary of our images, a summary of our titles and descriptions, as well as this kind of high level information. 
+
+9
+00:00:57,810 --> 00:01:02,450
+Speaker 1: So what we're gonna do is we're going to consolidate that into a prompt and ask agent. 
+
+10
+00:01:02,450 --> 00:01:06,090
+Speaker 1: We're also gonna ask again for a little bit more polish on the UI. 
+
+11
+00:01:06,130 --> 00:01:11,250
+Speaker 1: So what I'm gonna say here is make the application more visual. 
+
+12
+00:01:12,020 --> 00:01:19,270
+Speaker 1: So I'm starting high level and then I'm gonna drill down with just some quick bullet points for agent that are all kind of feeding into the same functionality.
+
+13
+00:01:19,270 --> 00:01:21,470
+Speaker 1: Again, we're keeping these very targeted. 
+
+14
+00:01:21,470 --> 00:01:24,150
+Speaker 1: We're not getting too crazy with what we're doing in one prompt. 
+
+15
+00:01:24,550 --> 00:01:42,010
+Speaker 1: So create summaries for each category of meta tag that you will display visually to the user, similar to the overall score. 
+
+16
+00:01:42,210 --> 00:01:51,180
+Speaker 1: If you remember from our wireframe, right, I had in mind this concept of multiple scores that we could inspire effect each kind of category in our website. 
+
+17
+00:01:51,260 --> 00:01:56,100
+Speaker 1: And it's okay that, you know, our MVP, what we're building here doesn't look exactly like my wireframe. 
+
+18
+00:01:56,140 --> 00:02:00,260
+Speaker 1: The wireframe is really more just to guide what we're building and keep that in the front of my mind. 
+
+19
+00:02:00,870 --> 00:02:04,230
+Speaker 1: But I am gonna drill down here and try to tune those things in a little bit more. 
+
+20
+00:02:05,310 --> 00:02:20,130
+Speaker 1: Make the app overall more visual and allow me to get a summary of the SEO results at a glance. 
+
+21
+00:02:20,500 --> 00:02:24,460
+Speaker 1: So we'll add one more point, which is exactly that. 
+
+22
+00:02:24,660 --> 00:02:33,250
+Speaker 1: And you know, a lot of times I see when people are building with AI, they'll come to me and say, hey, Matt, I'm trying to get AI to do this thing because XYZ and I want ABC outcome, right? 
+
+23
+00:02:33,610 --> 00:02:35,410
+Speaker 1: And I'm like, just tell the model that. 
+
+24
+00:02:35,730 --> 00:02:39,980
+Speaker 1: So exactly what I just told you, we're gonna tell to agent help.
+
+25
+00:02:40,900 --> 00:02:41,780
+Speaker 1: Overall. 
+
+26
+00:02:43,240 --> 00:02:53,050
+Speaker 1: Let's make the app more visual and user friendly for folks that might be new to SEO. 
+
+27
+00:02:53,860 --> 00:03:02,360
+Speaker 1: So we can get a high level view of how well our page is implemented.
+
+28
+00:03:04,120 --> 00:03:08,200
+Speaker 1: Now, it's kind of like, you know, giving wishes to a genie. 
+
+29
+00:03:08,240 --> 00:03:11,640
+Speaker 1: You know, if you're not very explicit, the Genie might just do some crazy stuff, right? 
+
+30
+00:03:11,640 --> 00:03:18,900
+Speaker 1: So what we have to do here, if we're asking for simplicity, is follow up that we want all the functionality that our app has right now. 
+
+31
+00:03:18,900 --> 00:03:20,340
+Speaker 1: We don't want you to take anything away. 
+
+32
+00:03:20,340 --> 00:03:22,620
+Speaker 1: So that's a very important thing that I've noticed as wonders. 
+
+33
+00:03:23,420 --> 00:03:39,190
+Speaker 1: Do not remove any functionality, just make it easier to see a high level summary or drill down into the details. 
+
+34
+00:03:40,940 --> 00:03:43,020
+Speaker 1: And I think we kind of know with the drill by now. 
+
+35
+00:03:43,060 --> 00:03:44,260
+Speaker 1: So we're just gonna let this one run. 
+
+36
+00:03:44,260 --> 00:03:47,980
+Speaker 1: We'll come back once agent is done implementing these features and we'll talk about what it did.
+
+37
+00:03:56,830 --> 00:03:59,070
+Speaker 1: Okay, so we're through that round of edits. 
+
+38
+00:03:59,070 --> 00:04:00,190
+Speaker 1: Let's see what we've gotten here. 
+
+39
+00:04:00,430 --> 00:04:02,590
+Speaker 1: We're just gonna go back with our old example. 
+
+40
+00:04:02,770 --> 00:04:03,720
+Speaker 1: We're gonna analyze that. 
+
+41
+00:04:04,320 --> 00:04:09,320
+Speaker 1: And now looks like we get a bit more of a visual representation of our checks. 
+
+42
+00:04:10,120 --> 00:04:15,350
+Speaker 1: There appears to be, let's see what's going on here, much better overview. 
+
+43
+00:04:15,430 --> 00:04:19,630
+Speaker 1: So we're generating kind of key findings and what's good, meta keywords, it's good. 
+
+44
+00:04:19,710 --> 00:04:24,760
+Speaker 1: These are present, what needs attention, as well as some priority recommendation. 
+
+45
+00:04:24,760 --> 00:04:28,000
+Speaker 1: So optimizing the title tag and improving the description. 
+
+46
+00:04:28,760 --> 00:04:31,840
+Speaker 1: We also get some category breakdown. 
+
+47
+00:04:31,840 --> 00:04:34,440
+Speaker 1: So SEO and social media optimization.
+
+48
+00:04:34,690 --> 00:04:36,720
+Speaker 1: So looks like there's some checks going on there. 
+
+49
+00:04:38,080 --> 00:04:41,760
+Speaker 1: It's checking both for titles and the way that things are gonna show up on social media. 
+
+50
+00:04:42,120 --> 00:04:44,960
+Speaker 1: We're checking how robots index our site. 
+
+51
+00:04:45,190 --> 00:04:51,150
+Speaker 1: What's known as a robot TXT typically determines how websites can be scraped on social media. 
+
+52
+00:04:51,150 --> 00:04:54,630
+Speaker 1: We also have open graph tags and Twitter card checks.
+
+53
+00:04:55,060 --> 00:04:59,900
+Speaker 1: Now we can still drill down into technical details and actually get a Google search. 
+
+54
+00:05:00,000 --> 00:05:01,430
+Speaker 1: Preview, which is nice. 
+
+55
+00:05:02,110 --> 00:05:05,070
+Speaker 1: So you can see like this is maybe a little too simple for Google. 
+
+56
+00:05:05,740 --> 00:05:07,420
+Speaker 1: Well, as our social media previews. 
+
+57
+00:05:07,420 --> 00:05:12,260
+Speaker 1: And this is a bit more clean, nicer display, both for Facebook and Twitter. 
+
+58
+00:05:13,930 --> 00:05:19,810
+Speaker 1: And then if we want to drop down into our SEO recommendations, we get a much more descriptive view here. 
+
+59
+00:05:19,930 --> 00:05:21,250
+Speaker 1: We can still see our raw tags. 
+
+60
+00:05:21,250 --> 00:05:22,650
+Speaker 1: There's also some like nice hover effect. 
+
+61
+00:05:23,650 --> 00:05:25,840
+Speaker 1: So, you know, this is like 3 or four prompts.
+
+62
+00:05:25,840 --> 00:05:32,400
+Speaker 1: But what I want to point out is that more than anything, we had attention to detail and we had attention to exactly what we wanted changed. 
+
+63
+00:05:32,570 --> 00:05:34,180
+Speaker 1: And so we drilled into our app. 
+
+64
+00:05:34,630 --> 00:05:36,070
+Speaker 1: There's still some things that aren't perfect, right? 
+
+65
+00:05:36,070 --> 00:05:37,670
+Speaker 1: Like this is not ideal. 
+
+66
+00:05:37,670 --> 00:05:42,230
+Speaker 1: The spacing here, we could really kind of like  out with getting this to look the way we want to. 
+
+67
+00:05:42,230 --> 00:05:45,610
+Speaker 1: But overall, we have something that's fundamentally more polished.
+
+68
+00:05:45,930 --> 00:05:52,890
+Speaker 1: Now, there were still a couple points, so we're gonna open up assistant here to make some like finer grain changes to what we just built. 
+
+69
+00:05:53,250 --> 00:05:58,870
+Speaker 1: And when you open up assistant, you might notice that your app resupport darts, you might notice that there's a refresh. 
+
+70
+00:05:58,870 --> 00:06:02,230
+Speaker 1: And that's because we're kind of like leaving agent mode, so to speak. 
+
+71
+00:06:03,130 --> 00:06:07,180
+Speaker 1: And if you remember, I didn't really like that I couldn't type in that. 
+
+72
+00:06:07,180 --> 00:06:08,740
+Speaker 1: I had to type in https. 
+
+73
+00:06:09,020 --> 00:06:35,750
+Speaker 1: So what I'm gonna say to assistant, because it actually has a lot of the same context, right, into our application that agent has, I'm gonna say, can you make the website entry form such that https is automatically populated and the user doesn't have to enter any other info. 
+
+74
+00:06:37,080 --> 00:06:43,240
+Speaker 1: And because this is a quicker tool, assistance is more lightweight tool, you're gonna notice that the responses are much quicker. 
+
+75
+00:06:43,560 --> 00:06:46,640
+Speaker 1: And so assistant is going to read the relevant files.
+
+76
+00:06:46,720 --> 00:06:48,400
+Speaker 1: This is our first kind of intro to assistant. 
+
+77
+00:06:48,480 --> 00:06:51,250
+Speaker 1: It's behaving a lot like agent, but in a similar manner. 
+
+78
+00:06:51,760 --> 00:06:55,360
+Speaker 1: It's going to make the change and then it's gonna make a checkpoint. 
+
+79
+00:06:55,600 --> 00:06:56,360
+Speaker 1: So we made a checkpoint. 
+
+80
+00:06:57,080 --> 00:07:00,920
+Speaker 1: Https is prefixed theoretically, or we'll do deep learning this time. 
+
+81
+00:07:00,920 --> 00:07:06,380
+Speaker 1: Deep learning, we just type in deep learning AI, we get our result. 
+
+82
+00:07:06,820 --> 00:07:15,120
+Speaker 1: So what you might notice is that our sort of globe element is on top of the https to provide context for assistant. 
+
+83
+00:07:15,120 --> 00:07:18,000
+Speaker 1: I'm gonna actually open up our screenshot tool here. 
+
+84
+00:07:18,000 --> 00:07:19,240
+Speaker 1: This is just using Mac OS. 
+
+85
+00:07:19,240 --> 00:07:21,920
+Speaker 1: So if you're on Windows, might be different. 
+
+86
+00:07:21,920 --> 00:07:32,100
+Speaker 1: I'm gonna copy this to my clipboard and then I'm gonna paste that screenshot in and say, now the globe iverlaps with https. 
+
+87
+00:07:32,620 --> 00:07:33,820
+Speaker 1: Can you fix it?
+
+88
+00:07:34,370 --> 00:07:40,610
+Speaker 1: When we talked about context, right, we talked about providing additional details to AI, giving it the information it needs to fix errors. 
+
+89
+00:07:40,610 --> 00:07:41,330
+Speaker 1: And that's what we're doing here. 
+
+90
+00:07:41,480 --> 00:07:49,690
+Speaker 1: Hey, now assistant can see the overlapping problem and it's gonna present us with a solution and ask if we wanna apply those changes. 
+
+91
+00:07:50,490 --> 00:07:51,810
+Speaker 1: Looks like we're getting a bit of an error here. 
+
+92
+00:07:52,170 --> 00:07:53,450
+Speaker 1: Let's preview and see what's happening. 
+
+93
+00:07:54,050 --> 00:08:00,090
+Speaker 1: It's actually just removing, it looks like removing the globe here, but the commit didn't quite work. 
+
+94
+00:08:00,840 --> 00:08:01,400
+Speaker 1: That's okay. 
+
+95
+00:08:01,520 --> 00:08:05,280
+Speaker 1: We're actually, you know, sometimes stuff like that happens, you might get similar errors. 
+
+96
+00:08:05,280 --> 00:08:10,620
+Speaker 1: I'm just gonna literally paste this in, may copy this, come around again, I'll see what happens. 
+
+97
+00:08:14,430 --> 00:08:16,870
+Speaker 1: So it looks like it just took another command really quick to run through. 
+
+98
+00:08:17,350 --> 00:08:19,670
+Speaker 1: It actually looks like the original changes were applied. 
+
+99
+00:08:19,710 --> 00:08:24,910
+Speaker 1: We just might have gotten a bit of a rerun, getting a little air there. 
+
+100
+00:08:24,950 --> 00:08:25,550
+Speaker 1: It's all good. 
+
+101
+00:08:26,660 --> 00:08:29,700
+Speaker 1: And when a system makes a new checkpoint, it's gonna restart our app.
+
+102
+00:08:29,740 --> 00:08:31,900
+Speaker 1: So now we have our app, we have the https. 
+
+103
+00:08:31,940 --> 00:08:34,800
+Speaker 1: I can just type in deep learning AI and click analyze. 
+
+104
+00:08:35,450 --> 00:08:36,050
+Speaker 1: Just like that. 
+
+105
+00:08:36,050 --> 00:08:37,130
+Speaker 1: We flipped over to assistant. 
+
+106
+00:08:37,130 --> 00:08:38,690
+Speaker 1: We made some more lightweight details. 
+
+107
+00:08:39,130 --> 00:08:41,730
+Speaker 1: This is kind of like what we wanted to build for our application. 
+
+108
+00:08:42,450 --> 00:08:44,400
+Speaker 1: So we're gonna walk through the deploy pattern. 
+
+109
+00:08:44,400 --> 00:08:46,720
+Speaker 1: This is something we'll do for both of our applications. 
+
+110
+00:08:46,760 --> 00:08:49,640
+Speaker 1: Note that deployments are limited to replicate core users. 
+
+111
+00:08:49,680 --> 00:08:51,440
+Speaker 1: So you might not see this experience. 
+
+112
+00:08:52,030 --> 00:08:55,510
+Speaker 1: But at any time, if you wanna subscribe or upgrade, you can deploy that way. 
+
+113
+00:08:55,750 --> 00:08:59,970
+Speaker 1: Clicking deploy, we're actually just gonna configure the build for you. 
+
+114
+00:09:00,010 --> 00:09:05,160
+Speaker 1: You don't really need to worry about these details or really even what auto scale means. 
+
+115
+00:09:05,560 --> 00:09:09,700
+Speaker 1: We're gonna approve and configure the settings and then we're gonna come up with a name per app. 
+
+116
+00:09:09,700 --> 00:09:11,540
+Speaker 1: So I'm gonna call my SEO tag inspector.
+
+117
+00:09:12,400 --> 00:09:15,240
+Speaker 1: Note that we're configuring the build command and the run command. 
+
+118
+00:09:15,280 --> 00:09:17,160
+Speaker 1: I don't really need to worry about any of this. 
+
+119
+00:09:17,200 --> 00:09:18,480
+Speaker 1: Agent's gonna take care of it for me. 
+
+120
+00:09:19,260 --> 00:09:19,900
+Speaker 1: Alright, click to play. 
+
+121
+00:09:20,220 --> 00:09:23,220
+Speaker 1: And you know, it's important to mention what's going on.
+
+122
+00:09:23,260 --> 00:09:24,940
+Speaker 1: This typically takes two or three minutes. 
+
+123
+00:09:25,600 --> 00:09:32,560
+Speaker 1: We're taking this application, we're bundling it up, we're taking this entire environment that we've built with agent and then we're just putting that on the cloud. 
+
+124
+00:09:32,560 --> 00:09:36,210
+Speaker 1: Basically, you don't really have to worry about the technical complexity of what's going on. 
+
+125
+00:09:36,210 --> 00:09:39,400
+Speaker 1: You don't have to worry about any of the nuance or details. 
+
+126
+00:09:39,440 --> 00:09:45,050
+Speaker 1: What you do have to know is that everything that you just build, we'll look the same on the web page that we're deploying.
+
+127
+00:09:45,860 --> 00:09:46,220
+Speaker 1: Now. 
+
+128
+00:09:46,220 --> 00:09:51,520
+Speaker 1: If you went back and made more changes, this application, they will not automatically flow through. 
+
+129
+00:09:51,520 --> 00:09:53,400
+Speaker 1: You'd have to go through and click redeploy. 
+
+130
+00:09:54,050 --> 00:09:59,920
+Speaker 1: So we're going a little bit slower in this lesson, but that's because we want to cover all the basics and understand how things work. 
+
+131
+00:10:00,190 --> 00:10:12,690
+Speaker 1: So when we build our application, when we click deploy, we're taking a snapshot of everything that we just built with agent, with assistant, all these features that we added, and then promoting them to their own web page, which we just defined.
+
+132
+00:10:13,340 --> 00:10:26,420
+Speaker 1: If at any time you want to learn more about the different types of deployments that we have or how deployments work or any of the technical details, you can learn more in our documentation or check out some videos on YouTube that I built that have some really in depth content. 
+
+133
+00:10:26,870 --> 00:10:35,010
+Speaker 1: But at a high level, we're gonna select the right deployment type for you and we can be very confident that's the right type to deploy. 
+
+134
+00:10:35,170 --> 00:10:37,490
+Speaker 1: So in the meantime, you can watch this cool loading screen. 
+
+135
+00:10:37,930 --> 00:10:41,810
+Speaker 1: All deployments also come with logs so you can see exactly what's happening in your deployment. 
+
+136
+00:10:42,610 --> 00:10:50,330
+Speaker 1: They come with analytics, so you'll be able to see who's visiting your deployment, how many users you have as well as some other settings that you can drill into. 
+
+137
+00:10:50,730 --> 00:10:53,770
+Speaker 1: Those will be visible once our deployment is done. 
+
+138
+00:10:54,080 --> 00:10:55,600
+Speaker 1: In the meantime, we're gonna sit back. 
+
+139
+00:10:55,680 --> 00:10:57,760
+Speaker 1: I'll join you once this is done to point. 
+
+140
+00:10:58,740 --> 00:10:59,570
+Speaker 1: So we're back. 
+
+141
+00:10:59,810 --> 00:11:02,330
+Speaker 1: You can see the deployment took about two minutes, which is great. 
+
+142
+00:11:03,060 --> 00:11:04,980
+Speaker 1: And we're gonna give you the domain you just deploy to. 
+
+143
+00:11:05,020 --> 00:11:08,650
+Speaker 1: So if I go to this URL, we're gonna get the same app.
+
+144
+00:11:08,650 --> 00:11:10,210
+Speaker 1: This is now deployed on the internet. 
+
+145
+00:11:10,250 --> 00:11:11,490
+Speaker 1: Note it's at its own URL. 
+
+146
+00:11:11,490 --> 00:11:12,850
+Speaker 1: You can visit this site if you want. 
+
+147
+00:11:13,450 --> 00:11:18,650
+Speaker 1: I actually just entered a site and it had https and the form automatically removed that format. 
+
+148
+00:11:18,650 --> 00:11:19,490
+Speaker 1: So that's really nice. 
+
+149
+00:11:19,970 --> 00:11:20,850
+Speaker 1: Can click analyze. 
+
+150
+00:11:21,050 --> 00:11:23,850
+Speaker 1: It's gonna work exactly the same as what we had before.
+
+151
+00:11:24,590 --> 00:11:25,950
+Speaker 1: So these are the basics. 
+
+152
+00:11:25,950 --> 00:11:40,490
+Speaker 1: We just built end to end an application with agent, with assistant that scrapes web pages, performs an analysis on that web page to tell us if there's anything that we can prove or maybe optimize for SEO, Google results or social posts and then deployed it. 
+
+153
+00:11:40,610 --> 00:11:42,290
+Speaker 1: We built a tool completely there. 
+
+154
+00:11:42,290 --> 00:11:43,890
+Speaker 1: Other people can use that you can use. 
+
+155
+00:11:44,650 --> 00:11:45,770
+Speaker 1: And that's how simple it is. 
+
+156
+00:11:46,180 --> 00:11:50,650
+Speaker 1: And so this lesson was really more about polishing, flipping over to assistant. 
+
+157
+00:11:50,730 --> 00:11:56,330
+Speaker 1: In the next lesson, we'll be able to speed through a bit more of the basics since we've already covered those and get into more of a complex topic. 
+
+158
+00:11:56,430 --> 00:11:59,920
+Speaker 1: So I'm really excited for that one. I'll catch you in the. 
+
+159
+00:12:00,000 --> 00:12:00,480
+Speaker 1: max lesson。

@@ -1,0 +1,844 @@
+
+1
+00:00:00,810 --> 00:00:07,170
+Speaker 1: Before we start, I want to share with you a few tips on how to become a successful app creator with Rapid Agent. 
+
+2
+00:00:07,320 --> 00:00:10,230
+Speaker 1: So first of all, be precise. 
+
+3
+00:00:10,590 --> 00:00:13,390
+Speaker 1: Make sure to give replication one task at a time. 
+
+4
+00:00:13,890 --> 00:00:17,650
+Speaker 1: If you have a complex task in mind, break it down into smaller pieces. 
+
+5
+00:00:18,200 --> 00:00:25,440
+Speaker 1: Otherwise, you will soon find out that handling multiple complex task at once can be really challenging for today's coding agents.
+
+6
+00:00:26,670 --> 00:00:30,550
+Speaker 1: On a similar note, maker prompts specific and detailed. 
+
+7
+00:00:31,230 --> 00:00:37,390
+Speaker 1: Much like human developers, coding engines work best when they receive clear and unambiguous instructions. 
+
+8
+00:00:39,180 --> 00:00:41,300
+Speaker 1: Next, be well organized. 
+
+9
+00:00:42,070 --> 00:00:44,710
+Speaker 1: I want you to keep your project as steady as possible. 
+
+10
+00:00:45,270 --> 00:00:52,660
+Speaker 1: Ad features step by step, test thoroughly after each edition, and don't hesitate to roll back when something breaks. 
+
+11
+00:00:53,890 --> 00:00:58,570
+Speaker 1: Then you always want to start with a fresh session for each new feature. 
+
+12
+00:00:59,050 --> 00:01:03,250
+Speaker 1: In this way, it will be easier to go back to what was working well before. 
+
+13
+00:01:04,220 --> 00:01:08,580
+Speaker 1: And last but not least, do not hesitate to return to your last working version. 
+
+14
+00:01:09,060 --> 00:01:16,990
+Speaker 1: If you keep piling up a stable coding features, most likely you will end up with a mess that will hinder you from making steady progress.
+
+15
+00:01:18,200 --> 00:01:22,000
+Speaker 1: And now the most important recommendation, be patient. 
+
+16
+00:01:22,680 --> 00:01:29,480
+Speaker 1: Even if you're not technical, do your best to build an understanding of the app and its components as you go. 
+
+17
+00:01:30,530 --> 00:01:38,810
+Speaker 1: Replication explains in detail the rationale behind each action it takes, describing both the thought process and the changes it makes on the code. 
+
+18
+00:01:39,750 --> 00:01:45,390
+Speaker 1: By reading carefully the output of Rapid Agent, you will quickly learn everything about the app that you are creating. 
+
+19
+00:01:46,290 --> 00:01:51,840
+Speaker 1: So as a natural follow up, take a moment to review the suggestions before accepting them.
+
+20
+00:01:52,980 --> 00:01:56,350
+Speaker 1: On one end, question things that don't make sense. 
+
+21
+00:01:56,870 --> 00:02:03,110
+Speaker 1: But on the other end, trusted rapid agent might often surprise you with an effective solution to the issue that you're facing. 
+
+22
+00:02:04,190 --> 00:02:06,270
+Speaker 1: And I can stress this one enough. 
+
+23
+00:02:06,740 --> 00:02:08,100
+Speaker 1: Be patient while debugging. 
+
+24
+00:02:08,740 --> 00:02:11,580
+Speaker 1: It's part of the process when developing complex features. 
+
+25
+00:02:12,260 --> 00:02:16,020
+Speaker 1: Even the best software developers spend most of their time debugging. 
+
+26
+00:02:16,890 --> 00:02:20,970
+Speaker 1: Retion is getting better on a daily basis, but it's still not perfect. 
+
+27
+00:02:21,130 --> 00:02:27,560
+Speaker 1: So allowing you the time to debug with different strategies will make you more successful than you might expect. 
+
+28
+00:02:28,210 --> 00:02:32,410
+Speaker 1: And now I'll hand it over to Matt, so you can start billing with Rapid Agent.
+
+29
+00:02:33,250 --> 00:02:37,890
+Speaker 2: In this lesson, we'll explore the replete platform and it's AI powered tools that accelerate development. 
+
+30
+00:02:37,890 --> 00:02:45,460
+Speaker 2: You'll learn the fundamental concepts behind effective AI collaboration and key strategies I use when building applications with AI assistance. 
+
+31
+00:02:45,940 --> 00:02:49,620
+Speaker 2: We'll also familiarize ourselves with replied and walk through getting set up. 
+
+32
+00:02:50,090 --> 00:02:50,930
+Speaker 2: First, a bit about me. 
+
+33
+00:02:51,710 --> 00:02:53,990
+Speaker 2: I'm Matt, a head up developer relations at riplet. 
+
+34
+00:02:54,430 --> 00:02:58,310
+Speaker 2: You can find me on social, on X, or on YouTube at these QR codes. 
+
+35
+00:02:59,210 --> 00:03:01,330
+Speaker 2: And really, we're just gonna jump right into getting started. 
+
+36
+00:03:01,330 --> 00:03:07,090
+Speaker 2: So first, it's important to talk about really what vibe coding is and what it is today. 
+
+37
+00:03:07,130 --> 00:03:16,690
+Speaker 2: And so right when we talk about vibe coding, it's typically leaning into our AI agents, our AI tools to rely on writing the code rather than write it ourselves.
+
+38
+00:03:17,230 --> 00:03:24,590
+Speaker 2: What Matt, that means is that there's a large jump in productivity, and a lot of people have seen that they're able to build applications they never were able to create before. 
+
+39
+00:03:25,050 --> 00:03:31,890
+Speaker 2: And that means it can take you from an idea that lives in your head to a real application deployed on the web, that's something that replied helps out with quite a bit. 
+
+40
+00:03:32,340 --> 00:03:38,290
+Speaker 2: But fundamentally, what we've seen is that vibe coding is limited by the developer experience. 
+
+41
+00:03:38,290 --> 00:03:42,960
+Speaker 2: And if you haven't heard the term developer experience before, or if you're not a professional software developer, don't worry. 
+
+42
+00:03:42,960 --> 00:03:51,120
+Speaker 2: It just means the experience of developing applications or the tools, the techniques and the environments that developers use to build things. 
+
+43
+00:03:51,780 --> 00:04:00,430
+Speaker 2: And so those tools can be intimidating, which is what we're going to cover today, how to make the most of those tools, get started building applications, and again, create the best steps possible.
+
+44
+00:04:00,550 --> 00:04:04,270
+Speaker 2: But more importantly, VIP coding has its gotches and those are things we're gonna cover today. 
+
+45
+00:04:04,650 --> 00:04:12,520
+Speaker 2: We're gonna cover ways of planning and thinking logically to get around some of those limitations and fundamentally produce better results. 
+
+46
+00:04:13,000 --> 00:04:17,660
+Speaker 2: So in this course, we're gonna use AI to build real deployed apps. 
+
+47
+00:04:17,700 --> 00:04:22,080
+Speaker 2: We're gonna learn why tooling is important and how to make the most the tools that we're using. 
+
+48
+00:04:22,440 --> 00:04:28,840
+Speaker 2: We're also going to learn how to communicate with AI because there's some fundamental skills that can help you, again, make the most of this tooling. 
+
+49
+00:04:28,920 --> 00:04:30,080
+Speaker 2: And it is just that. 
+
+50
+00:04:30,080 --> 00:04:36,170
+Speaker 2: It's the tool, but it requires some knowledge and there can be a bit of a learning curve to understand how to communicate with AI.
+
+51
+00:04:36,810 --> 00:04:43,130
+Speaker 2: And finally, we're gonna gain skills for effective building that you're gonna be able to take from this course and apply to every area of your life. 
+
+52
+00:04:43,130 --> 00:04:50,380
+Speaker 2: You're gonna be able to automate things that you don't wanna do or create things that you didn't think were possible or make your job more efficient or make your life more efficient. 
+
+53
+00:04:51,030 --> 00:04:54,230
+Speaker 2: I've seen those things in my own life and that's why I'm really excited to share them. 
+
+54
+00:04:54,230 --> 00:04:56,830
+Speaker 2: That's why I'm really grateful for what I get to do for a living.
+
+55
+00:04:56,830 --> 00:04:59,890
+Speaker 2: But first, we're gonna talk about bit about what replied is and. 
+
+56
+00:05:00,000 --> 00:05:02,390
+Speaker 2: And how AI tools fit into our platform. 
+
+57
+00:05:02,510 --> 00:05:05,390
+Speaker 2: So you can think about replied as the environment. 
+
+58
+00:05:05,430 --> 00:05:13,040
+Speaker 2: And then on top of replet, we have agent, which is our automated developer, and assistant, which is our tool for rapid edits and chat.
+
+59
+00:05:13,870 --> 00:05:17,540
+Speaker 2: So replied is a unique environment. 
+
+60
+00:05:17,860 --> 00:05:20,220
+Speaker 2: It's different from other tools that you've probably used in the past. 
+
+61
+00:05:20,300 --> 00:05:25,400
+Speaker 2: So if you've ever had to write code or install a code editor, you know that there's a lot of setup that's required. 
+
+62
+00:05:25,840 --> 00:05:33,040
+Speaker 2: You have to download this thing, install it on your computer, and that doesn't even include installing packages, configuring languages, configuring your environment. 
+
+63
+00:05:33,040 --> 00:05:33,880
+Speaker 2: It can be a real headache.
+
+64
+00:05:34,330 --> 00:05:36,130
+Speaker 2: So replied has no installation. 
+
+65
+00:05:36,130 --> 00:05:41,550
+Speaker 2: It runs entirely in your browser and one tab, and it includes AI tools for every step of the way. 
+
+66
+00:05:41,790 --> 00:05:55,300
+Speaker 2: But more than just handling packages and languages and being zero set up, it also has everything you need to build full stack applications that includes databases, object storage, authentication, whole host of other tools and services. 
+
+67
+00:05:55,380 --> 00:06:00,020
+Speaker 2: And so from there, you can deploy those apps in just a few clicks, which is what we're gonna see today. 
+
+68
+00:06:00,500 --> 00:06:05,840
+Speaker 2: And so the reason that rub is really powerful is because you don't have to spend time worrying about setup. 
+
+69
+00:06:06,240 --> 00:06:08,480
+Speaker 2: That's gonna allow us to move really quickly in this course. 
+
+70
+00:06:08,520 --> 00:06:09,600
+Speaker 2: I hope you think so too.
+
+71
+00:06:10,760 --> 00:06:15,370
+Speaker 2: Now, on top of replied, we built agent or Replete Agent. 
+
+72
+00:06:15,370 --> 00:06:16,890
+Speaker 2: And that's our automated developer. 
+
+73
+00:06:17,130 --> 00:06:28,960
+Speaker 2: It allows you to build and configure an entire project from scratch with just your voice, generate and build a plan for your project as we'll see today, and make complex multi step changes to your code.
+
+74
+00:06:29,970 --> 00:06:35,650
+Speaker 2: Now I'd be remiss if I didn't mention replied assistant, which is our more lightweight tool for chat and quick edits. 
+
+75
+00:06:35,810 --> 00:06:41,760
+Speaker 2: So with assistant, you can chat with AI about any topic, request quick one off edits to code and ask questions about your project. 
+
+76
+00:06:42,260 --> 00:06:54,500
+Speaker 2: So what we'll see today is a pretty common pattern is using agent to kind of scaffold out a project, get things to an MVP state, get things working, and then flipping to assistant to really dial in that functionality and build out the rest of your project. 
+
+77
+00:06:55,010 --> 00:07:04,800
+Speaker 2: And so one more thing to call out before we jump into our whiteboarding session and talk about some basics of prompting and vibe coding, which is gonna follow largely from what Michaela has already discussed.
+
+78
+00:07:05,240 --> 00:07:12,970
+Speaker 2: One important piece to mention is that replied has a fridge here and we'll be able to use the free tier for most, if not all of this course. 
+
+79
+00:07:12,970 --> 00:07:16,410
+Speaker 2: You'll be able to register for free on replied your first project. 
+
+80
+00:07:16,410 --> 00:07:25,350
+Speaker 2: You have up to three free projects on replied, which fits into the free tier, and you get a number of credits and checkpoints to use agent and assistant without having to pay more than that. 
+
+81
+00:07:25,430 --> 00:07:33,250
+Speaker 2: All concepts in this course are completely applicable not only to reply, but any situation you find yourself building with AI and building with these newer tools. 
+
+82
+00:07:33,290 --> 00:07:35,330
+Speaker 2: And so there's plenty to learn, plenty to take away. 
+
+83
+00:07:35,810 --> 00:07:37,730
+Speaker 2: And I think you're gonna get a lot out of this course. 
+
+84
+00:07:38,410 --> 00:07:40,210
+Speaker 2: And now we'll jump into a whiteboarding session. 
+
+85
+00:07:40,210 --> 00:07:46,210
+Speaker 2: And I'm gonna break down some concepts in building that I think are particularly useful for AI and reply it generally.
+
+86
+00:07:46,770 --> 00:07:53,170
+Speaker 2: So now we're gonna walk through five skills in vibe coding that I've thought a lot about and have really helped me take my apps the next level. 
+
+87
+00:07:53,170 --> 00:07:56,890
+Speaker 2: Those are thinking frameworks, checkpoints, debugging, and context. 
+
+88
+00:07:56,890 --> 00:07:59,250
+Speaker 2: We're gonna keep these short, we're gonna keep them straightforward. 
+
+89
+00:07:59,990 --> 00:08:10,820
+Speaker 2: But what I want you to do is keep these in the back of your head as we start to build out these projects and start to notice some of these patterns and notice some of these concepts so that in the future you can really dial in your apps. 
+
+90
+00:08:10,860 --> 00:08:14,180
+Speaker 2: I think building with AI vibe coding is a brand new concept. 
+
+91
+00:08:14,420 --> 00:08:20,110
+Speaker 2: And so the best way to learn it is by doing it and by taking courses like these and by experimenting on your own.
+
+92
+00:08:22,700 --> 00:08:27,940
+Speaker 2: So now we're gonna talk a bit about thinking and hopefully this is something you've been doing for most of your life. 
+
+93
+00:08:27,980 --> 00:08:30,780
+Speaker 2: I know there are periods where I don't think much, but I've been trying to work on that. 
+
+94
+00:08:31,150 --> 00:08:35,630
+Speaker 2: And we can break down thinking into a bit of a hierarchy.
+
+95
+00:08:35,990 --> 00:08:36,270
+Speaker 2: Now. 
+
+96
+00:08:36,390 --> 00:08:37,950
+Speaker 2: Logical thinking is really important. 
+
+97
+00:08:38,100 --> 00:08:40,140
+Speaker 2: We're gonna compare this to a game of chess. 
+
+98
+00:08:40,180 --> 00:08:44,940
+Speaker 2: Now thinking logically, that might be like asking questions, what is the game of chess? 
+
+99
+00:08:45,230 --> 00:08:46,870
+Speaker 2: Or actually playing the game. 
+
+100
+00:08:47,150 --> 00:08:48,950
+Speaker 2: That gets a bit more into analytical thinking. 
+
+101
+00:08:49,390 --> 00:08:56,810
+Speaker 2: And most of you are probably familiar with analytical thinking, breaking down games, learning how to play them well, breaking down problems and learning how to solve them.
+
+102
+00:08:57,210 --> 00:09:04,210
+Speaker 2: But the two types of thinking I want to introduce when we talk about building with AI are comtional thinking and procedural thinking. 
+
+103
+00:09:04,810 --> 00:09:04,850
+Speaker 2: Com. 
+
+104
+00:09:05,050 --> 00:09:15,040
+Speaker 2: An example of comtional thinking might be what are the patterns behind the game of chess and that might lead you to do something like program a computer to enforce the rules of chess. 
+
+105
+00:09:15,400 --> 00:09:33,890
+Speaker 2: When we build AI applications, we're not just thinking logically, we're actually thinking creatively or thinking comtionally about how we can fit a set of logic, which is actually an application, into a complicated problem, a higher level of thinking is procedural thinking, which might be programming a computer to play competitive chess. 
+
+106
+00:09:34,340 --> 00:09:44,810
+Speaker 2: And that requires us not just to understand the rules of chess and how to program a computer to enforce those rules, how to program a computer to play something competitively at a high level. 
+
+107
+00:09:45,330 --> 00:09:48,090
+Speaker 2: And so it really requires us to ask, how do I excel at the game? 
+
+108
+00:09:48,410 --> 00:09:50,050
+Speaker 2: What are the boundaries of the game? 
+
+109
+00:09:50,090 --> 00:09:54,050
+Speaker 2: And sort of the edge cases that I need to account for in order to build this thing? 
+
+110
+00:09:54,610 --> 00:09:59,890
+Speaker 2: And then finally, how do I take those things and translate them into code or translate them into natural language? 
+
+111
+00:10:00,030 --> 00:10:01,710
+Speaker 2: Urge for AI to then implement.
+
+112
+00:10:02,750 --> 00:10:04,630
+Speaker 2: So next I want to talk a bit about frameworks. 
+
+113
+00:10:05,030 --> 00:10:10,710
+Speaker 2: If you don't understand frameworks at a high level, be at languages or packages, don't worry, because this is more conceptual. 
+
+114
+00:10:11,330 --> 00:10:14,810
+Speaker 2: So the important thing is to start thinking about how your app works. 
+
+115
+00:10:14,850 --> 00:10:17,050
+Speaker 2: That follows from what we just talked about in thinking. 
+
+116
+00:10:17,960 --> 00:10:26,440
+Speaker 2: Start thinking through how your app works, how we're implementing solutions to these problems, and then think about the solutions that already exist because people have written a lot of code. 
+
+117
+00:10:26,920 --> 00:10:30,880
+Speaker 2: And the reason AI can write code for you is because it understands the code that people have written. 
+
+118
+00:10:31,240 --> 00:10:36,510
+Speaker 2: So if you can understand a problem space and start to think through the things that you don't know. 
+
+119
+00:10:36,870 --> 00:10:40,440
+Speaker 2: Maybe that means asking AI, hey, what are common solutions to this problem? 
+
+120
+00:10:40,600 --> 00:10:44,400
+Speaker 2: Or asking, yeah, hey, what are some really good packages to help me solve this problem? 
+
+121
+00:10:45,390 --> 00:10:51,870
+Speaker 2: Then you can understand how to do the thing that you want to or kind of orient yourself in the problem space. 
+
+122
+00:10:52,290 --> 00:10:55,810
+Speaker 2: And so that might mean asking AI questions like what frameworks allow me to do that thing? 
+
+123
+00:10:56,360 --> 00:11:07,780
+Speaker 2: So for example, if you wanted to implement a drag and drop interface into one of your applications, you could say, help me come up with react frameworks for implementing drag and drop into this application and then implement one. 
+
+124
+00:11:08,710 --> 00:11:20,820
+Speaker 2: Interacting with AI in this way is not only a great way to learn how frameworks work and how these things fit into languages, packages, and all of these other structures, but it's also a really great way to get things done faster.
+
+125
+00:11:21,060 --> 00:11:25,210
+Speaker 2: And this has been how I've Learned front end development entirely through AI. 
+
+126
+00:11:25,530 --> 00:11:26,850
+Speaker 2: I just ask a lot of questions. 
+
+127
+00:11:26,890 --> 00:11:28,850
+Speaker 2: I try to understand the things that it's building with. 
+
+128
+00:11:29,130 --> 00:11:32,710
+Speaker 2: And really at the core, I try to understand what I don't know. 
+
+129
+00:11:33,070 --> 00:11:36,910
+Speaker 2: And that involves a feedback process of asking AI questions and iterating.
+
+130
+00:11:37,720 --> 00:11:39,880
+Speaker 2: So next, let's talk a little bit about checkpoints. 
+
+131
+00:11:40,000 --> 00:11:42,920
+Speaker 2: An unfortunate effect in building is that things break. 
+
+132
+00:11:43,540 --> 00:11:45,460
+Speaker 2: That's a fact with or without AI. 
+
+133
+00:11:45,500 --> 00:11:48,580
+Speaker 2: And it's more common when we're building with AI, as a matter of fact. 
+
+134
+00:11:48,980 --> 00:11:51,660
+Speaker 2: So it's pretty likely things are gonna break in this course.
+
+135
+00:11:52,140 --> 00:11:54,980
+Speaker 2: But one really important concept is called version control. 
+
+136
+00:11:55,400 --> 00:11:58,710
+Speaker 2: And every project in replied has version control by default. 
+
+137
+00:11:58,750 --> 00:11:59,670
+Speaker 2: You don't have to set it up. 
+
+138
+00:11:59,670 --> 00:12:00,670
+Speaker 2: You don't have to worry about it.
+
+139
+00:12:01,430 --> 00:12:06,430
+Speaker 2: Because of this, we'll have checkpoints when we're building with AI and we're gonna chunk up what we're building. 
+
+140
+00:12:06,430 --> 00:12:12,750
+Speaker 2: We're gonna break it down into logical steps, and then we're gonna move quickly in short sprints and utilize these checkpoints if anything breaks. 
+
+141
+00:12:13,190 --> 00:12:23,480
+Speaker 2: And that means that even if we want to experiment with a new feature, even if we want to prompt AI and learn or try new things out, something doesn't quite work in our app, we can go back to the old state and pick up right from where we left off. 
+
+142
+00:12:24,330 --> 00:12:35,220
+Speaker 2: A larger point is that this is a really great way to build and develop, utilizing checkpoints, testing what you're building, and then if that works, continuing and if it doesn't, going back and trying again.
+
+143
+00:12:36,460 --> 00:12:41,900
+Speaker 2: Okay, so there's just a couple more concepts to talk about here, and then we're gonna jump into building first, debugging. 
+
+144
+00:12:42,430 --> 00:12:44,310
+Speaker 2: As I mentioned, things tend to break. 
+
+145
+00:12:44,630 --> 00:12:48,390
+Speaker 2: The process of debugging is the processes of figuring out why things broke. 
+
+146
+00:12:48,840 --> 00:12:52,960
+Speaker 2: Now, this might seem a little too straightforward, but I promise that it's worth going over. 
+
+147
+00:12:53,360 --> 00:12:57,190
+Speaker 2: So if you have a lamp that doesn't work, you might first ask, well, is the lamp plugged in? 
+
+148
+00:12:57,630 --> 00:13:03,360
+Speaker 2: And if it's not, you'd plug in the lamp if that doesn't turn out to be the problem, you might ask, well, hey, is the bulb burned out? 
+
+149
+00:13:03,890 --> 00:13:05,690
+Speaker 2: If it is, well, you replace the bulb. 
+
+150
+00:13:05,690 --> 00:13:09,890
+Speaker 2: And if it's not, you need to continue debugging or find another way to repair the lamp. 
+
+151
+00:13:10,310 --> 00:13:14,510
+Speaker 2: And this is exactly the same process that we're gonna walk through when we're building applications.
+
+152
+00:13:14,550 --> 00:13:18,750
+Speaker 2: Now, you might say, hey, that's actually a little boring, but you can really make anything fun. 
+
+153
+00:13:18,750 --> 00:13:25,230
+Speaker 2: And to me, debugging is really fun when I'm building something that makes me excited or that I know is going to produce a really cool outcome.
+
+154
+00:13:25,780 --> 00:13:30,260
+Speaker 2: And so the best debugging is methodical, it's thorough, and it starts from first principles. 
+
+155
+00:13:30,460 --> 00:13:40,220
+Speaker 2: So the goals in debugging are to first understand how our app works so I can understand where the error is, and then asks ourselves the questions, hey, how can we get to the root of this problem? 
+
+156
+00:13:41,290 --> 00:13:48,410
+Speaker 2: A final step, and this is kind of a jump, right, is how can we tell the LLM what's wrong so that it fixes our problem? 
+
+157
+00:13:48,410 --> 00:13:51,980
+Speaker 2: How can we tell the agent what's wrong so that it understands the problem? 
+
+158
+00:13:52,340 --> 00:13:54,860
+Speaker 2: And that's kind of where context comes into play.
+
+159
+00:13:55,410 --> 00:14:00,680
+Speaker 2: So if you've been building with AI, if you've been building with LMS, you've probably heard the term context window or context. 
+
+160
+00:14:00,680 --> 00:14:02,360
+Speaker 2: And what do we mean when we say context? 
+
+161
+00:14:02,720 --> 00:14:06,600
+Speaker 2: Well, the context window is the amount of tokens an LLM can process at a given time. 
+
+162
+00:14:07,120 --> 00:14:13,140
+Speaker 2: Think about that just like the number of words or the amount of information that you can give to our agent or our model. 
+
+163
+00:14:13,220 --> 00:14:17,160
+Speaker 2: And it can think about in any kind of one chat instance. 
+
+164
+00:14:17,200 --> 00:14:19,680
+Speaker 2: I like to think about it kind of like multitasking, right? 
+
+165
+00:14:20,160 --> 00:14:25,850
+Speaker 2: As a human, if you're asking me to do a bunch of stuff, I might start to lose track of some of the things that you asked me. 
+
+166
+00:14:25,890 --> 00:14:26,770
+Speaker 2: I might start to forget. 
+
+167
+00:14:26,890 --> 00:14:34,620
+Speaker 2: And so when we chat with LMS, a consistent theme is going to be that we need to make sure context is relevant to what we're trying to do.
+
+168
+00:14:35,130 --> 00:14:37,410
+Speaker 2: Now, context can be the prompt we provide to the LLM. 
+
+169
+00:14:37,450 --> 00:14:39,290
+Speaker 2: It can also be images, right? 
+
+170
+00:14:39,290 --> 00:14:40,930
+Speaker 2: That might be documentation that you provide. 
+
+171
+00:14:40,930 --> 00:14:42,410
+Speaker 2: We're gonna go over some examples of this. 
+
+172
+00:14:42,410 --> 00:14:46,210
+Speaker 2: It could be errors or details about your app environment or preferences. 
+
+173
+00:14:46,690 --> 00:14:59,890
+Speaker 2: And right, that's what we just talked about in debugging when we run into errors, we're gonna have to try and get those errors into the context of our communication with the LLM so that we can get past those problems, so we can understand what the issue is and move on. Or you can get the LM to. 
+
+174
+00:15:00,000 --> 00:15:02,030
+Speaker 2: Fix the work that it was doing.
+
+175
+00:15:02,550 --> 00:15:12,830
+Speaker 2: And a really important point is because these AI models, the underlying models that power replied agent might have outdated training data or they might have been built, you know, months or years ago. 
+
+176
+00:15:13,770 --> 00:15:26,070
+Speaker 2: We might need to provide additional context, especially if we're doing something new or novel that hasn't been done before, or if we're working with a package or a library or a framework that the model is not an expert on. 
+
+177
+00:15:26,760 --> 00:15:31,490
+Speaker 2: So tying that altogether, what does that mean for getting to a MVP when we're building with AI? 
+
+178
+00:15:32,050 --> 00:15:37,460
+Speaker 2: Well, we're gonna give AI only the information, we're gonna give agent only the information that's relevant to the MVP. 
+
+179
+00:15:37,890 --> 00:15:47,340
+Speaker 2: We're gonna start small, like Mikayla mentioned, and work our way up to something that's full featured and we're gonna provide foundational context and important details when we're crafting that first prompt. 
+
+180
+00:15:47,700 --> 00:15:50,140
+Speaker 2: From there, we're gonna start implementing new features. 
+
+181
+00:15:50,380 --> 00:15:52,620
+Speaker 2: We'll provide context relevant to the new feature. 
+
+182
+00:15:52,840 --> 00:16:12,730
+Speaker 2: We're gonna mention frameworks, provide documentation with explicit detail on implementation to really make sure that, you know, agent understands what we're trying to do and we're gonna make incremental changes, hit those checkpoints and then roll them back if anything goes wrong or anything happens as we're debugging errors as little speed bumps come up, we're gonna figure out how things work. 
+
+183
+00:16:12,810 --> 00:16:13,930
+Speaker 2: We're gonna figure out what's wrong. 
+
+184
+00:16:13,930 --> 00:16:20,550
+Speaker 2: We're gonna figure out how to get information to the LLM to get unstuck and figure out how to direct that context to solve our problems. 
+
+185
+00:16:20,550 --> 00:16:23,430
+Speaker 2: Remember, they're not errors, they're just happy little accidents. 
+
+186
+00:16:23,850 --> 00:16:27,370
+Speaker 2: If I can be known as the Bob Ross of vibe coding, I'd be totally fine with that. 
+
+187
+00:16:27,610 --> 00:16:30,960
+Speaker 2: And so this is the last thing I have before we get into building. 
+
+188
+00:16:30,960 --> 00:16:42,890
+Speaker 2: I promise we can think about our minimum viable product or MVP or adding new features to that MVP when we're building, we'll start by prompting AI and then we're gonna test our application. 
+
+189
+00:16:42,890 --> 00:16:47,520
+Speaker 2: We might try and break it, we might get an error and have to debug that app. 
+
+190
+00:16:48,240 --> 00:16:51,760
+Speaker 2: But once we do and have a working version, we'll get to a checkpoint. 
+
+191
+00:16:52,210 --> 00:16:55,970
+Speaker 2: Maybe we don't get any error and we can just go straight from testing to our checkpoint. 
+
+192
+00:16:56,740 --> 00:16:58,860
+Speaker 2: But the next step is to do this all over again. 
+
+193
+00:16:58,980 --> 00:17:02,900
+Speaker 2: So it looks like we prompt to get our MVP or feature. 
+
+194
+00:17:03,070 --> 00:17:04,260
+Speaker 2: Then we test that out. 
+
+195
+00:17:04,580 --> 00:17:07,820
+Speaker 2: We hit an error, debug it, fix it, or we don't. 
+
+196
+00:17:07,820 --> 00:17:09,940
+Speaker 2: And then we move on to our next MVPR feature. 
+
+197
+00:17:10,180 --> 00:17:17,690
+Speaker 2: And this sort of feedback loop, this sort of cycle is largely the pattern that I follow when I'm building with AI.
+
+198
+00:17:18,210 --> 00:17:19,290
+Speaker 2: So now let's jump right into it. 
+
+199
+00:17:19,290 --> 00:17:22,490
+Speaker 2: We'll give a quick walkthrough of replet and start with our first project. 
+
+200
+00:17:23,110 --> 00:17:28,110
+Speaker 2: So before we jump into our application, I just want to quickly walk through how to get to this screen. 
+
+201
+00:17:28,650 --> 00:17:33,850
+Speaker 2: And in order to see this page, this homepage, all you have to do is create an account on replied.com. 
+
+202
+00:17:34,330 --> 00:17:37,970
+Speaker 2: You can use your Gmail, you can use another account, you can use your email and password. 
+
+203
+00:17:38,280 --> 00:17:38,920
+Speaker 2: Very simple. 
+
+204
+00:17:39,450 --> 00:17:40,210
+Speaker 2: And you'll land right here. 
+
+205
+00:17:40,450 --> 00:17:42,090
+Speaker 2: And this is our homepage. 
+
+206
+00:17:42,090 --> 00:17:43,210
+Speaker 2: This is our overview page. 
+
+207
+00:17:43,860 --> 00:17:45,620
+Speaker 2: You can see it's very chat first. 
+
+208
+00:17:46,150 --> 00:17:48,830
+Speaker 2: So this is where we'll type our prompts to interact with agent. 
+
+209
+00:17:49,540 --> 00:17:54,700
+Speaker 2: But at any time you want to manage your applications, we have a side pane where you can see all the apps you've made, the apps you've deployed. 
+
+210
+00:17:54,940 --> 00:17:59,460
+Speaker 2: You can look at your usage, edit your settings, or otherwise manage your account. But. 
+
+211
+00:18:00,030 --> 00:18:00,910
+Speaker 2: Let's get started building.

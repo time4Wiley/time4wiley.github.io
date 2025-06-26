@@ -1,0 +1,164 @@
+
+1
+00:00:01,560 --> 00:00:06,360
+Speaker 1: Welcome to vive coding one on one with Replett, built in partnership with Replett. 
+
+2
+00:00:07,080 --> 00:00:15,350
+Speaker 1: In this course, you learn how to code with an AI agent using Rapid provides a cloud environment that allows you to build, host and share apps. 
+
+3
+00:00:15,430 --> 00:00:23,040
+Speaker 1: And reference recently added a very popular coding agent that makes generating and hosting web based applications fast.
+
+4
+00:00:23,700 --> 00:00:26,300
+Speaker 1: Coding agents are changing how we write codes. 
+
+5
+00:00:26,540 --> 00:00:30,620
+Speaker 1: I still do fair amount of software development myself, but now find it. 
+
+6
+00:00:30,620 --> 00:00:44,260
+Speaker 1: I count on OMS to write mostly code for me to create, take a problem and partition it into manageable blocks and then spend time creating a prompt describing what I want and use a model to produce a code one module at a time. 
+
+7
+00:00:44,750 --> 00:00:50,790
+Speaker 1: And this type of process is making me and many others much more and certainly much faster developers. 
+
+8
+00:00:51,500 --> 00:00:58,260
+Speaker 1: I do want to know that as rapid is a cloud hosted environments, we're unable to present the calls on our usual platform.
+
+9
+00:00:58,520 --> 00:01:00,520
+Speaker 1: And so this is a video only course. 
+
+10
+00:01:00,960 --> 00:01:08,060
+Speaker 1: If you watch only the videos, you learn the key concepts behind using coding agents as well as a process of using alarms to write code. 
+
+11
+00:01:08,180 --> 00:01:17,870
+Speaker 1: Sometimes if you barely looking at the code itself, which somehow call vibe coding, if outside of watching the videos, you want to use reply, you have to create a user account there. 
+
+12
+00:01:18,480 --> 00:01:26,930
+Speaker 1: I'm delighted that instructors for this course are Michaela Catasta, who's president of Raplets, as well as Matt Palmer, whose head of develop relations.
+
+13
+00:01:27,390 --> 00:01:28,140
+Speaker 2: Thanks Andrew. 
+
+14
+00:01:28,140 --> 00:01:29,860
+Speaker 2: We're really excited to present this course. 
+
+15
+00:01:30,060 --> 00:01:30,500
+Speaker 2: So.
+
+16
+00:01:30,540 --> 00:01:36,470
+Speaker 1: Michaela, tell me, how have you seen development change for the rise of AI coding agents?
+
+17
+00:01:37,490 --> 00:01:43,050
+Speaker 2: Well, rapidly eliminates many of the barriers that prevent users from building and deploying applications. 
+
+18
+00:01:43,320 --> 00:01:51,720
+Speaker 2: First of all, Rabbi provides a powerful code editor and a universal package manager, so you don't need to struggle with installation of Python and Javascript packages. 
+
+19
+00:01:52,340 --> 00:02:01,730
+Speaker 2: Source control is powered by Git, but we need it as slim as possible for our users and also rapid offers built in key value stores, databases and deployment solutions. 
+
+20
+00:02:02,570 --> 00:02:08,130
+Speaker 2: But now with Rapid Agent, every person in no coding experience can create apps and deploy them in public. 
+
+21
+00:02:08,600 --> 00:02:10,600
+Speaker 2: He will take you all a few minutes to start. 
+
+22
+00:02:11,040 --> 00:02:15,440
+Speaker 2: Even if you did not know many of the terms I just use, you can still build an application. 
+
+23
+00:02:15,920 --> 00:02:18,240
+Speaker 2: Matt will show exactly how to do it in this course.
+
+24
+00:02:19,050 --> 00:02:24,130
+Speaker 3: So a popular term today is 5 coding, where you lean into letting the coding agent do most of the heavy lifting. 
+
+25
+00:02:24,610 --> 00:02:29,400
+Speaker 3: We'll maximize the capabilities of the agent, but we'll also show how some planning can improve your results. 
+
+26
+00:02:29,940 --> 00:02:33,860
+Speaker 3: Along the way, you'll learn some tips and tricks to get the best results possible from our agent. 
+
+27
+00:02:34,140 --> 00:02:37,930
+Speaker 3: We'll start by building a search engine optimization or SEO analyzer. 
+
+28
+00:02:38,210 --> 00:02:41,650
+Speaker 3: This is a basic app that will get us started and introduce some key concepts. 
+
+29
+00:02:42,170 --> 00:02:46,210
+Speaker 3: Then you'll build a head to head voting app, which will showcase data extraction and storage. 
+
+30
+00:02:46,560 --> 00:02:49,910
+Speaker 3: Throughout the course, we'll learn the basic building blocks of web apps. 
+
+31
+00:02:49,950 --> 00:02:52,190
+Speaker 3: I think you're gonna be surprised at just how much you can build. 
+
+32
+00:02:52,310 --> 00:02:53,590
+Speaker 3: I know is I certainly have that.
+
+33
+00:02:54,920 --> 00:02:55,240
+Speaker 1: Tone. 
+
+34
+00:02:55,240 --> 00:02:58,160
+Speaker 1: Your intuition on how to use a coding agent. 
+
+35
+00:02:58,440 --> 00:03:02,360
+Speaker 1: Michaela will also share some of the details behind how rapid is built. 
+
+36
+00:03:02,860 --> 00:03:15,330
+Speaker 1: I hope some of these lessons that they Learned building rapid, which is itself a sophisticated agentic workflow, will also convey useful insights for how you might approach building other agentic AI applications.
+
+37
+00:03:15,890 --> 00:03:19,330
+Speaker 2: Yes, we Learned quite a bit in the last year, and I'm very happy to share.
+
+38
+00:03:19,330 --> 00:03:19,570
+Speaker 1: It. 
+
+39
+00:03:20,010 --> 00:03:22,130
+Speaker 1: Many people have worked situated schools. 
+
+40
+00:03:22,130 --> 00:03:26,880
+Speaker 1: I'd like to thank from Deep Linda AI, Hara Salami and Jeff Lothway. 
+
+41
+00:03:27,720 --> 00:03:31,360
+Speaker 1: Alright, let's get started with the first lesson in the next video.
