@@ -8,10 +8,31 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
   <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
+        media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+        media="(prefers-color-scheme: light)">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+        media="(prefers-color-scheme: dark)">
   <style>
-    body{margin:0;padding:2rem;background:#fafafa}
-    .markdown-body{max-width:960px;margin:auto}
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #fafafa;
+    }
+    .markdown-body {
+      max-width: 960px;
+      margin: auto;
+    }
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0d1117;
+      }
+    }
   </style>
 </head>
 
@@ -35,6 +56,12 @@
       .then(mdText => {
         // 把 markdown 转成 HTML
         marked.setOptions({
+          gfm: true,
+          breaks: true,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
           highlight: (code, lang) =>
             hljs.highlight(code, { language: lang || 'plaintext' }).value
         });
