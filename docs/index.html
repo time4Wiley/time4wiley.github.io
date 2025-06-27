@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>学习方法复盘</title>
+
+  <!-- 样式：GitHub 风格 Markdown + 代码高亮 -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <style>
+    body{margin:0;padding:2rem;background:#fafafa}
+    .markdown-body{max-width:960px;margin:auto}
+  </style>
+</head>
+
+<body>
+  <article id="app" class="markdown-body">Loading…</article>
+
+  <!-- ① Markdown → HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"></script>
+  <!-- ② 代码高亮 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- ③ Mermaid 图形 -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <script>
+    // Mermaid 全局初始化（不自动启动，后面手动 run）
+    mermaid.initialize({ startOnLoad:false });
+
+    // 从同目录拉取 Markdown
+    fetch('learning_method_review.md')
+      .then(res => res.text())
+      .then(mdText => {
+        // 把 markdown 转成 HTML
+        marked.setOptions({
+          highlight: (code, lang) =>
+            hljs.highlight(code, { language: lang || 'plaintext' }).value
+        });
+        document.getElementById('app').innerHTML = marked.parse(mdText);
+
+        // 把所有 ```mermaid``` 块渲染成 SVG
+        mermaid.run({ querySelector: '.language-mermaid' });
+      })
+      .catch(err => document.getElementById('app')
+        .innerHTML = '<p style="color:red">加载失败：'+ err.message +'</p>');
+  </script>
+</body>
+</html>
