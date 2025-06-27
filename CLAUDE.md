@@ -26,8 +26,8 @@ This is a GitHub Pages static website (time4wiley.github.io) that serves as an e
 # Create directory structure for new subject/publisher/grade
 python add_content.py --subject "数学" --publisher "人教版" --grade "八年级上册"
 
-# Count statistics (subjects, publishers, grades, PDFs)
-python add_content.py --count
+# View current content statistics
+python add_content.py --subject "dummy" --publisher "dummy" --grade "dummy" 2>/dev/null | grep "Content Summary:" -A 10
 ```
 
 ### Deployment
@@ -69,3 +69,5 @@ git push origin main
 - Maintain bilingual labels throughout (Chinese primary, English in parentheses)
 - File paths must match the GitHub Pages URL structure
 - The `.nojekyll` file prevents Jekyll processing - do not remove
+- No build tools, package managers, or external dependencies - pure HTML/CSS only
+- Open Graph meta tags are included for social media sharing
