@@ -6,7 +6,17 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "WebFetch(domain:time4wiley.github.io)",
+      "Bash(echo $SHELL)",
+      "Bash(zsh:*)",
+      "Bash(brew:*)",
+      "Bash(ls:*)",
+      "Bash(dark-mode:*)",
+      "Bash(git -C ~/App.configs status)",
+      "Bash(git -C ~/App.configs add .)",
+      "Bash(git -C ~/App.configs commit -m \"Add dark-mode CLI tool and update shell configuration\n\n- Install and configure dark-mode for macOS appearance switching\n- Add new script files for obsidian integration\n- Update zsh configuration and aliases\")",
+      "Bash(mv:*)"
     ],
     "deny": [
       "Bash(sudo:*)"
