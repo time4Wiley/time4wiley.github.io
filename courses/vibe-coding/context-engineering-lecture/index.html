@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding: Teaching AI to Understand Context</title>
+    <meta name="description" content="Interactive lecture for curious minds: Learn how to teach AI to understand context and become a vibe coding master!">
+    <meta property="og:title" content="Vibe Coding: Context Engineering for Young Coders">
+    <meta property="og:description" content="Fun, interactive lecture teaching 12-year-olds how AI understands context">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #06b6d4;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .lecture-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .lecture-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .lecture-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .analogy {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid var(--accent-color);
+        }
+
+        .analogy-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .code-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-title {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quiz-question {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        .quiz-options {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success-color);
+            background: #f0fdf4;
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger-color);
+            background: #fef2f2;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mindmap {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .mindmap-node {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .mindmap-node:hover {
+            transform: scale(1.05);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid var(--success-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .glossary-term {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .term-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .audio-control {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .completion-badge {
+            background: linear-gradient(45deg, var(--success-color), #059669);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .lecture-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #fef7cd, #fcd34d);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px dashed var(--accent-color);
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .demo-output {
+            background: var(--bg-card);
+            border: 2px solid var(--success-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            min-height: 60px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="lecture-header">
+            <h1 class="lecture-title">🤖 Vibe Coding: Teaching AI to Understand Context</h1>
+            <p class="lecture-subtitle">An Interactive Journey for Curious Young Minds</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p>Progress: <span id="progressText">0/7</span> sections completed</p>
+        </header>
+
+        <!-- Section 1: Welcome & Introduction -->
+        <section class="section active" id="section-1">
+            <h2 class="section-title">
+                <span class="icon">👋</span>
+                Welcome to Vibe Coding!
+            </h2>
+            
+            <div class="concept-card">
+                <h3>What is "Vibe Coding"?</h3>
+                <p>Imagine you're talking to a really smart robot friend. But here's the thing - this robot friend doesn't know what happened before you started talking, or what's around you right now. <strong>Vibe coding</strong> is like teaching your robot friend to "read the room" and understand the full situation!</p>
+            </div>
+
+            <div class="analogy">
+                <div class="analogy-title">🎒 The Backpack Analogy</div>
+                <p>Think of context like packing a backpack for different adventures:</p>
+                <ul>
+                    <li><strong>Beach day:</strong> You pack sunscreen, towels, snacks</li>
+                    <li><strong>School day:</strong> You pack books, pencils, lunch</li>
+                    <li><strong>Camping trip:</strong> You pack tent, sleeping bag, flashlight</li>
+                </ul>
+                <p>Context engineering is like being a super smart packer - you give the AI exactly the right "stuff" it needs for each specific task!</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">Real-World Example</div>
+                <p><strong>Without Context:</strong> "Hey AI, recommend something!"</p>
+                <p><em>AI thinks:</em> "Something? Like... a sandwich? A movie? A book? I have no idea!"</p>
+                <br>
+                <p><strong>With Good Context:</strong> "Hey AI, I'm 12 years old, I love adventure movies, it's Friday night, and I want to watch something with my family."</p>
+                <p><em>AI thinks:</em> "Perfect! I can recommend family-friendly adventure movies that are great for Friday night!"</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Concepts Made Simple -->
+        <section class="section" id="section-2">
+            <h2 class="section-title">
+                <span class="icon">🧠</span>
+                Core Concepts Made Simple
+            </h2>
+
+            <div class="mindmap">
+                <h3>Context Engineering Mind Map</h3>
+                <div class="mindmap-node">Context Window (AI's Memory)</div>
+                <div class="mindmap-node">Dynamic Context (Smart Updates)</div>
+                <div class="mindmap-node">Context Injection (Adding Info)</div>
+                <div class="mindmap-node">RAG Systems (Smart Search)</div>
+                <div class="mindmap-node">Vector Databases (Meaning Storage)</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🪟 Context Window - AI's Memory Limit</h3>
+                <p>Imagine AI's brain like a sticky note. It can only remember a certain amount of text at once - that's the "context window." It's like having a conversation where you can only remember the last 10 sentences!</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>⚡ Dynamic Context - Smart Updates</h3>
+                <p>This is like having a smart assistant that updates what it knows about you in real-time. If you just bought a skateboard, it remembers you're into skateboarding now!</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>💉 Context Injection - Adding the Right Info</h3>
+                <p>Like giving someone directions: you don't tell them about every single street in the city, just the ones they need to get where they're going!</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎮 Try It Yourself: Context Window Demo</h3>
+                <p>Type a message below and see how context affects AI responses:</p>
+                <input type="text" class="demo-input" id="userInput" placeholder="Type your message here...">
+                <button class="nav-button" onclick="demonstrateContext()">Show Context Effect</button>
+                <div class="demo-output" id="demoOutput">Results will appear here...</div>
+            </div>
+        </section>
+
+        <!-- Section 3: Real-World Applications -->
+        <section class="section" id="section-3">
+            <h2 class="section-title">
+                <span class="icon">🌍</span>
+                Real-World Applications
+            </h2>
+
+            <div class="example-box">
+                <div class="example-title">🛒 Smart Shopping Assistant</div>
+                <p><strong>The Challenge:</strong> Help someone find the perfect product</p>
+                <p><strong>Context Engineering Solution:</strong></p>
+                <ul>
+                    <li>What they bought before (history)</li>
+                    <li>What's popular right now (trends)</li>
+                    <li>What's in stock (inventory)</li>
+                    <li>Their age and interests (profile)</li>
+                </ul>
+                <p>Like having a super-smart shopkeeper who remembers everything about you!</p>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">Simple Code Example (Don't worry, we'll explain!)</div>
+                <pre>
+def smart_recommendation(user_age, interests, recent_purchases):
+    context = {
+        "user_info": f"Age: {user_age}, Likes: {interests}",
+        "history": recent_purchases,
+        "current_trends": get_trending_items(),
+        "available_items": get_inventory()
+    }
+    
+    return ai_model.recommend(context)
+                </pre>
+                <p style="color: var(--secondary-color); margin-top: 10px;">This code is like creating a smart shopping assistant's "memory" before it helps you!</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🤖 Helpful Chatbot</div>
+                <p>Imagine a school chatbot that knows:</p>
+                <ul>
+                    <li>Your grade level and classes</li>
+                    <li>What homework you have</li>
+                    <li>Your learning style</li>
+                    <li>Current school events</li>
+                </ul>
+                <p>It can give you perfect help because it understands your specific situation!</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>🎯 Why This Matters</h3>
+                <p>Context engineering makes AI helpful instead of confusing. It's the difference between getting exactly what you need versus getting random information that doesn't help!</p>
+            </div>
+        </section>
+
+        <!-- Section 4: Interactive Quiz -->
+        <section class="section" id="section-4">
+            <h2 class="section-title">
+                <span class="icon">🧩</span>
+                Test Your Knowledge!
+            </h2>
+
+            <div class="quiz-question" id="quiz-1">
+                <h3>Question 1: What is context engineering?</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">Writing code for websites</li>
+                    <li class="quiz-option" data-answer="correct">Teaching AI to understand the full situation</li>
+                    <li class="quiz-option" data-answer="wrong">Creating video games</li>
+                    <li class="quiz-option" data-answer="wrong">Building robots</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>Correct!</strong> Context engineering is about giving AI the right information to understand any situation, just like giving someone good directions.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question" id="quiz-2">
+                <h3>Question 2: What's the best analogy for a context window?</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">A computer screen</li>
+                    <li class="quiz-option" data-answer="correct">A sticky note with limited space</li>
+                    <li class="quiz-option" data-answer="wrong">A window in a house</li>
+                    <li class="quiz-option" data-answer="wrong">A calendar</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>Exactly!</strong> A context window is like a sticky note - it can only hold so much information before it runs out of space.</p>
+                </div>
+            </div>
+
+            <div class="quiz-question" id="quiz-3">
+                <h3>Question 3: Why is context important for AI?</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">To make it run faster</li>
+                    <li class="quiz-option" data-answer="correct">To help it give relevant, helpful answers</li>
+                    <li class="quiz-option" data-answer="wrong">To save electricity</li>
+                    <li class="quiz-option" data-answer="wrong">To make it look prettier</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>Perfect!</strong> Context helps AI understand what you really need, like the difference between asking for "something good" vs "a good adventure movie for family night."</p>
+                </div>
+            </div>
+
+            <div id="quiz-results" style="display: none;">
+                <div class="completion-badge">
+                    🎉 Great job! You're becoming a context engineering expert!
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Hands-On Coding -->
+        <section class="section" id="section-5">
+            <h2 class="section-title">
+                <span class="icon">💻</span>
+                Let's Code Together!
+            </h2>
+
+            <div class="concept-card">
+                <h3>Your First Context Engineering Project</h3>
+                <p>We're going to build a simple "Smart Movie Recommender" that understands context!</p>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">Step 1: Collect Context Information</div>
+                <pre>
+# Let's gather information about our user
+user_context = {
+    "age": 12,
+    "favorite_genres": ["adventure", "comedy", "sci-fi"],
+    "time_of_day": "evening",
+    "watching_with": "family",
+    "mood": "want something exciting"
+}
+                </pre>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">Step 2: Create Smart Context</div>
+                <pre>
+def create_movie_context(user_info):
+    context = f"""
+    You are helping a {user_info['age']}-year-old who loves {user_info['favorite_genres']}.
+    It's {user_info['time_of_day']} and they're watching with {user_info['watching_with']}.
+    They're in the mood for: {user_info['mood']}
+    
+    Recommend family-friendly movies that match this context.
+    """
+    return context
+                </pre>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎬 Try Our Movie Recommender!</h3>
+                <p>Fill in your preferences:</p>
+                <input type="number" class="demo-input" id="ageInput" placeholder="Your age" min="8" max="18" value="12">
+                <input type="text" class="demo-input" id="genreInput" placeholder="Favorite movie types (comedy, adventure, etc.)">
+                <input type="text" class="demo-input" id="moodInput" placeholder="What mood are you in?">
+                <button class="nav-button" onclick="recommendMovie()">Get My Movie Recommendation!</button>
+                <div class="demo-output" id="movieOutput">Your personalized recommendation will appear here...</div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🔍 What's Happening Behind the Scenes?</div>
+                <ol>
+                    <li><strong>Context Collection:</strong> We gather information about you</li>
+                    <li><strong>Context Structuring:</strong> We organize it in a way AI can understand</li>
+                    <li><strong>Smart Recommendation:</strong> AI uses this context to give perfect suggestions</li>
+                </ol>
+                <p>This is exactly how Netflix, YouTube, and other platforms work - but now you understand the magic!</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Advanced Concepts (Simplified) -->
+        <section class="section" id="section-6">
+            <h2 class="section-title">
+                <span class="icon">🚀</span>
+                Level Up: Advanced Concepts Made Easy
+            </h2>
+
+            <div class="concept-card">
+                <h3>🔍 RAG (Retrieval Augmented Generation)</h3>
+                <p><strong>Fancy name, simple idea:</strong> It's like having a super-smart search engine that finds exactly the right information and gives it to AI before it answers your question.</p>
+                
+                <div class="analogy">
+                    <div class="analogy-title">🏫 The School Library Analogy</div>
+                    <p>Imagine you ask a librarian: "I need help with my science project on volcanoes."</p>
+                    <ul>
+                        <li>The librarian searches for volcano books</li>
+                        <li>Finds the most relevant chapters</li>
+                        <li>Gives you exactly what you need</li>
+                        <li>You get perfect information for your specific project!</li>
+                    </ul>
+                    <p>That's RAG - the AI gets the best information before helping you!</p>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🗃️ Vector Databases</h3>
+                <p><strong>Think of it as:</strong> A magical filing cabinet that understands <em>meaning</em> instead of just keywords.</p>
+                
+                <div class="example-box">
+                    <div class="example-title">Regular Search vs Vector Search</div>
+                    <p><strong>Regular search:</strong> "dog" only finds things with the word "dog"</p>
+                    <p><strong>Vector search:</strong> "dog" finds "puppy," "canine," "pet," "furry friend," and even stories about dogs without saying "dog"!</p>
+                    <p>It understands that these words are all related in meaning!</p>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🔄 Dynamic Context Updates</h3>
+                <p>This is like having a friend who remembers everything new about you and updates their understanding in real-time.</p>
+                
+                <div class="code-example">
+                    <div class="code-title">Example: Smart Game Companion</div>
+                    <pre>
+class SmartGameHelper:
+    def __init__(self):
+        self.player_context = {}
+    
+    def update_context(self, new_info):
+        # Player just got interested in skateboarding
+        if "skateboard" in new_info:
+            self.player_context["interests"].append("skateboarding")
+            self.player_context["skill_level"] = "beginner"
+    
+    def give_advice(self):
+        # Now gives skateboarding tips and recommendations!
+        return f"Based on your new interest in {self.player_context['interests'][-1]}..."
+                    </pre>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🎮 Real-World Example: Smart Gaming Assistant</div>
+                <p>Imagine a gaming buddy AI that:</p>
+                <ul>
+                    <li>Remembers your favorite game types</li>
+                    <li>Tracks your skill improvements</li>
+                    <li>Knows what you're stuck on right now</li>
+                    <li>Updates its help based on your progress</li>
+                </ul>
+                <p>The more you play, the smarter it gets at helping you!</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Glossary & Next Steps -->
+        <section class="section" id="section-7">
+            <h2 class="section-title">
+                <span class="icon">📚</span>
+                Your Context Engineering Dictionary
+            </h2>
+
+            <div class="glossary-term">
+                <div class="term-name">Context Engineering</div>
+                <p>Teaching AI to understand the full situation before responding - like giving perfect directions instead of random information.</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">Context Window</div>
+                <p>The maximum amount of text AI can remember at once - like a sticky note with limited space.</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">Dynamic Context</div>
+                <p>Information that updates in real-time - like a smart friend who remembers new things about you.</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">RAG (Retrieval Augmented Generation)</div>
+                <p>A smart search system that finds the perfect information before AI answers - like a super librarian.</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">Vector Database</div>
+                <p>A magical filing system that understands meaning, not just keywords - finds "puppy" when you search "dog".</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">Token</div>
+                <p>A piece of text that AI reads - roughly like words or parts of words.</p>
+            </div>
+
+            <div class="completion-badge">
+                🎓 Congratulations! You're now a Context Engineering Expert!
+            </div>
+
+            <div class="concept-card">
+                <h3>🎯 What You've Learned</h3>
+                <ul>
+                    <li>How to give AI the right context for any situation</li>
+                    <li>Why context makes AI incredibly helpful</li>
+                    <li>How to build simple context-aware programs</li>
+                    <li>The magic behind smart recommendations and assistants</li>
+                    <li>Advanced concepts that power the coolest AI applications</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🚀 Your Next Adventures in Vibe Coding</div>
+                <ul>
+                    <li>Build your own smart chatbot</li>
+                    <li>Create a personal AI assistant</li>
+                    <li>Design context-aware games</li>
+                    <li>Explore machine learning basics</li>
+                    <li>Learn about AI ethics and responsibility</li>
+                </ul>
+                <p>You now understand one of the most important concepts in modern AI - use this superpower wisely!</p>
+            </div>
+        </section>
+
+        <nav class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="previousSection()" disabled>← Previous</button>
+            <div id="sectionIndicator">Section 1 of 7</div>
+            <button class="nav-button" id="nextBtn" onclick="nextSection()">Next →</button>
+        </nav>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 7;
+        let completedSections = new Set();
+        let quizAnswers = {};
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${completedSections.size}/${totalSections}`;
+        }
+
+        function showSection(sectionNumber) {
+            // Hide all sections
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById(`section-${i}`).classList.remove('active');
+            }
+            
+            // Show current section
+            document.getElementById(`section-${sectionNumber}`).classList.add('active');
+            
+            // Mark as completed
+            completedSections.add(sectionNumber);
+            updateProgress();
+            
+            // Update navigation
+            document.getElementById('prevBtn').disabled = sectionNumber === 1;
+            document.getElementById('nextBtn').disabled = sectionNumber === totalSections;
+            document.getElementById('sectionIndicator').textContent = `Section ${sectionNumber} of ${totalSections}`;
+            
+            currentSection = sectionNumber;
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                showSection(currentSection + 1);
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        function demonstrateContext() {
+            const userInput = document.getElementById('userInput').value;
+            const output = document.getElementById('demoOutput');
+            
+            if (!userInput.trim()) {
+                output.innerHTML = "Please type something first!";
+                return;
+            }
+            
+            const withoutContext = `Without context: AI might respond randomly about "${userInput}"`;
+            const withContext = `With context (knowing you're 12, learning about AI): AI gives age-appropriate, educational response about "${userInput}"`;
+            
+            output.innerHTML = `
+                <strong>❌ ${withoutContext}</strong><br><br>
+                <strong>✅ ${withContext}</strong><br><br>
+                <em>Context makes all the difference!</em>
+            `;
+        }
+
+        function recommendMovie() {
+            const age = document.getElementById('ageInput').value;
+            const genres = document.getElementById('genreInput').value;
+            const mood = document.getElementById('moodInput').value;
+            const output = document.getElementById('movieOutput');
+            
+            if (!age || !genres || !mood) {
+                output.innerHTML = "Please fill in all fields to get your recommendation!";
+                return;
+            }
+            
+            const recommendations = {
+                "adventure": ["The Incredibles", "Spider-Man: Into the Spider-Verse", "Moana"],
+                "comedy": ["Despicable Me", "The LEGO Movie", "Zootopia"],
+                "sci-fi": ["Wall-E", "Big Hero 6", "Ready Player One"],
+                "action": ["The Incredibles", "Spider-Man: Into the Spider-Verse", "Black Panther"],
+                "fantasy": ["Harry Potter series", "Moana", "How to Train Your Dragon"]
+            };
+            
+            let movieList = [];
+            genres.toLowerCase().split(',').forEach(genre => {
+                const trimmed = genre.trim();
+                if (recommendations[trimmed]) {
+                    movieList = movieList.concat(recommendations[trimmed]);
+                }
+            });
+            
+            if (movieList.length === 0) {
+                movieList = ["The Incredibles", "Spider-Man: Into the Spider-Verse", "Moana"];
+            }
+            
+            const randomMovie = movieList[Math.floor(Math.random() * movieList.length)];
+            
+            output.innerHTML = `
+                <strong>🎬 Perfect Match Found!</strong><br>
+                Based on your context:<br>
+                • Age: ${age}<br>
+                • Genres: ${genres}<br>
+                • Mood: ${mood}<br><br>
+                <strong>Recommended: "${randomMovie}"</strong><br>
+                <em>This recommendation was generated using context engineering - just like real streaming services!</em>
+            `;
+        }
+
+        // Quiz functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quiz-option')) {
+                const question = e.target.closest('.quiz-question');
+                const questionId = question.id;
+                const options = question.querySelectorAll('.quiz-option');
+                const explanation = question.querySelector('.quiz-explanation');
+                
+                // Remove previous selections
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selection
+                e.target.classList.add('selected');
+                
+                // Check answer
+                const isCorrect = e.target.dataset.answer === 'correct';
+                e.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+                
+                // Show correct answer if wrong
+                if (!isCorrect) {
+                    options.forEach(opt => {
+                        if (opt.dataset.answer === 'correct') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+                
+                // Show explanation
+                explanation.style.display = 'block';
+                
+                // Track answer
+                quizAnswers[questionId] = isCorrect;
+                
+                // Check if all quiz questions are answered
+                if (Object.keys(quizAnswers).length === 3) {
+                    document.getElementById('quiz-results').style.display = 'block';
+                }
+            }
+        });
+
+        // Initialize
+        updateProgress();
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentSection > 1) {
+                previousSection();
+            } else if (e.key === 'ArrowRight' && currentSection < totalSections) {
+                nextSection();
+            }
+        });
+    </script>
+</body>
+</html>
