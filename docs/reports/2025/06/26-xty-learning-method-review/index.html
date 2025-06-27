@@ -17,26 +17,105 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
         media="(prefers-color-scheme: dark)">
   <style>
+    :root {
+      --bg-light: #fafafa;
+      --bg-dark: #0d1117;
+      --toggle-bg-light: #fff;
+      --toggle-bg-dark: #21262d;
+      --toggle-border-light: #d1d9e0;
+      --toggle-border-dark: #30363d;
+      --toggle-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     body {
       margin: 0;
       padding: 2rem;
-      background: #fafafa;
+      background: var(--bg-light);
+      transition: background-color 0.3s ease;
     }
+    
+    body.dark-mode {
+      background: var(--bg-dark);
+    }
+    
     .markdown-body {
       max-width: 960px;
       margin: auto;
     }
     
-    /* Dark mode support */
+    /* Floating toggle button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--toggle-bg-light);
+      border: 1px solid var(--toggle-border-light);
+      box-shadow: var(--toggle-shadow);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      user-select: none;
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dark-mode .theme-toggle {
+      background: var(--toggle-bg-dark);
+      border-color: var(--toggle-border-dark);
+    }
+    
+    /* Override CSS media queries for manual control */
+    body.dark-mode .markdown-body {
+      color-scheme: dark;
+    }
+    
+    body:not(.dark-mode) .markdown-body {
+      color-scheme: light;
+    }
+    
+    /* Force dark styles when in manual dark mode */
+    body.dark-mode link[media*="dark"] {
+      media: all !important;
+    }
+    
+    body.dark-mode link[media*="light"] {
+      media: not all !important;
+    }
+    
+    /* Force light styles when in manual light mode */
+    body:not(.dark-mode) link[media*="light"] {
+      media: all !important;
+    }
+    
+    body:not(.dark-mode) link[media*="dark"] {
+      media: not all !important;
+    }
+    
+    /* Auto mode - respect system preference when no manual override */
     @media (prefers-color-scheme: dark) {
-      body {
-        background: #0d1117;
+      body:not(.light-mode):not(.dark-mode) {
+        background: var(--bg-dark);
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Floating theme toggle button -->
+  <div class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+    <span id="themeIcon">🌙</span>
+  </div>
+  
   <article id="app" class="markdown-body">Loading…</article>
 
   <!-- ① Markdown → HTML -->
@@ -47,6 +126,57 @@
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 
   <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+    
+    // Check for saved theme preference or default to system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+        themeIcon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else if (theme === 'light') {
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+        themeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        // Auto mode - follow system preference
+        body.classList.remove('dark-mode', 'light-mode');
+        themeIcon.textContent = systemPrefersDark ? '☀️' : '🌙';
+        localStorage.removeItem('theme');
+      }
+    }
+    
+    // Initialize theme
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme(systemPrefersDark ? 'dark' : 'light');
+    }
+    
+    // Toggle theme on click
+    themeToggle.addEventListener('click', () => {
+      if (body.classList.contains('dark-mode')) {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+    });
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
     // Mermaid 全局初始化（不自动启动，后面手动 run）
     mermaid.initialize({ startOnLoad:false });
 
