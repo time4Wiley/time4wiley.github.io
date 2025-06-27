@@ -5,17 +5,16 @@
   <title>学习方法复盘</title>
 
   <!-- 样式：GitHub 风格 Markdown + 代码高亮 -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
-  <link rel="stylesheet"
+  <link id="markdown-light" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-light.min.css">
+  <link id="markdown-dark" rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css"
-        media="(prefers-color-scheme: dark)">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-        media="(prefers-color-scheme: light)">
-  <link rel="stylesheet"
+        disabled>
+  <link id="highlight-light" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link id="highlight-dark" rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-        media="(prefers-color-scheme: dark)">
+        disabled>
   <style>
     :root {
       --bg-light: #fafafa;
@@ -74,38 +73,13 @@
       border-color: var(--toggle-border-dark);
     }
     
-    /* Override CSS media queries for manual control */
+    /* Ensure markdown body uses correct color scheme */
     body.dark-mode .markdown-body {
       color-scheme: dark;
     }
     
-    body:not(.dark-mode) .markdown-body {
+    body.light-mode .markdown-body {
       color-scheme: light;
-    }
-    
-    /* Force dark styles when in manual dark mode */
-    body.dark-mode link[media*="dark"] {
-      media: all !important;
-    }
-    
-    body.dark-mode link[media*="light"] {
-      media: not all !important;
-    }
-    
-    /* Force light styles when in manual light mode */
-    body:not(.dark-mode) link[media*="light"] {
-      media: all !important;
-    }
-    
-    body:not(.dark-mode) link[media*="dark"] {
-      media: not all !important;
-    }
-    
-    /* Auto mode - respect system preference when no manual override */
-    @media (prefers-color-scheme: dark) {
-      body:not(.light-mode):not(.dark-mode) {
-        background: var(--bg-dark);
-      }
     }
   </style>
 </head>
@@ -136,21 +110,48 @@
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     function setTheme(theme) {
+      const markdownLight = document.getElementById('markdown-light');
+      const markdownDark = document.getElementById('markdown-dark');
+      const highlightLight = document.getElementById('highlight-light');
+      const highlightDark = document.getElementById('highlight-dark');
+      
       if (theme === 'dark') {
         body.classList.add('dark-mode');
         body.classList.remove('light-mode');
         themeIcon.textContent = '☀️';
         localStorage.setItem('theme', 'dark');
+        // Enable dark stylesheets
+        markdownDark.disabled = false;
+        highlightDark.disabled = false;
+        markdownLight.disabled = true;
+        highlightLight.disabled = true;
       } else if (theme === 'light') {
         body.classList.add('light-mode');
         body.classList.remove('dark-mode');
         themeIcon.textContent = '🌙';
         localStorage.setItem('theme', 'light');
+        // Enable light stylesheets
+        markdownLight.disabled = false;
+        highlightLight.disabled = false;
+        markdownDark.disabled = true;
+        highlightDark.disabled = true;
       } else {
         // Auto mode - follow system preference
         body.classList.remove('dark-mode', 'light-mode');
         themeIcon.textContent = systemPrefersDark ? '☀️' : '🌙';
         localStorage.removeItem('theme');
+        // Set stylesheets based on system preference
+        if (systemPrefersDark) {
+          markdownDark.disabled = false;
+          highlightDark.disabled = false;
+          markdownLight.disabled = true;
+          highlightLight.disabled = true;
+        } else {
+          markdownLight.disabled = false;
+          highlightLight.disabled = false;
+          markdownDark.disabled = true;
+          highlightDark.disabled = true;
+        }
       }
     }
     
