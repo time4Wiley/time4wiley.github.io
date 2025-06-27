@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe编程：教AI理解上下文</title>
+    <meta name="description" content="给好奇少年的互动式课程：学会如何教AI理解上下文，成为Vibe编程大师！">
+    <meta property="og:title" content="Vibe编程：青少年上下文工程课程">
+    <meta property="og:description" content="有趣的互动式课程，教12岁孩子AI如何理解上下文">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #06b6d4;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .lecture-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .lecture-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .lecture-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .analogy {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid var(--accent-color);
+        }
+
+        .analogy-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .code-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-title {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quiz-question {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        .quiz-options {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success-color);
+            background: #f0fdf4;
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger-color);
+            background: #fef2f2;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mindmap {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .mindmap-node {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .mindmap-node:hover {
+            transform: scale(1.05);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid var(--success-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .glossary-term {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .term-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .completion-badge {
+            background: linear-gradient(45deg, var(--success-color), #059669);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .lecture-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #fef7cd, #fcd34d);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px dashed var(--accent-color);
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .demo-output {
+            background: var(--bg-card);
+            border: 2px solid var(--success-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            min-height: 60px;
+            font-family: monospace;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-switch a {
+            background: var(--bg-card);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+        }
+
+        .language-switch a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="index.html">🌐 English</a>
+    </div>
+
+    <div class="container">
+        <header class="lecture-header">
+            <h1 class="lecture-title">🤖 Vibe编程：教AI理解上下文</h1>
+            <p class="lecture-subtitle">给好奇少年的互动学习之旅</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p>学习进度：<span id="progressText">0/7</span> 章节已完成</p>
+        </header>
+
+        <!-- 第一章：欢迎和介绍 -->
+        <section class="section active" id="section-1">
+            <h2 class="section-title">
+                <span class="icon">👋</span>
+                欢迎来到Vibe编程世界！
+            </h2>
+            
+            <div class="concept-card">
+                <h3>什么是"Vibe编程"？</h3>
+                <p>想象一下，你正在和一个超级聪明的机器人朋友聊天。但问题是——这个机器人朋友不知道你们之前聊过什么，也不知道你现在的情况。<strong>Vibe编程</strong>就像是教你的机器人朋友"察言观色"，理解完整的情况！</p>
+            </div>
+
+            <div class="analogy">
+                <div class="analogy-title">🎒 书包收纳法则</div>
+                <p>把上下文想象成为不同的冒险活动收拾书包：</p>
+                <ul>
+                    <li><strong>海边游玩：</strong> 你会装防晒霜、毛巾、零食</li>
+                    <li><strong>上学日常：</strong> 你会装课本、铅笔、午餐</li>
+                    <li><strong>野营探险：</strong> 你会装帐篷、睡袋、手电筒</li>
+                </ul>
+                <p>上下文工程就像是成为一个超级聪明的收纳师——给AI准确提供它完成每个特定任务所需的"物品"！</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">真实世界的例子</div>
+                <p><strong>没有上下文：</strong> "嗨AI，给我推荐点什么！"</p>
+                <p><em>AI想：</em> "什么？比如...三明治？电影？书？我完全不知道！"</p>
+                <br>
+                <p><strong>有了好的上下文：</strong> "嗨AI，我12岁，喜欢冒险电影，现在是周五晚上，想和家人一起看点什么。"</p>
+                <p><em>AI想：</em> "完美！我可以推荐适合周五晚上全家观看的冒险电影！"</p>
+            </div>
+        </section>
+
+        <!-- 第二章：核心概念简化版 -->
+        <section class="section" id="section-2">
+            <h2 class="section-title">
+                <span class="icon">🧠</span>
+                核心概念轻松学
+            </h2>
+
+            <div class="mindmap">
+                <h3>上下文工程思维导图</h3>
+                <div class="mindmap-node">上下文窗口（AI的记忆）</div>
+                <div class="mindmap-node">动态上下文（智能更新）</div>
+                <div class="mindmap-node">上下文注入（添加信息）</div>
+                <div class="mindmap-node">RAG系统（智能搜索）</div>
+                <div class="mindmap-node">向量数据库（意义存储）</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🪟 上下文窗口 - AI的记忆限制</h3>
+                <p>把AI的大脑想象成一张便利贴。它一次只能记住一定数量的文字——这就是"上下文窗口"。就像你们对话中只能记住最后10句话一样！</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>⚡ 动态上下文 - 智能更新</h3>
+                <p>这就像有一个智能助手，能实时更新它对你的了解。如果你刚买了一个滑板，它就会记住你现在对滑板运动感兴趣！</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>💉 上下文注入 - 添加正确信息</h3>
+                <p>就像给别人指路：你不会告诉他们城市里的每一条街道，只告诉他们到达目的地需要走的路！</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎮 动手试试：上下文窗口演示</h3>
+                <p>在下面输入一条消息，看看上下文如何影响AI的回应：</p>
+                <input type="text" class="demo-input" id="userInput" placeholder="在这里输入你的消息...">
+                <button class="nav-button" onclick="demonstrateContext()">显示上下文效果</button>
+                <div class="demo-output" id="demoOutput">结果将在这里显示...</div>
+            </div>
+        </section>
+
+        <!-- 第三章：真实世界应用 -->
+        <section class="section" id="section-3">
+            <h2 class="section-title">
+                <span class="icon">🌍</span>
+                真实世界应用
+            </h2>
+
+            <div class="example-box">
+                <div class="example-title">🛒 智能购物助手</div>
+                <p><strong>挑战：</strong> 帮助某人找到完美的产品</p>
+                <p><strong>上下文工程解决方案：</strong></p>
+                <ul>
+                    <li>他们之前买过什么（历史记录）</li>
+                    <li>现在什么最受欢迎（趋势）</li>
+                    <li>什么有库存（库存）</li>
+                    <li>他们的年龄和兴趣（档案）</li>
+                </ul>
+                <p>就像有一个超级聪明的店主，记住关于你的所有事情！</p>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">简单代码示例（别担心，我们会解释！）</div>
+                <pre>
+def 智能推荐(用户年龄, 兴趣爱好, 最近购买):
+    上下文 = {
+        "用户信息": f"年龄: {用户年龄}, 喜欢: {兴趣爱好}",
+        "历史": 最近购买,
+        "当前趋势": 获取热门商品(),
+        "可用商品": 获取库存()
+    }
+    
+    return AI模型.推荐(上下文)
+                </pre>
+                <p style="color: var(--secondary-color); margin-top: 10px;">这段代码就像在给智能购物助手创建"记忆"，让它能够帮助你！</p>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🤖 有用的聊天机器人</div>
+                <p>想象一个学校聊天机器人，它知道：</p>
+                <ul>
+                    <li>你的年级和课程</li>
+                    <li>你有什么作业</li>
+                    <li>你的学习风格</li>
+                    <li>当前的学校活动</li>
+                </ul>
+                <p>它能给你完美的帮助，因为它理解你的具体情况！</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>🎯 为什么这很重要</h3>
+                <p>上下文工程让AI变得有用而不是混乱。这就是得到你真正需要的东西，与得到对你没有帮助的随机信息之间的区别！</p>
+            </div>
+        </section>
+
+        <!-- 第四章：互动测验 -->
+        <section class="section" id="section-4">
+            <h2 class="section-title">
+                <span class="icon">🧩</span>
+                测试你的知识！
+            </h2>
+
+            <div class="quiz-question" id="quiz-1">
+                <h3>问题1：什么是上下文工程？</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">为网站写代码</li>
+                    <li class="quiz-option" data-answer="correct">教AI理解完整情况</li>
+                    <li class="quiz-option" data-answer="wrong">制作视频游戏</li>
+                    <li class="quiz-option" data-answer="wrong">建造机器人</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>正确！</strong> 上下文工程是关于给AI提供正确的信息来理解任何情况，就像给某人指好路一样。</p>
+                </div>
+            </div>
+
+            <div class="quiz-question" id="quiz-2">
+                <h3>问题2：上下文窗口最好的比喻是什么？</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">电脑屏幕</li>
+                    <li class="quiz-option" data-answer="correct">空间有限的便利贴</li>
+                    <li class="quiz-option" data-answer="wrong">房子里的窗户</li>
+                    <li class="quiz-option" data-answer="wrong">日历</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>完全正确！</strong> 上下文窗口就像一张便利贴——在用完空间之前只能容纳这么多信息。</p>
+                </div>
+            </div>
+
+            <div class="quiz-question" id="quiz-3">
+                <h3>问题3：为什么上下文对AI很重要？</h3>
+                <ul class="quiz-options">
+                    <li class="quiz-option" data-answer="wrong">让它运行更快</li>
+                    <li class="quiz-option" data-answer="correct">帮助它给出相关、有用的答案</li>
+                    <li class="quiz-option" data-answer="wrong">节省电力</li>
+                    <li class="quiz-option" data-answer="wrong">让它看起来更美观</li>
+                </ul>
+                <div class="quiz-explanation" style="display: none;">
+                    <p><strong>完美！</strong> 上下文帮助AI理解你真正需要什么，就像问"好的东西"与"适合家庭之夜的好冒险电影"之间的区别。</p>
+                </div>
+            </div>
+
+            <div id="quiz-results" style="display: none;">
+                <div class="completion-badge">
+                    🎉 干得好！你正在成为上下文工程专家！
+                </div>
+            </div>
+        </section>
+
+        <!-- 第五章：动手编程 -->
+        <section class="section" id="section-5">
+            <h2 class="section-title">
+                <span class="icon">💻</span>
+                让我们一起编程！
+            </h2>
+
+            <div class="concept-card">
+                <h3>你的第一个上下文工程项目</h3>
+                <p>我们要构建一个简单的"智能电影推荐器"，它能理解上下文！</p>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">步骤1：收集上下文信息</div>
+                <pre>
+# 让我们收集关于用户的信息
+用户上下文 = {
+    "年龄": 12,
+    "喜欢的类型": ["冒险", "喜剧", "科幻"],
+    "时间": "晚上",
+    "观看对象": "家人",
+    "心情": "想要刺激的内容"
+}
+                </pre>
+            </div>
+
+            <div class="code-example">
+                <div class="code-title">步骤2：创建智能上下文</div>
+                <pre>
+def 创建电影上下文(用户信息):
+    上下文 = f"""
+    你正在帮助一个{用户信息['年龄']}岁的孩子，他喜欢{用户信息['喜欢的类型']}。
+    现在是{用户信息['时间']}，他要和{用户信息['观看对象']}一起看。
+    他的心情是：{用户信息['心情']}
+    
+    推荐适合这种上下文的家庭友好电影。
+    """
+    return 上下文
+                </pre>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎬 试试我们的电影推荐器！</h3>
+                <p>填写你的偏好：</p>
+                <input type="number" class="demo-input" id="ageInput" placeholder="你的年龄" min="8" max="18" value="12">
+                <input type="text" class="demo-input" id="genreInput" placeholder="喜欢的电影类型（喜剧、冒险等）">
+                <input type="text" class="demo-input" id="moodInput" placeholder="你现在的心情如何？">
+                <button class="nav-button" onclick="recommendMovie()">获取我的电影推荐！</button>
+                <div class="demo-output" id="movieOutput">你的个性化推荐将出现在这里...</div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🔍 幕后发生了什么？</div>
+                <ol>
+                    <li><strong>上下文收集：</strong> 我们收集关于你的信息</li>
+                    <li><strong>上下文结构化：</strong> 我们以AI能理解的方式组织它</li>
+                    <li><strong>智能推荐：</strong> AI使用这个上下文给出完美建议</li>
+                </ol>
+                <p>这正是Netflix、YouTube和其他平台的工作方式——但现在你理解了其中的魔法！</p>
+            </div>
+        </section>
+
+        <!-- 第六章：高级概念（简化版） -->
+        <section class="section" id="section-6">
+            <h2 class="section-title">
+                <span class="icon">🚀</span>
+                进阶：高级概念轻松学
+            </h2>
+
+            <div class="concept-card">
+                <h3>🔍 RAG（检索增强生成）</h3>
+                <p><strong>听起来很厉害，其实很简单：</strong> 它就像有一个超级智能的搜索引擎，能找到恰好合适的信息，并在AI回答你的问题之前把这些信息给它。</p>
+                
+                <div class="analogy">
+                    <div class="analogy-title">🏫 学校图书馆比喻</div>
+                    <p>想象你问图书管理员："我需要帮助完成关于火山的科学项目。"</p>
+                    <ul>
+                        <li>图书管理员搜索火山相关书籍</li>
+                        <li>找到最相关的章节</li>
+                        <li>给你恰好需要的内容</li>
+                        <li>你为特定项目获得完美信息！</li>
+                    </ul>
+                    <p>这就是RAG——AI在帮助你之前获得最佳信息！</p>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🗃️ 向量数据库</h3>
+                <p><strong>可以这样想：</strong> 一个神奇的文件柜，它理解<em>意思</em>而不只是关键词。</p>
+                
+                <div class="example-box">
+                    <div class="example-title">普通搜索 vs 向量搜索</div>
+                    <p><strong>普通搜索：</strong> "狗"只能找到有"狗"这个字的内容</p>
+                    <p><strong>向量搜索：</strong> "狗"能找到"小狗"、"犬类"、"宠物"、"毛茸茸的朋友"，甚至没有说"狗"字的关于狗的故事！</p>
+                    <p>它理解这些词在意思上都是相关的！</p>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🔄 动态上下文更新</h3>
+                <p>这就像有一个朋友，记住关于你的每件新事情，并实时更新他们的理解。</p>
+                
+                <div class="code-example">
+                    <div class="code-title">例子：智能游戏伙伴</div>
+                    <pre>
+class 智能游戏助手:
+    def __init__(self):
+        self.玩家上下文 = {}
+    
+    def 更新上下文(self, 新信息):
+        # 玩家刚对滑板产生兴趣
+        if "滑板" in 新信息:
+            self.玩家上下文["兴趣"].append("滑板运动")
+            self.玩家上下文["技能水平"] = "初学者"
+    
+    def 给建议(self):
+        # 现在给出滑板技巧和推荐！
+        return f"基于你对{self.玩家上下文['兴趣'][-1]}的新兴趣..."
+                    </pre>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🎮 真实世界例子：智能游戏助手</div>
+                <p>想象一个游戏伙伴AI，它能：</p>
+                <ul>
+                    <li>记住你喜欢的游戏类型</li>
+                    <li>跟踪你的技能进步</li>
+                    <li>知道你现在卡在哪里</li>
+                    <li>根据你的进度更新帮助</li>
+                </ul>
+                <p>你玩得越多，它就越聪明地帮助你！</p>
+            </div>
+        </section>
+
+        <!-- 第七章：词汇表和下一步 -->
+        <section class="section" id="section-7">
+            <h2 class="section-title">
+                <span class="icon">📚</span>
+                你的上下文工程词典
+            </h2>
+
+            <div class="glossary-term">
+                <div class="term-name">上下文工程</div>
+                <p>教AI在回应之前理解完整情况——就像给出完美指路而不是随机信息。</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">上下文窗口</div>
+                <p>AI一次能记住的最大文本量——就像空间有限的便利贴。</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">动态上下文</div>
+                <p>实时更新的信息——就像记住关于你新事情的聪明朋友。</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">RAG（检索增强生成）</div>
+                <p>在AI回答之前找到完美信息的智能搜索系统——就像超级图书管理员。</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">向量数据库</div>
+                <p>理解意思而不只是关键词的神奇文件系统——搜索"狗"时能找到"小狗"。</p>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">令牌（Token）</div>
+                <p>AI读取的一段文本——大致相当于单词或单词的一部分。</p>
+            </div>
+
+            <div class="completion-badge">
+                🎓 恭喜！你现在是上下文工程专家了！
+            </div>
+
+            <div class="concept-card">
+                <h3>🎯 你学到了什么</h3>
+                <ul>
+                    <li>如何为任何情况给AI提供正确的上下文</li>
+                    <li>为什么上下文让AI变得非常有用</li>
+                    <li>如何构建简单的上下文感知程序</li>
+                    <li>智能推荐和助手背后的魔法</li>
+                    <li>驱动最酷AI应用的高级概念</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <div class="example-title">🚀 你在Vibe编程中的下一个冒险</div>
+                <ul>
+                    <li>构建你自己的智能聊天机器人</li>
+                    <li>创建个人AI助手</li>
+                    <li>设计上下文感知游戏</li>
+                    <li>探索机器学习基础</li>
+                    <li>学习AI伦理和责任</li>
+                </ul>
+                <p>你现在理解了现代AI中最重要的概念之一——明智地使用这个超能力！</p>
+            </div>
+        </section>
+
+        <nav class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="previousSection()" disabled>← 上一节</button>
+            <div id="sectionIndicator">第1章 共7章</div>
+            <button class="nav-button" id="nextBtn" onclick="nextSection()">下一节 →</button>
+        </nav>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 7;
+        let completedSections = new Set();
+        let quizAnswers = {};
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${completedSections.size}/${totalSections}`;
+        }
+
+        function showSection(sectionNumber) {
+            // Hide all sections
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById(`section-${i}`).classList.remove('active');
+            }
+            
+            // Show current section
+            document.getElementById(`section-${sectionNumber}`).classList.add('active');
+            
+            // Mark as completed
+            completedSections.add(sectionNumber);
+            updateProgress();
+            
+            // Update navigation
+            document.getElementById('prevBtn').disabled = sectionNumber === 1;
+            document.getElementById('nextBtn').disabled = sectionNumber === totalSections;
+            document.getElementById('sectionIndicator').textContent = `第${sectionNumber}章 共${totalSections}章`;
+            
+            currentSection = sectionNumber;
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                showSection(currentSection + 1);
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        function demonstrateContext() {
+            const userInput = document.getElementById('userInput').value;
+            const output = document.getElementById('demoOutput');
+            
+            if (!userInput.trim()) {
+                output.innerHTML = "请先输入一些内容！";
+                return;
+            }
+            
+            const withoutContext = `没有上下文：AI可能会对"${userInput}"做出随机回应`;
+            const withContext = `有了上下文（知道你12岁，正在学习AI）：AI会给出适合年龄、有教育意义的关于"${userInput}"的回应`;
+            
+            output.innerHTML = `
+                <strong>❌ ${withoutContext}</strong><br><br>
+                <strong>✅ ${withContext}</strong><br><br>
+                <em>上下文让一切都不同了！</em>
+            `;
+        }
+
+        function recommendMovie() {
+            const age = document.getElementById('ageInput').value;
+            const genres = document.getElementById('genreInput').value;
+            const mood = document.getElementById('moodInput').value;
+            const output = document.getElementById('movieOutput');
+            
+            if (!age || !genres || !mood) {
+                output.innerHTML = "请填写所有字段以获得推荐！";
+                return;
+            }
+            
+            const recommendations = {
+                "冒险": ["超人总动员", "蜘蛛侠：平行宇宙", "海洋奇缘"],
+                "喜剧": ["神偷奶爸", "乐高大电影", "疯狂动物城"],
+                "科幻": ["瓦力", "超能陆战队", "头号玩家"],
+                "动作": ["超人总动员", "蜘蛛侠：平行宇宙", "黑豹"],
+                "奇幻": ["哈利波特系列", "海洋奇缘", "驯龙高手"]
+            };
+            
+            let movieList = [];
+            genres.split(/[,，]/).forEach(genre => {
+                const trimmed = genre.trim();
+                if (recommendations[trimmed]) {
+                    movieList = movieList.concat(recommendations[trimmed]);
+                }
+            });
+            
+            if (movieList.length === 0) {
+                movieList = ["超人总动员", "蜘蛛侠：平行宇宙", "海洋奇缘"];
+            }
+            
+            const randomMovie = movieList[Math.floor(Math.random() * movieList.length)];
+            
+            output.innerHTML = `
+                <strong>🎬 找到完美匹配！</strong><br>
+                基于你的上下文：<br>
+                • 年龄：${age}<br>
+                • 类型：${genres}<br>
+                • 心情：${mood}<br><br>
+                <strong>推荐："${randomMovie}"</strong><br>
+                <em>这个推荐是使用上下文工程生成的——就像真正的流媒体服务一样！</em>
+            `;
+        }
+
+        // Quiz functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quiz-option')) {
+                const question = e.target.closest('.quiz-question');
+                const questionId = question.id;
+                const options = question.querySelectorAll('.quiz-option');
+                const explanation = question.querySelector('.quiz-explanation');
+                
+                // Remove previous selections
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark selection
+                e.target.classList.add('selected');
+                
+                // Check answer
+                const isCorrect = e.target.dataset.answer === 'correct';
+                e.target.classList.add(isCorrect ? 'correct' : 'incorrect');
+                
+                // Show correct answer if wrong
+                if (!isCorrect) {
+                    options.forEach(opt => {
+                        if (opt.dataset.answer === 'correct') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+                
+                // Show explanation
+                explanation.style.display = 'block';
+                
+                // Track answer
+                quizAnswers[questionId] = isCorrect;
+                
+                // Check if all quiz questions are answered
+                if (Object.keys(quizAnswers).length === 3) {
+                    document.getElementById('quiz-results').style.display = 'block';
+                }
+            }
+        });
+
+        // Initialize
+        updateProgress();
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentSection > 1) {
+                previousSection();
+            } else if (e.key === 'ArrowRight' && currentSection < totalSections) {
+                nextSection();
+            }
+        });
+    </script>
+</body>
+</html>
