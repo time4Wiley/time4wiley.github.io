@@ -18,7 +18,9 @@
       "Bash(git -C ~/App.configs commit -m \"Add dark-mode CLI tool and update shell configuration\n\n- Install and configure dark-mode for macOS appearance switching\n- Add new script files for obsidian integration\n- Update zsh configuration and aliases\")",
       "Bash(mv:*)",
       "Bash(open:*)",
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Bash(gh repo collaborator add:*)",
+      "Bash(gh api:*)"
     ],
     "deny": [
       "Bash(sudo:*)"
