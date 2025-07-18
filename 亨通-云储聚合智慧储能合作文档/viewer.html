@@ -397,8 +397,21 @@
                 
                 const markdown = await response.text();
                 
+                // Pre-process markdown to handle Mermaid blocks
+                // Handle both standard format and the format with init directly after mermaid
+                let processedMarkdown = markdown.replace(/```mermaid%%\{init:([\s\S]*?)```/g, (match, code) => {
+                    // Fix the format by adding newline after mermaid
+                    const fixedCode = '%%{init:' + code;
+                    return `<div class="mermaid">${fixedCode.trim()}</div>`;
+                });
+                
+                // Also handle standard mermaid blocks
+                processedMarkdown = processedMarkdown.replace(/```mermaid\n([\s\S]*?)```/g, (match, code) => {
+                    return `<div class="mermaid">${code.trim()}</div>`;
+                });
+                
                 // Parse markdown to HTML
-                const html = marked.parse(markdown);
+                const html = marked.parse(processedMarkdown);
                 contentDiv.innerHTML = html;
                 
                 // Extract title from first H1
@@ -412,7 +425,9 @@
                 updateBreadcrumb(filename);
                 
                 // Render Mermaid diagrams
-                mermaid.run();
+                mermaid.run({
+                    querySelector: '.mermaid'
+                });
                 
                 // Update active navigation
                 updateActiveNav(filename);
@@ -495,11 +510,16 @@
         const renderer = new marked.Renderer();
         const originalLinkRenderer = renderer.link;
         renderer.link = function(href, title, text) {
+            // Check if href is valid
+            if (!href || typeof href !== 'string') {
+                return originalLinkRenderer.call(this, href, title, text);
+            }
+            
             // Handle relative markdown links
             if (href.endsWith('.md') && !href.startsWith('http')) {
                 // Convert .md links to use the viewer
-                href = `?file=${encodeURIComponent(href)}`;
-                return `<a href="${href}" onclick="event.preventDefault(); window.history.pushState({}, '', '${href}'); loadMarkdownFile('${decodeURIComponent(href.substring(6))}');">${text}</a>`;
+                const newHref = `?file=${encodeURIComponent(href)}`;
+                return `<a href="${newHref}" onclick="event.preventDefault(); window.history.pushState({}, '', '${newHref}'); loadMarkdownFile('${href}');">${text}</a>`;
             }
             return originalLinkRenderer.call(this, href, title, text);
         };
