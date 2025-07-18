@@ -72,14 +72,6 @@ graph TB
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 flowchart LR
