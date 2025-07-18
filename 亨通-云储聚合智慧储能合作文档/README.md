@@ -17,7 +17,6 @@
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -25,14 +24,6 @@
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 graph LR
@@ -105,7 +96,6 @@ graph LR
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -113,14 +103,6 @@ graph LR
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 graph LR

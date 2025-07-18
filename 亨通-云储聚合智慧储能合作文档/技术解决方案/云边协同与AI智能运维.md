@@ -31,7 +31,6 @@
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -39,14 +38,6 @@
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 graph TB
@@ -74,7 +65,6 @@ graph TB
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -183,7 +173,6 @@ def battery_health_assessment(voltage, current, temperature, cycle_count):
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -191,14 +180,6 @@ def battery_health_assessment(voltage, current, temperature, cycle_count):
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 graph TB

@@ -11,7 +11,6 @@
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -19,14 +18,6 @@
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 graph TB
@@ -233,7 +224,6 @@ graph TB
 ```mermaid
 %%{init: {
   'theme':'base',
-  'darkMode': true,
   'themeVariables': {
     'primaryColor':'#ffffff',
     'primaryTextColor':'#1a1a1a',
@@ -241,14 +231,6 @@ graph TB
     'secondaryTextColor':'#1a1a1a',
     'primaryBorderColor':'#1a1a1a',
     'lineColor':'#1a1a1a'
-  },
-  'darkThemeVariables': {
-    'primaryColor':'#1a1a1a',
-    'primaryTextColor':'#ffffff',
-    'secondaryColor':'#333333',
-    'secondaryTextColor':'#ffffff',
-    'primaryBorderColor':'#ffffff',
-    'lineColor':'#ffffff'
   }
 }}%%
 pie title 典型项目收益分配比例
