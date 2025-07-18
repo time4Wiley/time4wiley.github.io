@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亨通-云储聚合智慧储能合作文档</title>
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 300px;
+            background: #2c3e50;
+            color: white;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background: #1a252f;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        
+        .nav-section {
+            padding: 10px 0;
+        }
+        
+        .nav-title {
+            padding: 10px 20px;
+            font-weight: bold;
+            color: #bdc3c7;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        
+        .nav-item {
+            display: block;
+            padding: 8px 20px 8px 30px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            font-size: 0.95em;
+        }
+        
+        .nav-item:hover {
+            background: #34495e;
+        }
+        
+        .nav-item.active {
+            background: #3498db;
+            border-left: 4px solid #2980b9;
+            padding-left: 26px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+        
+        .content-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-content {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Markdown Styles */
+        .markdown-content h1 {
+            color: #1e3c72;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .markdown-content h2 {
+            color: #2a5298;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .markdown-content h3 {
+            color: #34495e;
+            margin: 20px 0 10px;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 8px;
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .markdown-content code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .markdown-content pre {
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .markdown-content th, .markdown-content td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .markdown-content th {
+            background: #2a5298;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .markdown-content tr:nth-child(even) {
+            background: #f8f9fb;
+        }
+        
+        .markdown-content a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        
+        /* Mermaid diagram container */
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* Loading and error states */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c00;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.open {
+                left: 0;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1001;
+                background: #2c3e50;
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            .main-content {
+                margin-top: 50px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰ 菜单</button>
+    
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>文档导航</h2>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">概述</div>
+                <a href="#" class="nav-item" data-file="README.md">文档首页</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">企业概况与核心能力</div>
+                <a href="#" class="nav-item" data-file="企业概况与核心能力/README.md">章节概览</a>
+                <a href="#" class="nav-item" data-file="企业概况与核心能力/亨通集团智慧能源板块分析.md">亨通集团智慧能源板块分析</a>
+                <a href="#" class="nav-item" data-file="企业概况与核心能力/云储聚合技术平台能力.md">云储聚合技术平台能力</a>
+                <a href="#" class="nav-item" data-file="企业概况与核心能力/双方技术优势对比.md">双方技术优势对比</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">技术解决方案</div>
+                <a href="#" class="nav-item" data-file="技术解决方案/README.md">章节概览</a>
+                <a href="#" class="nav-item" data-file="技术解决方案/新型储能与虚拟电厂一体化.md">新型储能与虚拟电厂一体化</a>
+                <a href="#" class="nav-item" data-file="技术解决方案/云边协同与AI智能运维.md">云边协同与AI智能运维</a>
+                <a href="#" class="nav-item" data-file="技术解决方案/光纤通信与储能数实融合.md">光纤通信与储能数实融合</a>
+                <a href="#" class="nav-item" data-file="技术解决方案/光储充微网与新能源汽车生态.md">光储充微网与新能源汽车生态</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">市场机遇与商业模式</div>
+                <a href="#" class="nav-item" data-file="市场机遇与商业模式/README.md">章节概览</a>
+                <a href="#" class="nav-item" data-file="市场机遇与商业模式/工商业储能聚合模式.md">工商业储能聚合模式</a>
+                <a href="#" class="nav-item" data-file="市场机遇与商业模式/电力现货与辅助服务市场.md">电力现货与辅助服务市场</a>
+                <a href="#" class="nav-item" data-file="市场机遇与商业模式/海外市场拓展策略.md">海外市场拓展策略</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">监管政策与合规</div>
+                <a href="#" class="nav-item" data-file="监管政策与合规/README.md">章节概览</a>
+                <a href="#" class="nav-item" data-file="监管政策与合规/双碳目标与地方政策对接.md">双碳目标与地方政策对接</a>
+                <a href="#" class="nav-item" data-file="监管政策与合规/安全合规与国际认证.md">安全合规与国际认证</a>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">实施策略与合作模式</div>
+                <a href="#" class="nav-item" data-file="实施策略与合作模式/README.md">章节概览</a>
+                <a href="#" class="nav-item" data-file="实施策略与合作模式/资本合作与项目落地.md">资本合作与项目落地</a>
+                <a href="#" class="nav-item" data-file="实施策略与合作模式/技术整合与平台对接.md">技术整合与平台对接</a>
+                <a href="#" class="nav-item" data-file="实施策略与合作模式/风险评估与缓解策略.md">风险评估与缓解策略</a>
+            </div>
+        </nav>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="breadcrumb" id="breadcrumb">
+                    <a href="../index.html">主页</a> > <a href="#">亨通-云储聚合智慧储能合作文档</a>
+                </div>
+                <h1 id="page-title">亨通-云储聚合智慧储能合作文档</h1>
+            </div>
+            
+            <div class="markdown-content" id="content">
+                <div class="loading">正在加载文档...</div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#1e3c72',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#2a5298',
+                lineColor: '#5694f1',
+                secondaryColor: '#006100',
+                tertiaryColor: '#fff'
+            }
+        });
+        
+        // Get file parameter from URL
+        function getFileFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('file') || 'README.md';
+        }
+        
+        // Load and render markdown file
+        async function loadMarkdownFile(filename) {
+            const contentDiv = document.getElementById('content');
+            const pageTitle = document.getElementById('page-title');
+            
+            try {
+                contentDiv.innerHTML = '<div class="loading">正在加载文档...</div>';
+                
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const markdown = await response.text();
+                
+                // Parse markdown to HTML
+                const html = marked.parse(markdown);
+                contentDiv.innerHTML = html;
+                
+                // Extract title from first H1
+                const firstH1 = contentDiv.querySelector('h1');
+                if (firstH1) {
+                    pageTitle.textContent = firstH1.textContent;
+                    document.title = firstH1.textContent + ' - 亨通-云储聚合智慧储能合作文档';
+                }
+                
+                // Update breadcrumb
+                updateBreadcrumb(filename);
+                
+                // Render Mermaid diagrams
+                mermaid.run();
+                
+                // Update active navigation
+                updateActiveNav(filename);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <h2>加载失败</h2>
+                        <p>无法加载文件: ${filename}</p>
+                        <p>错误信息: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Update breadcrumb based on file path
+        function updateBreadcrumb(filename) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const parts = filename.split('/');
+            let path = '<a href="../index.html">主页</a> > <a href="viewer.html">亨通-云储聚合智慧储能合作文档</a>';
+            
+            if (parts.length > 1) {
+                const folder = parts[0];
+                path += ` > ${folder}`;
+            }
+            
+            breadcrumb.innerHTML = path;
+        }
+        
+        // Update active navigation item
+        function updateActiveNav(filename) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.dataset.file === filename) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // Handle navigation clicks
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const file = item.dataset.file;
+                window.history.pushState({}, '', `?file=${encodeURIComponent(file)}`);
+                loadMarkdownFile(file);
+                
+                // Close mobile menu if open
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            });
+        });
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', () => {
+            const file = getFileFromURL();
+            loadMarkdownFile(file);
+        });
+        
+        // Toggle mobile sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+        
+        // Configure marked options
+        marked.setOptions({
+            highlight: function(code, lang) {
+                return code;
+            },
+            breaks: true,
+            gfm: true
+        });
+        
+        // Custom renderer for better link handling
+        const renderer = new marked.Renderer();
+        const originalLinkRenderer = renderer.link;
+        renderer.link = function(href, title, text) {
+            // Handle relative markdown links
+            if (href.endsWith('.md') && !href.startsWith('http')) {
+                // Convert .md links to use the viewer
+                href = `?file=${encodeURIComponent(href)}`;
+                return `<a href="${href}" onclick="event.preventDefault(); window.history.pushState({}, '', '${href}'); loadMarkdownFile('${decodeURIComponent(href.substring(6))}');">${text}</a>`;
+            }
+            return originalLinkRenderer.call(this, href, title, text);
+        };
+        marked.use({ renderer });
+        
+        // Initial load
+        const initialFile = getFileFromURL();
+        loadMarkdownFile(initialFile);
+    </script>
+</body>
+</html>
